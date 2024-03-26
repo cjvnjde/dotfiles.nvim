@@ -7,8 +7,8 @@ local map = vim.keymap.set
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
-map('n', '<C-u>', '<C-u>zz', { desk =  "Move middle up"})
-map('n', '<C-d>', '<C-d>zz', { desk =  "Move middle down"})
+map('n', '<C-u>', '<C-u>zz', { desc =  "Move middle up"})
+map('n', '<C-d>', '<C-d>zz', { desc =  "Move middle down"})
 
 map('n', '<leader>fm', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>:EslintFixAll<CR>', { desc = "Format document" })
 
