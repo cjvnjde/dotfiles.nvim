@@ -19,7 +19,8 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "lua-language-server", "stylua",
+        "lua-language-server",
+        "stylua",
         "css-lsp",
         "html-lsp",
         "typescript-language-server",
@@ -33,13 +34,14 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        "vim", "lua", "vimdoc",
+        "vim",
+        "lua",
+        "vimdoc",
         "html",
         "css",
         "javascript",
         "typescript",
         "tsx",
-        "c",
         "markdown",
         "markdown_inline",
         "astro",
