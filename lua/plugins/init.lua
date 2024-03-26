@@ -26,6 +26,7 @@ return {
         "typescript-language-server",
         "deno",
         "prettier",
+        "eslint-lsp",
       },
     },
   },
