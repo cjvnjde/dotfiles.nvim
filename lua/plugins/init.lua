@@ -1,7 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre' -- uncomment for format on save
+    event = "BufWritePre",
     config = function()
       require "configs.conform"
     end,
@@ -27,6 +27,7 @@ return {
         "deno",
         "prettier",
         "eslint-lsp",
+        "tailwindcss-language-server",
       },
     },
   },
@@ -130,7 +131,7 @@ return {
           enabled = false,
         },
         adapters = {
-          require('neotest-jest')({
+          require "neotest-jest" {
             jest_test_discovery = false,
             jestCommand = "npm test -- collectCoverage=true",
             jestConfigFile = "jest.config.ts",
@@ -138,8 +139,8 @@ return {
             cwd = function()
               return vim.fn.getcwd()
             end,
-          }),
-        }
+          },
+        },
       }
     end,
   },
@@ -150,28 +151,28 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function()
-      require("coverage").setup({
-        auto_reload = true
-      })
+      require("coverage").setup {
+        auto_reload = true,
+      }
     end,
   },
 
   {
-    'mikesmithgh/kitty-scrollback.nvim',
+    "mikesmithgh/kitty-scrollback.nvim",
     enabled = true,
     lazy = true,
-    cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
-    event = { 'User KittyScrollbackLaunch' },
+    cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
+    event = { "User KittyScrollbackLaunch" },
     -- version = '*', -- latest stable version, may have breaking changes if major version changed
     -- version = '^4.0.0', -- pin major version, include fixes and features that do not have breaking changes
     config = function()
-      require('kitty-scrollback').setup({
+      require("kitty-scrollback").setup {
         {
           paste_window = {
-            yank_register_enabled = false
-          }
-        }
-      })
+            yank_register_enabled = false,
+          },
+        },
+      }
     end,
-  }
+  },
 }
