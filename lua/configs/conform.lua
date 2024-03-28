@@ -12,19 +12,11 @@ local options = {
     markdown = { "prettier" },
     graphql = { "prettier" },
     lua = { "stylua" },
-    -- css = { "prettier" },
-    -- html = { "prettier" },
   },
   format_on_save = {
     lsp_fallback = true,
     async = true,
   },
-
-  -- format_on_save = {
-  --   -- These options will be passed to conform.format()
-  --   timeout_ms = 500,
-  --   lsp_fallback = true,
-  -- },
 }
 
 require("conform").setup(options)
