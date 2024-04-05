@@ -2,6 +2,8 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
+
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
