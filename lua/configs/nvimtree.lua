@@ -13,8 +13,10 @@ local options = {
   },
   view = {
     adaptive_size = true,
+    centralize_selection = true,
     float = {
       enable = true,
+      quit_on_focus_loss = true,
     },
   },
   git = {
