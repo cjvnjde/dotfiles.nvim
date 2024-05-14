@@ -85,6 +85,7 @@ return {
     end,
   },
 
+  -- auto tab width
   "tpope/vim-sleuth",
 
   {
@@ -163,6 +164,35 @@ return {
       require("coverage").setup {
         auto_reload = true,
       }
+    end,
+  },
+
+  {
+    "kristijanhusak/vim-dadbod-ui",
+    dependencies = {
+      { "tpope/vim-dadbod", lazy = true },
+      { "kristijanhusak/vim-dadbod-completion", ft = { "sql" }, lazy = true },
+    },
+    cmd = {
+      "DBUI",
+      "DBUIToggle",
+      "DBUIAddConnection",
+      "DBUIFindBuffer",
+    },
+  },
+
+  {
+    "hrsh7th/nvim-cmp",
+    config = function(_, opts)
+      local cmp = require "cmp"
+
+      cmp.setup(opts)
+      cmp.setup.filetype({ "sql" }, {
+        sources = {
+          { name = "vim-dadbod-completion" },
+          { name = "buffer" },
+        },
+      })
     end,
   },
 
