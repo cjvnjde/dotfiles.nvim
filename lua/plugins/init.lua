@@ -97,7 +97,11 @@ return {
     config = function()
       require("ibl").setup()
     end,
-    opts = {},
+  },
+
+  {
+    "stevearc/oil.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
   {
