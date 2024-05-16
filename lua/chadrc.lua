@@ -9,7 +9,7 @@ M.ui = {
   theme_toggle = { "catppuccin", "catppuccin" },
 
   tabufline = {
-    order = { "buffers", "btns" },
+    enabled = false,
   },
   -- hl_override = {
   -- 	Comment = { italic = true },

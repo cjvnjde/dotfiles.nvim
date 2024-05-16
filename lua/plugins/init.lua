@@ -63,6 +63,9 @@ return {
       indent = {
         enable = true,
       },
+      autotag = {
+        enable = true,
+      },
     },
   },
 
@@ -89,11 +92,15 @@ return {
   "tpope/vim-sleuth",
 
   {
-    -- Add indentation guides even on blank lines
+    "windwp/nvim-ts-autotag",
+    lazy = false,
+  },
+
+  {
     "lukas-reineke/indent-blankline.nvim",
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
     main = "ibl",
+    opts = {},
+    lazy = false,
     config = function()
       require("ibl").setup()
     end,
@@ -102,6 +109,11 @@ return {
   {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    main = "oil",
+    lazy = false,
+    config = function()
+      require("oil").setup()
+    end,
   },
 
   {
