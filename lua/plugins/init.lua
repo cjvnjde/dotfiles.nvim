@@ -61,7 +61,6 @@ return {
         "tsx",
         "markdown",
         "markdown_inline",
-        "astro",
       },
       indent = {
         enable = true,
