@@ -46,6 +46,9 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "windwp/nvim-ts-autotag",
+    },
     opts = {
       ensure_installed = {
         "vim",
@@ -65,6 +68,7 @@ return {
       },
       autotag = {
         enable = true,
+        filetypes = { "html", "xml", "tsx", "typescriptreact", "javascriptreact" },
       },
     },
   },
@@ -90,11 +94,6 @@ return {
 
   -- auto tab width
   "tpope/vim-sleuth",
-
-  {
-    "windwp/nvim-ts-autotag",
-    lazy = false,
-  },
 
   {
     "lukas-reineke/indent-blankline.nvim",
