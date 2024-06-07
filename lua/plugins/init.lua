@@ -45,6 +45,15 @@ return {
   },
 
   {
+    "echasnovski/mini.nvim",
+    version = false,
+    lazy = false,
+    config = function()
+      require("mini.ai").setup()
+    end,
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "windwp/nvim-ts-autotag",
