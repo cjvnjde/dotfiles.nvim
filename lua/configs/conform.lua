@@ -12,6 +12,7 @@ local options = {
     markdown = { "prettier" },
     graphql = { "prettier" },
     lua = { "stylua" },
+    rust = { "rustfmt" },
   },
   format_after_save = {
     lsp_fallback = true,
