@@ -40,6 +40,7 @@ return {
         "prettier",
         "eslint-lsp",
         "tailwindcss-language-server",
+        "rust-analyzer",
       },
     },
   },
@@ -70,6 +71,7 @@ return {
         "tsx",
         "markdown",
         "markdown_inline",
+        "rust",
       },
       indent = {
         enable = true,
@@ -129,32 +131,6 @@ return {
     ft = { "markdown" },
     build = function()
       vim.fn["mkdp#util#install"]()
-    end,
-  },
-
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup {
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 75,
-        },
-        filetypes = {
-          yaml = true,
-          markdown = true,
-          help = true,
-          gitcommit = true,
-          gitrebase = true,
-          hgcommit = true,
-          svn = false,
-          cvs = false,
-          ["."] = true,
-        },
-      }
     end,
   },
 
