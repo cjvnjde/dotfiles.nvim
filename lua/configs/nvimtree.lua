@@ -1,6 +1,7 @@
 local options = {
   filters = {
     dotfiles = false,
+    custom = { "node_modules", "dist", "build" },
   },
   disable_netrw = true,
   hijack_netrw = true,
