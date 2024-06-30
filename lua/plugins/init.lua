@@ -32,6 +32,7 @@ return {
     opts = {
       ensure_installed = {
         "lua-language-server",
+        "vue-language-server",
         "stylua",
         "css-lsp",
         "html-lsp",
