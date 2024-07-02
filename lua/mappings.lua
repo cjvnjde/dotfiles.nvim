@@ -51,3 +51,9 @@ map("n", "<leader>cos", function()
   require("coverage").load()
   require("coverage").summary()
 end, { desc = "[s]how test coverage summary" })
+
+map("n", ";", ":", { noremap = true, silent = false })
+map("v", ";", ":", { noremap = true, silent = false })
+
+map("n", ":", ";", { noremap = true, silent = false })
+map("v", ":", ";", { noremap = true, silent = false })
