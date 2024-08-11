@@ -27,6 +27,8 @@ return {
     end,
   },
 
+  { "rescript-lang/vim-rescript", ft = "rescript" },
+
   {
     "williamboman/mason.nvim",
     opts = {
@@ -42,6 +44,7 @@ return {
         "eslint-lsp",
         "tailwindcss-language-server",
         "rust-analyzer",
+        "rescript-language-server",
       },
     },
   },
