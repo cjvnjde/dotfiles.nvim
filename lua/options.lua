@@ -19,7 +19,7 @@ o.clipboard = "unnamedplus"
 o.cursorline = true
 
 -- Only highlight the line number of the current line, not the entire line
-o.cursorlineopt = "number"
+o.cursorlineopt = "line"
 
 -- Indenting
 -- Convert tabs to spaces
