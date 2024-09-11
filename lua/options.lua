@@ -1,10 +1,16 @@
-require "nvchad.options"
-
 local opt = vim.opt
 local o = vim.o
+local g = vim.g
 
-opt.spelllang = "en_us"
-opt.spell = true
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+g.mapleader = " "
+g.maplocalleader = "\\"
+
+-- opt.spelllang = "en_us"
+-- opt.spell = true
+
 -------------------------------------- options ------------------------------------------
 -- Set the global statusline (appears at the bottom of all windows)
 o.laststatus = 3
