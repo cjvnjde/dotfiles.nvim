@@ -16,9 +16,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 -- @see https://lazy.folke.io/configuration
 require("lazy").setup {
   spec = {
