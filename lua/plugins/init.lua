@@ -87,4 +87,11 @@ return {
       "williamboman/mason-lspconfig.nvim",
     },
   },
+
+  -- show key bindings
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    cmd = "WhichKey",
+  },
 }
