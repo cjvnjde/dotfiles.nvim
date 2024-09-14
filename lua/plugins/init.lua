@@ -30,7 +30,6 @@ return {
   },
   -- auto tab width
   "tpope/vim-sleuth",
-  -- install additional tools
   -- formatting
   {
     "stevearc/conform.nvim",
@@ -38,6 +37,7 @@ return {
     opts = (require "configs.conform"),
   },
 
+  -- install additional tools
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
@@ -64,11 +64,27 @@ return {
     main = "ibl",
     config = true,
   },
-
+  -- file search / search tool
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = (require "configs.telescope"),
+  },
+
+  -- mason
+
+  {
+    "williamboman/mason.nvim",
+    config = true,
+  },
+  "williamboman/mason-lspconfig.nvim",
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = (require "configs.mason").mason_auto_install,
+    dependencies = {
+      { "williamboman/mason.nvim", config = true },
+      "williamboman/mason-lspconfig.nvim",
+    },
   },
 }
