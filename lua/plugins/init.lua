@@ -1,3 +1,5 @@
+local ensure_installed = require "configs.ensure_installed"
+
 return {
   -- theme
   {
@@ -29,35 +31,6 @@ return {
   -- auto tab width
   "tpope/vim-sleuth",
   -- install additional tools
-  {
-    "williamboman/mason.nvim",
-    config = true,
-  },
-  "williamboman/mason-lspconfig.nvim",
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "vue-language-server",
-        "stylua",
-        "css-lsp",
-        "html-lsp",
-        "typescript-language-server",
-        "deno",
-        "prettier",
-        "eslint-lsp",
-        "tailwindcss-language-server",
-        "rust-analyzer",
-        "rescript-language-server",
-      },
-      run_on_start = true,
-    },
-    dependencies = {
-      { "williamboman/mason.nvim", config = true },
-      "williamboman/mason-lspconfig.nvim",
-    },
-  },
   -- formatting
   {
     "stevearc/conform.nvim",
@@ -71,20 +44,7 @@ return {
       "windwp/nvim-ts-autotag",
     },
     opts = {
-      ensure_installed = {
-        "bash",
-        "vim",
-        "lua",
-        "vimdoc",
-        "html",
-        "css",
-        "javascript",
-        "typescript",
-        "tsx",
-        "markdown",
-        "markdown_inline",
-        "rust",
-      },
+      ensure_installed = ensure_installed.treesitter,
       auto_install = true,
       highlight = {
         enable = true,
@@ -103,36 +63,5 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = true,
-  },
-
-  -- autocomplition
-  {
-    "hrsh7th/nvim-cmp",
-    opts = {
-      sources = {
-        { name = "nvim_lsp" },
-        { name = "path" },
-      },
-    },
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-    },
-  },
-  -- LSP
-  -- lsp message notifications
-  {
-    "j-hui/fidget.nvim",
-    config = true,
-  },
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      { "williamboman/mason.nvim", config = true },
-      "williamboman/mason-lspconfig.nvim",
-    },
-    config = function()
-      require "configs.lsp"
-    end,
   },
 }
