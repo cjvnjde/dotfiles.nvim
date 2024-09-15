@@ -26,6 +26,13 @@ map("n", "<C-d>", "<C-d>zz", { desc = "Move middle down" })
 
 map("v", "<leader>p", '"_dP', { desc = "Paste without yanking" })
 map("v", "y", "ygv<Esc>", { desc = "Yank and keep selection" })
+map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
+
+map("v", ">", ">gv", { desc = "Indent text" })
+
+map("n", "<leader>fm", function()
+  vim.lsp.buf.format { async = true }
+end, { desc = "[F]or[M]at document" })
 
 -- sway ; and : keys
 map("n", ";", ":", { noremap = true, silent = false })
