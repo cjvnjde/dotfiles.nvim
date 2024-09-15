@@ -1,7 +1,8 @@
 require "options" -- should be first
 require "configs.lazy"
 require "autocmds"
+local mappings = require "mappings"
 
 vim.schedule(function()
-  require "mappings"
+  mappings.global()
 end)

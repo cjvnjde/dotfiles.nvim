@@ -1,3 +1,4 @@
+local mappings = require "mappings"
 local options = {
   defaults = {
     prompt_prefix = "   ",
@@ -12,9 +13,7 @@ local options = {
       width = 0.87,
       height = 0.80,
     },
-    mappings = {
-      n = { ["q"] = require("telescope.actions").close },
-    },
+    mappings = mappings.telescope(),
   },
   extensions = {},
 }

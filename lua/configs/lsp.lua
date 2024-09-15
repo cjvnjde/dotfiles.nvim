@@ -1,18 +1,9 @@
 local lspconfig = require "lspconfig"
 local ensure_installed = require "lua.packages"
-
-local map = vim.keymap.set
+local mappings = require "mappings"
 
 local on_attach = function(_, bufnr)
-  local function opts(desc)
-    return { buffer = bufnr, desc = "LSP " .. desc }
-  end
-
-  map("n", "gd", vim.lsp.buf.definition, opts "[G]o to [D]efinition")
-  map("n", "gi", vim.lsp.buf.implementation, opts "[G]o to [I]mplementation")
-  map("n", "<leader>rn", vim.lsp.buf.rename, opts "[R]e[N]ame")
-  map("n", "<leader>ca", vim.lsp.buf.code_action, opts "[C]ode [A]ction")
-  map("v", "<leader>ca", vim.lsp.buf.code_action, opts "[C]ode [A]ction")
+  mappings.lsp(bufnr)
 end
 
 local on_init = function(client, _)
