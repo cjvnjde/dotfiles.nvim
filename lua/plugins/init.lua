@@ -1,4 +1,4 @@
-local ensure_installed = require "configs.ensure_installed"
+local ensure_installed = require "lua.packages"
 
 return {
   -- theme
@@ -78,13 +78,11 @@ return {
     "williamboman/mason.nvim",
     config = true,
   },
-  "williamboman/mason-lspconfig.nvim",
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = (require "configs.mason").mason_auto_install,
     dependencies = {
       { "williamboman/mason.nvim", config = true },
-      "williamboman/mason-lspconfig.nvim",
     },
   },
 
@@ -93,5 +91,37 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     cmd = "WhichKey",
+  },
+  {
+    "antosha417/nvim-lsp-file-operations",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-tree.lua",
+    },
+    config = true,
+  },
+  -- LSP
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      { "williamboman/mason.nvim", config = true },
+      { "j-hui/fidget.nvim", opts = {} },
+      "hrsh7th/cmp-nvim-lsp",
+    },
+    config = function()
+      require "configs.lsp"
+    end,
+  },
+  { -- Autocompletion
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+    },
+    config = function()
+      require "configs.cmp"
+    end,
   },
 }

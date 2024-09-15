@@ -1,6 +1,14 @@
 local M = {
+  lsp = {
+    "lua_ls",
+    "ts_ls",
+    "html",
+    "cssls",
+    "tailwindcss",
+    "rust_analyzer",
+    "rescriptls",
+  },
   mason = {
-    "lua-language-server",
     "vue-language-server",
     "stylua",
     "css-lsp",
