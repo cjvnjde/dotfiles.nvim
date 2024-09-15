@@ -1,4 +1,4 @@
-local ensure_installed = require "lua.packages"
+local ensure_installed = require "packages"
 
 local M = {
   mason_auto_install = {
