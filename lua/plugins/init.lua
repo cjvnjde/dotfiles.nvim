@@ -59,6 +59,7 @@ return {
   -- treesitter for syntax highlighting and more
   {
     "nvim-treesitter/nvim-treesitter",
+    main = "nvim-treesitter.configs",
     opts = {
       ensure_installed = ensure_installed.treesitter,
       auto_install = true,
@@ -69,7 +70,6 @@ return {
         enable = true,
       },
     },
-    main = "nvim-treesitter.configs",
   },
 
   -- adds vertical indentation lines
@@ -150,6 +150,20 @@ return {
         delete = { text = "_" },
         topdelete = { text = "‾" },
         changedelete = { text = "~" },
+      },
+    },
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_c = { "filename" },
+        lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_y = {},
+        lualine_z = { "location" },
       },
     },
   },
