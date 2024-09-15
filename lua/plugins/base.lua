@@ -114,7 +114,16 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-tree.lua",
     },
-    config = true,
+    opts = {
+      operations = {
+        willRenameFiles = true,
+        didRenameFiles = true,
+        willCreateFiles = true,
+        didCreateFiles = true,
+        willDeleteFiles = true,
+        didDeleteFiles = true,
+      },
+    },
   },
   -- LSP configurations and dependencies
   {

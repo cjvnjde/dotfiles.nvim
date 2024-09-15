@@ -13,12 +13,7 @@ local on_init = function(client, _)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-capabilities.workspace.fileOperations = {
-  dynamicRegistration = false,
-  didRename = true,
-  willRename = true,
-}
+capabilities = vim.tbl_deep_extend("force", capabilities, require("lsp-file-operations").default_capabilities())
 
 capabilities.textDocument.completion.completionItem = {
   documentationFormat = { "markdown", "plaintext" },
