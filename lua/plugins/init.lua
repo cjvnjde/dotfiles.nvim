@@ -184,4 +184,17 @@ return {
       require("colorizer").setup()
     end,
   },
+
+  -- extend a and i textobjects
+  {
+    "echasnovski/mini.nvim",
+    main = "mini.ai",
+    config = true,
+  },
+  -- file explorer that lets you edit your filesystem like a normal Neovim buffer
+  -- {
+  --   "stevearc/oil.nvim",
+  --   config = true,
+  --   dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  -- },
 }
