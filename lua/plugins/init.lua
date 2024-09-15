@@ -141,6 +141,7 @@ return {
       require "configs.cmp"
     end,
   },
+  -- [[GIT]]
   {
     "lewis6991/gitsigns.nvim",
     opts = {
@@ -153,6 +154,16 @@ return {
       },
     },
   },
+  {
+    "f-person/git-blame.nvim",
+    event = "VeryLazy",
+    opts = {
+      enabled = false,
+      message_template = "<summary> • <date> • <author>",
+      date_format = "%Y-%m-%d %H:%M",
+    },
+  },
+  -- Bottom line
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
