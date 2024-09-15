@@ -11,7 +11,8 @@ local on_attach = function(_, bufnr)
   map("n", "gd", vim.lsp.buf.definition, opts "[G]o to [D]efinition")
   map("n", "gi", vim.lsp.buf.implementation, opts "[G]o to [I]mplementation")
   map("n", "<leader>rn", vim.lsp.buf.rename, opts "[R]e[N]ame")
-  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "[C]ode [A]ction")
+  map("n", "<leader>ca", vim.lsp.buf.code_action, opts "[C]ode [A]ction")
+  map("v", "<leader>ca", vim.lsp.buf.code_action, opts "[C]ode [A]ction")
 end
 
 local on_init = function(client, _)
@@ -27,6 +28,7 @@ capabilities.workspace.fileOperations = {
   didRename = true,
   willRename = true,
 }
+
 capabilities.textDocument.completion.completionItem = {
   documentationFormat = { "markdown", "plaintext" },
   snippetSupport = true,
@@ -66,9 +68,9 @@ local lsp_configs = {
             "require",
           },
         },
-        workspace = {
-          library = vim.api.nvim_get_runtime_file("", true),
-        },
+        -- workspace = {
+        --   library = vim.api.nvim_get_runtime_file("", true),
+        -- },
         telemetry = {
           enable = false,
         },
@@ -83,6 +85,7 @@ local function setup_lsp(lsp)
       if lsp_configs[lsp] and lsp_configs[lsp].on_attach then
         lsp_configs[lsp].on_attach(client, bufnr)
       end
+
       on_attach(client, bufnr)
     end,
     on_init = on_init,

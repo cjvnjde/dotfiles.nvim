@@ -146,24 +146,11 @@ return {
   -- [[GIT]]
   {
     "lewis6991/gitsigns.nvim",
-    opts = {
-      signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
-      },
-    },
-  },
-  {
-    "f-person/git-blame.nvim",
-    event = "VeryLazy",
-    opts = {
-      enabled = false,
-      message_template = "<summary> • <date> • <author>",
-      date_format = "%Y-%m-%d %H:%M",
-    },
+    opts = function()
+      local opts = require "configs.gitsigns"
+
+      return opts
+    end,
   },
   -- Bottom line
   {
