@@ -31,7 +31,8 @@ map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = 
 map("v", ">", ">gv", { desc = "Indent text" })
 
 map("n", "<leader>fm", function()
-  vim.lsp.buf.format { async = true }
+  require("conform").format { lsp_fallback = true }
+  -- vim.lsp.buf.format { async = true }
 end, { desc = "[F]or[M]at document" })
 
 -- sway ; and : keys

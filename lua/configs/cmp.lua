@@ -1,6 +1,7 @@
 local cmp = require "cmp"
 
 local options = {
+  completion = { completeopt = "menu,menuone,noinsert" },
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -33,6 +34,7 @@ local options = {
   sources = {
     { name = "nvim_lsp" },
     { name = "buffer" },
+    { name = "luasnip" },
     { name = "path" },
   },
 }
