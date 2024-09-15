@@ -50,3 +50,5 @@ map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find bu
 map("n", "<leader>fa", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
+
+-- LSP mappings are here "configs.lsp"

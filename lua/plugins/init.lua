@@ -16,6 +16,7 @@ return {
       vim.cmd.colorscheme "catppuccin"
     end,
   },
+  -- file explorer
   {
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
@@ -28,21 +29,36 @@ return {
     event = "VeryLazy",
     config = true,
   },
-  -- auto tab width
+  -- automatically detect tab width
   "tpope/vim-sleuth",
-  -- formatting
+
+  -- auto close pairs such as brackets and quotes
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
+  },
+  -- formatting on save
   {
     "stevearc/conform.nvim",
     event = "BufWritePre",
     opts = (require "configs.conform"),
   },
 
-  -- install additional tools
+  {
+    "windwp/nvim-ts-autotag",
+    opts = {
+      opts = {
+        enable_close = true,
+        enable_rename = true,
+        enable_close_on_slash = true,
+      },
+    },
+  },
+
+  -- treesitter for syntax highlighting and more
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "windwp/nvim-ts-autotag",
-    },
     opts = {
       ensure_installed = ensure_installed.treesitter,
       auto_install = true,
@@ -52,19 +68,18 @@ return {
       indent = {
         enable = true,
       },
-      autotag = {
-        enable = true,
-        filetypes = { "html", "xml", "tsx", "typescriptreact", "javascriptreact" },
-      },
     },
+    main = "nvim-treesitter.configs",
   },
-  -- adds vertical lines
+
+  -- adds vertical indentation lines
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = true,
   },
-  -- file search / search tool
+
+  -- fuzzy finder and search tool
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
@@ -72,12 +87,12 @@ return {
     opts = (require "configs.telescope"),
   },
 
-  -- mason
-
+  -- mason for managing external tools like LSP servers, linters, and formatters
   {
     "williamboman/mason.nvim",
     config = true,
   },
+  -- auto install tools with mason
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = (require "configs.mason").mason_auto_install,
@@ -86,12 +101,13 @@ return {
     },
   },
 
-  -- show key bindings
+  -- show keybindings in a popup
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
     cmd = "WhichKey",
   },
+  -- LSP file operations support
   {
     "antosha417/nvim-lsp-file-operations",
     dependencies = {
@@ -100,7 +116,7 @@ return {
     },
     config = true,
   },
-  -- LSP
+  -- LSP configurations and dependencies
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -112,7 +128,8 @@ return {
       require "configs.lsp"
     end,
   },
-  { -- Autocompletion
+  -- autocompletion engine
+  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
@@ -123,5 +140,17 @@ return {
     config = function()
       require "configs.cmp"
     end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      signs = {
+        add = { text = "+" },
+        change = { text = "~" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+      },
+    },
   },
 }
