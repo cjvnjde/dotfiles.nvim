@@ -20,7 +20,8 @@ vim.opt.rtp:prepend(lazypath)
 -- @see https://lazy.folke.io/configuration
 require("lazy").setup {
   spec = {
-    { import = "plugins" },
+    { import = "plugins.base" },
+    { import = "plugins.extra" },
   },
   default = {
     lazy = true,

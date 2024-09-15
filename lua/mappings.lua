@@ -61,6 +61,9 @@ M.global = function()
   map("n", "<leader>fa", "<cmd>Telescope marks<CR>", { desc = "[F]ind [M]arks" })
   map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "[F]ind [O]ldfiles" })
   map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "[F]ind [F]iles" })
+
+  -- Oil
+  map("n", "<leader>fs", "<CMD>Oil<CR>", { desc = "Open [F]ile[S]ystem directory" })
 end
 
 M.cmp = function(cmp)
