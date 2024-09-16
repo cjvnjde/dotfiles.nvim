@@ -64,6 +64,38 @@ M.global = function()
 
   -- Oil
   map("n", "<leader>fs", "<CMD>Oil<CR>", { desc = "Open [F]ile[S]ystem directory" })
+
+  -- Neotest
+
+  map("n", "<leader>tn", "<cmd>lua require('neotest').run.run()<CR>", { desc = "[T]est [N]earest" })
+  map("n", "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", { desc = "[T]est [F]ile" })
+  map("n", "<leader>tl", "<cmd>lua require('neotest').run.run_last()<CR>", { desc = "[T]est [L]ast" })
+  map("n", "<leader>ts", function()
+    local neotest = require "neotest"
+    neotest.run.stop()
+
+    if neotest.watch.is_watching() then
+      neotest.watch.stop()
+    end
+  end, { desc = "[T]est [S]top and stop watching" })
+  map("n", "<leader>tw", "<cmd>lua require('neotest').watch.watch()<CR>", { desc = "[T]est [W]atch" })
+  map("n", "<leader>to", "<cmd>lua require('neotest').output.open()<CR>", { desc = "[T]est [O]utput" })
+  map(
+    "n",
+    "<leader>tO",
+    "<cmd>lua require('neotest').output.open({ enter = true })<CR>",
+    { desc = "[T]est [O]utput and enter" }
+  )
+  map("n", "<leader>tt", "<cmd>lua require('neotest').summary.toggle()<CR>", { desc = "[T]est [T]oggle summary" })
+
+  map("n", "<leader>cot", function()
+    require("coverage").load(true)
+  end, { desc = "[C]overage [T]oggle test coverage" })
+
+  map("n", "<leader>cos", function()
+    require("coverage").load()
+    require("coverage").summary()
+  end, { desc = "[C]overage [S]how test coverage summary" })
 end
 
 M.cmp = function(cmp)
