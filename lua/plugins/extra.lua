@@ -13,7 +13,7 @@ return {
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
       "marilari88/neotest-vitest",
-      "nvim-neotest/neotest-jest",
+      "cjvnjde/neotest-jest",
     },
     config = function()
       require("neotest").setup {
