@@ -13,6 +13,7 @@ return {
     graphql = { "prettier" },
     lua = { "stylua" },
     rust = { "rustfmt" },
+    nix = { "nixfmt" },
   },
   format_after_save = {
     lsp_fallback = true,
