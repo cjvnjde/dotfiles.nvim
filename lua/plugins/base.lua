@@ -1,7 +1,7 @@
 local ensure_installed = require "packages"
 
 return {
-  -- theme
+  -- Theme configuration
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -16,70 +16,69 @@ return {
       vim.cmd.colorscheme "catppuccin"
     end,
   },
-  -- file explorer
+
+  -- File explorer plugin
   {
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     opts = (require "configs.nvimtree"),
   },
-  -- add/update/delete surrounding pairs
+
+  -- Surround text with pairs (quotes, brackets, etc.)
   {
     "kylechui/nvim-surround",
     version = "*",
     event = "VeryLazy",
     config = true,
   },
-  -- automatically detect tab width
+
+  -- Automatically detect and set tab width
   "tpope/vim-sleuth",
 
-  -- auto close pairs such as brackets and quotes
+  -- Auto-close pairs like brackets and quotes
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = true,
   },
-  -- formatting on save
+
+  -- Auto-format files on save
   {
     "stevearc/conform.nvim",
     event = "BufWritePre",
     opts = (require "configs.conform"),
   },
 
+  -- Auto-tag HTML and XML elements
   {
     "windwp/nvim-ts-autotag",
     opts = {
-      opts = {
-        enable_close = true,
-        enable_rename = true,
-        enable_close_on_slash = true,
-      },
+      enable_close = true,
+      enable_rename = true,
+      enable_close_on_slash = true,
     },
   },
 
-  -- treesitter for syntax highlighting and more
+  -- Treesitter for enhanced syntax highlighting and indentation
   {
     "nvim-treesitter/nvim-treesitter",
     main = "nvim-treesitter.configs",
     opts = {
       ensure_installed = ensure_installed.treesitter,
       auto_install = true,
-      highlight = {
-        enable = true,
-      },
-      indent = {
-        enable = true,
-      },
+      highlight = { enable = true },
+      indent = { enable = true },
     },
   },
 
-  -- adds vertical indentation lines
+  -- Add vertical indentation lines
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = true,
   },
 
-  -- fuzzy finder and search tool
+  -- Fuzzy finder and search tool
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
@@ -87,27 +86,27 @@ return {
     opts = (require "configs.telescope"),
   },
 
-  -- mason for managing external tools like LSP servers, linters, and formatters
+  -- Tool installer for LSP, linters, and formatters
   {
     "williamboman/mason.nvim",
     config = true,
   },
-  -- auto install tools with mason
+
+  -- Auto-install tools using Mason
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = (require "configs.mason").mason_auto_install,
-    dependencies = {
-      { "williamboman/mason.nvim", config = true },
-    },
+    dependencies = { { "williamboman/mason.nvim", config = true } },
   },
 
-  -- show keybindings in a popup
+  -- Display keybindings in a popup
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
     cmd = "WhichKey",
   },
-  -- LSP file operations support
+
+  -- File operations support with LSP
   {
     "antosha417/nvim-lsp-file-operations",
     dependencies = {
@@ -125,7 +124,8 @@ return {
       },
     },
   },
-  -- LSP configurations and dependencies
+
+  -- LSP configuration and dependencies
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -137,7 +137,8 @@ return {
       require "configs.lsp"
     end,
   },
-  -- autocompletion engine
+
+  -- Autocompletion engine
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -152,16 +153,17 @@ return {
       require "configs.cmp"
     end,
   },
-  -- [[GIT]]
+
+  -- Git integration
   {
     "lewis6991/gitsigns.nvim",
     opts = function()
       local opts = require "configs.gitsigns"
-
       return opts
     end,
   },
-  -- Bottom line
+
+  -- Status line configuration
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -171,11 +173,12 @@ return {
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { "filename" },
         lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_y = {},
         lualine_z = { "location" },
       },
     },
   },
+
+  -- Color highlighter for hex codes and color names
   {
     "norcalli/nvim-colorizer.lua",
     config = function()
@@ -183,13 +186,14 @@ return {
     end,
   },
 
-  -- extend a and i textobjects
+  -- Extended text objects for selection
   {
     "echasnovski/mini.nvim",
     main = "mini.ai",
     config = true,
   },
 
+  -- Snippet engine and snippets library
   {
     "L3MON4D3/LuaSnip",
     version = "v2.3.0",
