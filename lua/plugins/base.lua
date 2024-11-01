@@ -203,4 +203,11 @@ return {
       require "configs.luasnip"
     end,
   },
+
+  {
+    "goolord/alpha-nvim",
+    config = function()
+      require "configs.alpha"
+    end,
+  },
 }
