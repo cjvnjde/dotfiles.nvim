@@ -96,6 +96,11 @@ M.global = function()
     require("coverage").load()
     require("coverage").summary()
   end, { desc = "[C]overage [S]how test coverage summary" })
+
+  map("n", "<leader><leader>", "<Plug>(leap)")
+  -- map("n", "S", "<Plug>(leap-from-window)")
+  -- map({ "x", "o" }, "s", "<Plug>(leap-forward)")
+  -- map({ "x", "o" }, "S", "<Plug>(leap-backward)")
 end
 
 M.cmp = function(cmp)

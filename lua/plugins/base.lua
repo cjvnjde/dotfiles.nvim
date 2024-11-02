@@ -210,4 +210,8 @@ return {
       require "configs.alpha"
     end,
   },
+  {
+    "ggandor/leap.nvim",
+    dependencies = "tpope/vim-repeat",
+  },
 }
