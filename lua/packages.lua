@@ -8,7 +8,6 @@ local M = {
     "rust_analyzer",
     "rescriptls",
     "gdscript",
-    "nil_ls",
   },
   mason = {
     "css-lsp",
@@ -24,7 +23,6 @@ local M = {
     "prettier",
     "rust-analyzer",
     "gdtoolkit",
-    "nil",
   },
   treesitter = {
     "gdscript",

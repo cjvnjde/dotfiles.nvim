@@ -49,16 +49,6 @@ return {
     opts = (require "configs.conform"),
   },
 
-  -- Auto-tag HTML and XML elements
-  {
-    "windwp/nvim-ts-autotag",
-    opts = {
-      enable_close = true,
-      enable_rename = true,
-      enable_close_on_slash = true,
-    },
-  },
-
   -- Treesitter for enhanced syntax highlighting and indentation
   {
     "nvim-treesitter/nvim-treesitter",
@@ -68,6 +58,19 @@ return {
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },
+    },
+  },
+
+  -- Auto-tag HTML and XML elements
+  {
+    "windwp/nvim-ts-autotag",
+    name = "nvim-ts-autotag",
+    opts = {
+      opts = {
+        enable_close = true,
+        enable_rename = true,
+        enable_close_on_slash = true,
+      },
     },
   },
 

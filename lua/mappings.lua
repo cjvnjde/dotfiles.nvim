@@ -216,9 +216,15 @@ M.lsp = function(bufnr)
 end
 
 M.telescope = function()
-  return {
-    n = { ["q"] = require("telescope.actions").close },
-  }
+  local telescope_actions = require "telescope.actions"
+
+  if telescope_actions then
+    return {
+      n = { ["q"] = require("telescope.actions").close },
+    }
+  end
+
+  return {}
 end
 
 return M
