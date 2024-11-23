@@ -130,6 +130,9 @@ M.global = function()
   map("n", "<M-l>", function()
     harpoon:list():next()
   end)
+
+  -- Rest
+  map("n", "<leader>rr", "<CMD>Rest run<CR>", { desc = "[R]run[R]rest request" })
 end
 
 M.cmp = function(cmp)
