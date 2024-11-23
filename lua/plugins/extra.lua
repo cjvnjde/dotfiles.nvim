@@ -54,6 +54,10 @@ return {
   },
 
   {
+    "rest-nvim/rest.nvim",
+  },
+
+  {
     "mikesmithgh/kitty-scrollback.nvim",
     enabled = true,
     lazy = true,

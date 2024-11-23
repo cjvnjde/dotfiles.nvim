@@ -36,6 +36,7 @@ local M = {
     "markdown_inline",
     "rust",
     "json",
+    "http",
   },
 }
 
