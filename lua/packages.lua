@@ -7,7 +7,6 @@ local M = {
     "tailwindcss",
     "rust_analyzer",
     "rescriptls",
-    "gdscript",
   },
   mason = {
     "css-lsp",
@@ -22,12 +21,8 @@ local M = {
     "deno",
     "prettier",
     "rust-analyzer",
-    "gdtoolkit",
   },
   treesitter = {
-    "gdscript",
-    "godot_resource",
-    "gdshader",
     "bash",
     "vim",
     "lua",
@@ -40,6 +35,7 @@ local M = {
     "markdown",
     "markdown_inline",
     "rust",
+    "json",
   },
 }
 
