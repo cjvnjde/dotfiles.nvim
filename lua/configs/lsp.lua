@@ -63,15 +63,6 @@ local lsp_configs = {
       },
     },
   },
-  nil_ls = {
-    settings = {
-      ["nil"] = {
-        formatting = {
-          command = { "nixfmt" },
-        },
-      },
-    },
-  },
 }
 
 local function setup_lsp(lsp)

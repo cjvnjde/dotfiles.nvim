@@ -55,6 +55,16 @@ return {
 
   {
     "rest-nvim/rest.nvim",
+    config = function()
+      ---@class rest.Config
+      local config = {
+        env = {
+          pattern = ".*%.http.env.*",
+        },
+      }
+
+      vim.g.rest_nvim = config
+    end,
   },
 
   {

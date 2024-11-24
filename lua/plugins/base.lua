@@ -175,7 +175,16 @@ return {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { "filename" },
-        lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_x = {
+          {
+            "rest",
+            icon = "",
+            fg = "#428890",
+          },
+          "encoding",
+          "fileformat",
+          "filetype",
+        },
         lualine_z = { "location" },
       },
     },

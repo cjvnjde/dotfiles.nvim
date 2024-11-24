@@ -7,6 +7,7 @@ local M = {
     "tailwindcss",
     "rust_analyzer",
     "rescriptls",
+    "jsonls",
   },
   mason = {
     "css-lsp",
@@ -21,6 +22,7 @@ local M = {
     "deno",
     "prettier",
     "rust-analyzer",
+    "json-lsp",
   },
   treesitter = {
     "bash",
