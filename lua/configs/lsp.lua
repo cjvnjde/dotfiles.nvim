@@ -1,5 +1,5 @@
 local lspconfig = require "lspconfig"
-local ensure_installed = require "packages"
+local ensure_installed = require "language_tools"
 local mappings = require "mappings"
 
 local on_attach = function(_, bufnr)

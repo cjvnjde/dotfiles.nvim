@@ -1,4 +1,4 @@
-local ensure_installed = require "packages"
+local ensure_installed = require "language_tools"
 
 local M = {
   mason_auto_install = {
