@@ -8,6 +8,7 @@ local M = {
     "rust_analyzer",
     "rescriptls",
     "jsonls",
+    "eslint",
   },
   mason = {
     "css-lsp",
@@ -21,6 +22,7 @@ local M = {
     "stylua",
     "deno",
     "prettier",
+    "eslint_d",
     "rust-analyzer",
     "json-lsp",
   },
