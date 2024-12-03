@@ -2,8 +2,8 @@ local lspconfig = require "lspconfig"
 local ensure_installed = require "language_tools"
 local mappings = require "mappings"
 
-local on_attach = function(_, bufnr)
-  mappings.lsp(bufnr)
+local on_attach = function(client, bufnr)
+  mappings.lsp(client, bufnr)
 end
 
 local on_init = function(client, _)
@@ -42,11 +42,40 @@ local lsp_configs = {
       })
     end,
   },
+  ts_ls = {
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayVariableTypeHints = true,
+        },
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayVariableTypeHints = true,
+        },
+      },
+    },
+  },
   lua_ls = {
     settings = {
       Lua = {
         runtime = {
           version = "LuaJIT",
+        },
+        hint = {
+          enable = true,
         },
         diagnostics = {
           globals = {
@@ -54,9 +83,6 @@ local lsp_configs = {
             "require",
           },
         },
-        -- workspace = {
-        --   library = vim.api.nvim_get_runtime_file("", true),
-        -- },
         telemetry = {
           enable = false,
         },

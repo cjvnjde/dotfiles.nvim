@@ -206,7 +206,7 @@ M.gitsigns = function(gs, bufnr)
   map("n", "<leader>bl", gs.blame_line, opts "[B]lame [L]ine")
 end
 
-M.lsp = function(bufnr)
+M.lsp = function(client, bufnr)
   local function opts(desc)
     return { buffer = bufnr, desc = "LSP " .. desc }
   end
@@ -216,6 +216,13 @@ M.lsp = function(bufnr)
   map("n", "<leader>rn", vim.lsp.buf.rename, opts "[R]e[N]ame")
   map("n", "<leader>ca", vim.lsp.buf.code_action, opts "[C]ode [A]ction")
   map("v", "<leader>ca", vim.lsp.buf.code_action, opts "[C]ode [A]ction")
+  map("n", "<leader>ha", vim.lsp.buf.hover, opts "[H]over [A]ction")
+
+  if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+    map("n", "<leader>th", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
+    end, opts "LSP [T]oggle Inlay [H]ints")
+  end
 end
 
 M.telescope = function()
