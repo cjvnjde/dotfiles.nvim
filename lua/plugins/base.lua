@@ -1,4 +1,5 @@
 local ensure_installed = require "language_tools"
+local mappings = require "mappings"
 
 return {
   -- Theme configuration
@@ -225,5 +226,11 @@ return {
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
+  },
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    config = true,
+    keys = mappings.trouble(),
   },
 }
