@@ -10,6 +10,7 @@ local M = {
     "jsonls",
     "eslint",
     "emmet_language_server",
+    "bashls",
   },
   mason = {
     "css-lsp",
@@ -27,6 +28,7 @@ local M = {
     "rust-analyzer",
     "json-lsp",
     "emmet-language-server",
+    "bash-language-server",
   },
   treesitter = {
     "bash",
