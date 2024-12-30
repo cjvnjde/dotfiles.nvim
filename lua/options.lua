@@ -108,3 +108,7 @@ opt.scrolloff = 10
 
 -- Set highlight on search
 opt.hlsearch = true
+
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 99
