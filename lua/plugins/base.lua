@@ -134,7 +134,18 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       { "williamboman/mason.nvim", config = true },
-      { "j-hui/fidget.nvim", opts = {} },
+      {
+        "j-hui/fidget.nvim",
+        opts = {
+          progress = {
+            ignore = {
+              function(msg)
+                return msg.lsp_client.name == "pylsp" and string.find(msg.title, "lint:")
+              end,
+            },
+          },
+        },
+      },
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
