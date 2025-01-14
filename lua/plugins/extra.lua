@@ -86,4 +86,8 @@ return {
   {
     "github/copilot.vim",
   },
+  {
+    "alunny/pegjs-vim",
+    lazy = true,
+  },
 }

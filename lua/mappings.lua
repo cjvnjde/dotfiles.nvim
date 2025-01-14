@@ -2,6 +2,16 @@ local M = {}
 
 local map = vim.keymap.set
 
+function is_quickfix_open()
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      return true
+    end
+  end
+
+  return false
+end
+
 M.global = function()
   -- [[ NATIVE ]]
   -- move cursor in input mode
@@ -30,7 +40,6 @@ M.global = function()
 
   map("v", "<leader>p", '"_dP', { desc = "Paste without yanking" })
   map("v", "y", "ygv<Esc>", { desc = "Yank and keep selection" })
-  map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
 
   map("v", ">", ">gv", { desc = "Indent text" })
 
@@ -160,6 +169,30 @@ M.global = function()
 
   -- Rest
   map("n", "<leader>rr", "<CMD>Rest run<CR>", { desc = "[R]run[R]rest request" })
+
+  -- Quickfix
+  local cmp = require "cmp"
+
+  map("n", "<C-n>", function()
+    if not cmp.visible() then
+      return "<cmd>cnext<CR>"
+    end
+  end, { expr = true, silent = true, desc = "[N]ext quickfix (when 'cmp' is hidden)" })
+
+  map("n", "<C-p>", function()
+    if not cmp.visible() then
+      return "<cmd>cprevious<CR>"
+    end
+  end, { expr = true, silent = true, desc = "[P]previous quickfix (when 'cmp' is hidden)" })
+
+  map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
+  map("n", "<leader>tq", function()
+    if is_quickfix_open() then
+      return "<cmd>cclose<CR>"
+    else
+      return "<cmd>copen<CR>"
+    end
+  end, { expr = true, desc = "[T]oggle [Q]uit quick fix list", silent = true })
 end
 
 M.cmp = function(cmp)
