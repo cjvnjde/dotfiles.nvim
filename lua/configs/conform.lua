@@ -12,6 +12,7 @@ return {
     yaml = { "prettier" },
     markdown = { "prettier" },
     graphql = { "prettier" },
+    vue = { "prettier" },
     lua = { "stylua" },
     rust = { "rustfmt" },
     nix = { "nixfmt" },

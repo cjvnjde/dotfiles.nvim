@@ -12,6 +12,7 @@ local M = {
     "emmet_language_server",
     "bashls",
     "pylsp",
+    "vuels",
   },
   mason = {
     "css-lsp",
@@ -47,7 +48,12 @@ local M = {
     "rust",
     "json",
     "http",
+    "vue",
     "python",
+    "yaml",
+    "sql",
+    "toml",
+    "jsdoc",
   },
 }
 
