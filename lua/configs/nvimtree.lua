@@ -16,7 +16,7 @@ return {
     adaptive_size = true,
     centralize_selection = true,
     float = {
-      enable = true,
+      enable = false,
       quit_on_focus_loss = true,
     },
   },
