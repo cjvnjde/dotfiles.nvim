@@ -12,6 +12,17 @@ function is_quickfix_open()
   return false
 end
 
+local function try_require(module_name)
+  local ok, module = pcall(require, module_name)
+
+  if ok then
+    return module
+  else
+    print(string.format("Module '%s' not found.", module_name))
+    return nil
+  end
+end
+
 M.global = function()
   -- [[ NATIVE ]]
   -- move cursor in input mode
@@ -112,60 +123,63 @@ M.global = function()
   -- map({ "x", "o" }, "s", "<Plug>(leap-forward)")
   -- map({ "x", "o" }, "S", "<Plug>(leap-backward)")
 
-  local harpoon = require "harpoon"
+  local harpoon = try_require "harpoon"
 
-  map("n", "<M-a>", function()
-    harpoon:list():add()
-  end)
+  if harpoon then
+    map("n", "<M-a>", function()
+      harpoon:list():add()
+    end)
 
-  map("n", "<M-d>", function()
-    harpoon:list():remove()
-  end)
+    map("n", "<M-d>", function()
+      harpoon:list():remove()
+    end)
 
-  local conf = require("telescope.config").values
-  local function toggle_telescope(harpoon_files)
-    local file_paths = {}
-    for _, item in ipairs(harpoon_files.items) do
-      table.insert(file_paths, item.value)
+    local conf = require("telescope.config").values
+
+    local function toggle_telescope(harpoon_files)
+      local file_paths = {}
+      for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+      end
+
+      require("telescope.pickers")
+        .new({}, {
+          prompt_title = "Harpoon",
+          finder = require("telescope.finders").new_table {
+            results = file_paths,
+          },
+          previewer = conf.file_previewer {},
+          sorter = conf.generic_sorter {},
+        })
+        :find()
     end
 
-    require("telescope.pickers")
-      .new({}, {
-        prompt_title = "Harpoon",
-        finder = require("telescope.finders").new_table {
-          results = file_paths,
-        },
-        previewer = conf.file_previewer {},
-        sorter = conf.generic_sorter {},
-      })
-      :find()
+    map("n", "<leader>fh", function()
+      toggle_telescope(harpoon:list())
+    end, { desc = "[F]ind [H]arpoon" })
+
+    map("n", "<M-e>", function()
+      harpoon.ui:toggle_quick_menu(harpoon:list())
+    end)
+    map("n", "<M-h>", function()
+      harpoon:list():select(1)
+    end, { desc = "Go to Harpoon 1" })
+    map("n", "<M-t>", function()
+      harpoon:list():select(2)
+    end, { desc = "Go to Harpoon 2" })
+    map("n", "<M-n>", function()
+      harpoon:list():select(3)
+    end, { desc = "Go to Harpoon 3" })
+    map("n", "<M-s>", function()
+      harpoon:list():select(4)
+    end, { desc = "Go to Harpoon 4" })
+    map("n", "<M-b>", function()
+      harpoon:list():prev()
+    end)
+    map("n", "<M-l>", function()
+      harpoon:list():next()
+    end)
   end
-
-  map("n", "<leader>fh", function()
-    toggle_telescope(harpoon:list())
-  end, { desc = "[F]ind [H]arpoon" })
-
-  map("n", "<M-e>", function()
-    harpoon.ui:toggle_quick_menu(harpoon:list())
-  end)
-  map("n", "<M-h>", function()
-    harpoon:list():select(1)
-  end, { desc = "Go to Harpoon 1" })
-  map("n", "<M-t>", function()
-    harpoon:list():select(2)
-  end, { desc = "Go to Harpoon 2" })
-  map("n", "<M-n>", function()
-    harpoon:list():select(3)
-  end, { desc = "Go to Harpoon 3" })
-  map("n", "<M-s>", function()
-    harpoon:list():select(4)
-  end, { desc = "Go to Harpoon 4" })
-  map("n", "<M-b>", function()
-    harpoon:list():prev()
-  end)
-  map("n", "<M-l>", function()
-    harpoon:list():next()
-  end)
 
   -- Rest
   map("n", "<leader>rr", "<CMD>Rest run<CR>", { desc = "[R]run[R]rest request" })
@@ -287,7 +301,7 @@ M.lsp = function(client, bufnr)
 end
 
 M.telescope = function()
-  local telescope_actions = require "telescope.actions"
+  local telescope_actions = try_require "telescope.actions"
 
   if telescope_actions then
     return {
