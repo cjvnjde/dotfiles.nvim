@@ -2,53 +2,6 @@ local ensure_installed = require "language_tools"
 local mappings = require "mappings"
 
 return {
-  -- Theme configuration
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    lazy = false,
-    opts = {
-      flavour = "mocha",
-      transparent_background = true,
-    },
-    config = function(self, opts)
-      require(self.name).setup(opts)
-      vim.cmd.colorscheme "catppuccin"
-    end,
-  },
-
-  -- File explorer plugin
-  {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    opts = (require "configs.nvimtree"),
-  },
-
-  -- Surround text with pairs (quotes, brackets, etc.)
-  {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    config = true,
-  },
-
-  -- Automatically detect and set tab width
-  "tpope/vim-sleuth",
-
-  -- Auto-close pairs like brackets and quotes
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true,
-  },
-
-  -- Auto-format files on save
-  {
-    "stevearc/conform.nvim",
-    event = "BufWritePre",
-    opts = (require "configs.conform"),
-  },
 
   -- Treesitter for enhanced syntax highlighting and indentation
   {
@@ -60,26 +13,6 @@ return {
       highlight = { enable = true },
       indent = { enable = true },
     },
-  },
-
-  -- Auto-tag HTML and XML elements
-  {
-    "windwp/nvim-ts-autotag",
-    name = "nvim-ts-autotag",
-    opts = {
-      opts = {
-        enable_close = true,
-        enable_rename = true,
-        enable_close_on_slash = true,
-      },
-    },
-  },
-
-  -- Add vertical indentation lines
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    config = true,
   },
 
   -- Fuzzy finder and search tool
@@ -101,13 +34,6 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = (require "configs.mason").mason_auto_install,
     dependencies = { { "williamboman/mason.nvim", config = true } },
-  },
-
-  -- Display keybindings in a popup
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    cmd = "WhichKey",
   },
 
   -- File operations support with LSP
@@ -178,38 +104,6 @@ return {
     end,
   },
 
-  -- Status line configuration
-  {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { "filename" },
-        lualine_x = {
-          {
-            "rest",
-            icon = "",
-            fg = "#428890",
-          },
-          "encoding",
-          "fileformat",
-          "filetype",
-        },
-        lualine_z = { "location" },
-      },
-    },
-  },
-
-  -- Color highlighter for hex codes and color names
-  {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end,
-  },
-
   -- Extended text objects for selection
   {
     "echasnovski/mini.nvim",
@@ -243,6 +137,25 @@ return {
     cmd = "Trouble",
     config = true,
     keys = mappings.trouble(),
+  },
+
+  {
+    "rest-nvim/rest.nvim",
+    config = function()
+      ---@class rest.Config
+      local config = {
+        env = {
+          pattern = ".*%.http.env.*",
+        },
+      }
+
+      vim.g.rest_nvim = config
+    end,
+  },
+
+  {
+    "alunny/pegjs-vim",
+    lazy = true,
   },
   -- {
   --   "folke/noice.nvim",

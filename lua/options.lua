@@ -2,16 +2,9 @@ local opt = vim.opt
 local o = vim.o
 local g = vim.g
 
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
 g.mapleader = " "
 g.maplocalleader = "\\"
 
--- opt.spelllang = "en_us"
--- opt.spell = true
-
--------------------------------------- options ------------------------------------------
 -- Set the global statusline (appears at the bottom of all windows)
 o.laststatus = 3
 
@@ -67,6 +60,7 @@ o.mouse = "a"
 -- Numbers
 -- Show line numbers
 o.number = true
+o.relativenumber = true
 -- Set the minimum number of columns to use for the line number
 o.numberwidth = 2
 -- Hide the ruler (line and column number of the cursor position) from the status line
@@ -98,7 +92,7 @@ o.updatetime = 250
 
 -- Allow certain keys to move to the previous/next line when at the start/end of a line
 -- This includes arrow keys (<>), square brackets ([]), h, and l
-opt.whichwrap:append "<>[]hl"
+-- opt.whichwrap:append "<>[]hl"
 
 -- Preview substitutions live, as you type!
 opt.inccommand = "split"
