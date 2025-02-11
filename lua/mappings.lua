@@ -88,7 +88,7 @@ M.global = function()
 
   -- Neotest
 
-  map("n", "<leader>tn", "<cmd>lua require('neotest').run.run()<CR>", { desc = "[T]est [N]earest" })
+  map("n", "<leader>tn", "<cmd>lua nequire('neotest').run.run()<CR>", { desc = "[T]est [N]earest" })
   map("n", "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", { desc = "[T]est [F]ile" })
   map("n", "<leader>tl", "<cmd>lua require('neotest').run.run_last()<CR>", { desc = "[T]est [L]ast" })
   map("n", "<leader>ts", function()

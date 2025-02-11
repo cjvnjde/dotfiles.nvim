@@ -1,5 +1,5 @@
 require "options" -- should be first
-require "configs.lazy"
+require "package_manager"
 require "commands"
 local mappings = require "mappings"
 
