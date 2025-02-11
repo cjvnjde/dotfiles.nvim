@@ -2,7 +2,7 @@ local M = {}
 
 local map = vim.keymap.set
 
-function is_quickfix_open()
+local function is_quickfix_open()
   for _, win in ipairs(vim.fn.getwininfo()) do
     if win.quickfix == 1 then
       return true
@@ -54,11 +54,6 @@ M.global = function()
 
   map("v", ">", ">gv", { desc = "Indent text" })
 
-  map("n", "<leader>fm", function()
-    require("conform").format { lsp_fallback = true }
-    -- vim.lsp.buf.format { async = true }
-  end, { desc = "[F]or[M]at document" })
-
   -- sway ; and : keys
   map("n", ";", ":", { noremap = true, silent = false })
   map("v", ";", ":", { noremap = true, silent = false })
@@ -70,59 +65,22 @@ M.global = function()
   map("n", "<leader>/", "gcc", { desc = "Toggle Comment", remap = true })
   map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 
-  -- [[ PLUGINS ]]
-
-  -- nvimtree
-  map("n", "<leader>n", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-  map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
-
-  -- telescope
-  map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "[F]ind [W]ord (live grep)" })
-  map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "[F]ind [B]uffers" })
-  map("n", "<leader>fa", "<cmd>Telescope marks<CR>", { desc = "[F]ind [M]arks" })
-  map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "[F]ind [O]ldfiles" })
-  map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "[F]ind [F]iles" })
-
-  -- Oil
-  map("n", "<leader>fs", "<CMD>Oil<CR>", { desc = "Open [F]ile[S]ystem directory" })
-
-  -- Neotest
-
-  map("n", "<leader>tn", "<cmd>lua nequire('neotest').run.run()<CR>", { desc = "[T]est [N]earest" })
-  map("n", "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", { desc = "[T]est [F]ile" })
-  map("n", "<leader>tl", "<cmd>lua require('neotest').run.run_last()<CR>", { desc = "[T]est [L]ast" })
-  map("n", "<leader>ts", function()
-    local neotest = require "neotest"
-    neotest.run.stop()
-
-    if neotest.watch.is_watching() then
-      neotest.watch.stop()
+  -- Quickfix
+  map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
+  map("n", "<leader>tq", function()
+    if is_quickfix_open() then
+      return "<cmd>cclose<CR>"
+    else
+      return "<cmd>copen<CR>"
     end
-  end, { desc = "[T]est [S]top and stop watching" })
-  map("n", "<leader>tw", "<cmd>lua require('neotest').watch.watch()<CR>", { desc = "[T]est [W]atch" })
-  map("n", "<leader>to", "<cmd>lua require('neotest').output.open()<CR>", { desc = "[T]est [O]utput" })
-  map(
-    "n",
-    "<leader>tO",
-    "<cmd>lua require('neotest').output.open({ enter = true })<CR>",
-    { desc = "[T]est [O]utput and enter" }
-  )
-  map("n", "<leader>tt", "<cmd>lua require('neotest').summary.toggle()<CR>", { desc = "[T]est [T]oggle summary" })
+  end, { expr = true, desc = "[T]oggle [Q]uit quick fix list", silent = true })
+end
 
-  map("n", "<leader>cot", function()
-    require("coverage").load(true)
-  end, { desc = "[C]overage [T]oggle test coverage" })
+M.rest = function()
+  map("n", "<leader>rr", "<CMD>Rest run<CR>", { desc = "[R]run[R]rest request" })
+end
 
-  map("n", "<leader>cos", function()
-    require("coverage").load()
-    require("coverage").summary()
-  end, { desc = "[C]overage [S]how test coverage summary" })
-
-  map("n", "<leader><leader>", "<Plug>(leap)")
-  -- map("n", "S", "<Plug>(leap-from-window)")
-  -- map({ "x", "o" }, "s", "<Plug>(leap-forward)")
-  -- map({ "x", "o" }, "S", "<Plug>(leap-backward)")
-
+M.harpoon = function()
   local harpoon = try_require "harpoon"
 
   if harpoon then
@@ -180,13 +138,22 @@ M.global = function()
       harpoon:list():next()
     end)
   end
+end
 
-  -- Rest
-  map("n", "<leader>rr", "<CMD>Rest run<CR>", { desc = "[R]run[R]rest request" })
+M.leap = function()
+  map("n", "<leader><leader>", "<Plug>(leap)")
+  -- map("n", "S", "<Plug>(leap-from-window)")
+  -- map({ "x", "o" }, "s", "<Plug>(leap-forward)")
+  -- map({ "x", "o" }, "S", "<Plug>(leap-backward)")
+end
 
-  -- Quickfix
-  local cmp = require "cmp"
+M.conform = function()
+  map("n", "<leader>fm", function()
+    require("conform").format { lsp_fallback = true }
+  end, { desc = "[F]or[M]at document" })
+end
 
+M.cmp = function(cmp)
   map("n", "<C-n>", function()
     if not cmp.visible() then
       return "<cmd>cnext<CR>"
@@ -199,17 +166,6 @@ M.global = function()
     end
   end, { expr = true, silent = true, desc = "[P]previous quickfix (when 'cmp' is hidden)" })
 
-  map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
-  map("n", "<leader>tq", function()
-    if is_quickfix_open() then
-      return "<cmd>cclose<CR>"
-    else
-      return "<cmd>copen<CR>"
-    end
-  end, { expr = true, desc = "[T]oggle [Q]uit quick fix list", silent = true })
-end
-
-M.cmp = function(cmp)
   return {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -223,15 +179,6 @@ M.cmp = function(cmp)
       select = true,
     },
 
-    -- Conflict with copilot
-    -- ["<Tab>"] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_next_item()
-    --   else
-    --     fallback()
-    --   end
-    -- end, { "i", "s" }),
-
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -240,6 +187,15 @@ M.cmp = function(cmp)
       end
     end, { "i", "s" }),
   }
+end
+
+M.nvimtree = function()
+  map("n", "<leader>n", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+  map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+end
+
+M.oil = function()
+  map("n", "<leader>fs", "<CMD>Oil<CR>", { desc = "Open [F]ile[S]ystem directory" })
 end
 
 M.gitsigns = function(gs, bufnr)
@@ -300,8 +256,48 @@ M.lsp = function(client, bufnr)
   end
 end
 
+M.neotest = function()
+  map("n", "<leader>tn", "<cmd>lua nequire('neotest').run.run()<CR>", { desc = "[T]est [N]earest" })
+  map("n", "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", { desc = "[T]est [F]ile" })
+  map("n", "<leader>tl", "<cmd>lua require('neotest').run.run_last()<CR>", { desc = "[T]est [L]ast" })
+  map("n", "<leader>ts", function()
+    local neotest = require "neotest"
+    neotest.run.stop()
+
+    if neotest.watch.is_watching() then
+      neotest.watch.stop()
+    end
+  end, { desc = "[T]est [S]top and stop watching" })
+  map("n", "<leader>tw", "<cmd>lua require('neotest').watch.watch()<CR>", { desc = "[T]est [W]atch" })
+  map("n", "<leader>to", "<cmd>lua require('neotest').output.open()<CR>", { desc = "[T]est [O]utput" })
+  map(
+    "n",
+    "<leader>tO",
+    "<cmd>lua require('neotest').output.open({ enter = true })<CR>",
+    { desc = "[T]est [O]utput and enter" }
+  )
+  map("n", "<leader>tt", "<cmd>lua require('neotest').summary.toggle()<CR>", { desc = "[T]est [T]oggle summary" })
+end
+
+M.coverage = function()
+  map("n", "<leader>cot", function()
+    require("coverage").load(true)
+  end, { desc = "[C]overage [T]oggle test coverage" })
+
+  map("n", "<leader>cos", function()
+    require("coverage").load()
+    require("coverage").summary()
+  end, { desc = "[C]overage [S]how test coverage summary" })
+end
+
 M.telescope = function()
   local telescope_actions = try_require "telescope.actions"
+
+  map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "[F]ind [W]ord (live grep)" })
+  map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "[F]ind [B]uffers" })
+  map("n", "<leader>fa", "<cmd>Telescope marks<CR>", { desc = "[F]ind [M]arks" })
+  map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "[F]ind [O]ldfiles" })
+  map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "[F]ind [F]iles" })
 
   if telescope_actions then
     return {

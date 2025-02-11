@@ -1,5 +1,4 @@
 return {
-
   -- Autocompletion engine
   {
     "hrsh7th/nvim-cmp",

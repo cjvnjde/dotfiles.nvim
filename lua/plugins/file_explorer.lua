@@ -79,10 +79,17 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      require("nvim-tree").setup(opts)
+      require("mappings").nvimtree()
+    end,
   },
   {
     "stevearc/oil.nvim",
-    config = true,
+    config = function()
+      require("oil").setup()
+      require("mappings").oil()
+    end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 }

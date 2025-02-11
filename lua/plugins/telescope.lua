@@ -1,7 +1,6 @@
 local mappings = require "mappings"
 
 return {
-
   -- Fuzzy finder and search tool
   {
     "nvim-telescope/telescope.nvim",
@@ -25,5 +24,9 @@ return {
       },
       extensions = {},
     },
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("mappings").telescope()
+    end,
   },
 }

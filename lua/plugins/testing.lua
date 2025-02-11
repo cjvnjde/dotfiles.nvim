@@ -19,6 +19,7 @@ return {
           require "neotest-jest",
         },
       }
+      require("mappings").neotest()
     end,
   },
   {
@@ -26,10 +27,12 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    config = function()
-      require("coverage").setup {
-        auto_reload = true,
-      }
+    opts = {
+      auto_reload = true,
+    },
+    config = function(_, opts)
+      require("coverage").setup(opts)
+      require("mappings").coverage()
     end,
   },
 }

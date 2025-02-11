@@ -29,5 +29,9 @@ return {
         lsp_fallback = true,
       },
     },
+    config = function(_, opts)
+      require("conform").setup(opts)
+      require("mappings").conform()
+    end,
   },
 }
