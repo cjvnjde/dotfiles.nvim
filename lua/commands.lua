@@ -31,6 +31,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
+-- Close nvimtree when no other buffer is open --
 vim.api.nvim_create_autocmd("BufEnter", {
   group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
   pattern = "NvimTree_*",

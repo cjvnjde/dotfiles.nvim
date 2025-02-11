@@ -5,7 +5,7 @@ return {
     opts = {
       filters = {
         dotfiles = false,
-        custom = { "node_modules", "dist", "build", ".git" },
+        custom = { "node_modules", "dist", "build", "\\.git" },
       },
       disable_netrw = true,
       hijack_netrw = true,
