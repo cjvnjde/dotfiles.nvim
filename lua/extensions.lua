@@ -32,6 +32,7 @@ local M = {
     "emmet-language-server",
     "bash-language-server",
     "python-lsp-server",
+    "markdownlint",
   },
   treesitter = {
     "bash",
