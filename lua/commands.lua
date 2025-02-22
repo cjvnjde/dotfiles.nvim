@@ -30,19 +30,3 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     }
   end,
 })
-
--- Close nvimtree when no other buffer is open --
--- vim.api.nvim_create_autocmd("BufEnter", {
---   group = vim.api.nvim_create_augroup("Neotree", { clear = true }),
---   pattern = "neo-tree",
---   callback = function()
---     local layout = vim.api.nvim_call_function("winlayout", {})
---     if
---       layout[1] == "leaf"
---       and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "neo-tree"
---       and layout[3] == nil
---     then
---       vim.cmd "confirm quit"
---     end
---   end,
--- })

@@ -16,6 +16,10 @@ return {
       "MunifTanjim/nui.nvim",
     },
     opts = {
+      close_if_last_window = true,
+      filesystem = {
+        follow_current_file = true,
+      },
       nesting_rules = {
         ["ts"] = {
           pattern = "(.*)%.ts$",
