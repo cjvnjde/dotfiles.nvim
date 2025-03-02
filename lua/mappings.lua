@@ -252,6 +252,15 @@ M.lsp = function(client, bufnr)
       context = { only = { "source" } },
     }
   end
+  local function remove_unused()
+    vim.lsp.buf.code_action {
+      apply = true,
+      context = {
+        only = { "source.removeUnused.ts" },
+        diagnostics = {},
+      },
+    }
+  end
 
   map("n", "gd", vim.lsp.buf.definition, opts "[G]o to [D]efinition")
   map("n", "gi", vim.lsp.buf.implementation, opts "[G]o to [I]mplementation")
@@ -261,7 +270,7 @@ M.lsp = function(client, bufnr)
   map("v", "<leader>ca", quickfix_action, opts "[C]ode [A]ction")
 
   map("n", "<leader>cs", source_action, opts "[C]ode [S]ource action")
-  map("v", "<leader>cs", source_action, opts "[C]ode [S]ource action")
+  map("n", "<leader>cc", remove_unused, opts "[C]ode [C]clean action")
 
   map("n", "<leader>ha", vim.lsp.buf.hover, opts "[H]over [A]ction")
 
