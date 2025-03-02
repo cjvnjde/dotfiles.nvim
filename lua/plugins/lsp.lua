@@ -34,6 +34,18 @@ local function configure_lsp()
     },
   }
 
+  local js_ts_default_settings = {
+    inlayHints = {
+      includeInlayEnumMemberValueHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayParameterNameHints = "all",
+      includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayVariableTypeHints = true,
+    },
+  }
+
   local lsp_configs = {
     eslint = {
       on_attach = function(_, bufnr)
@@ -45,27 +57,13 @@ local function configure_lsp()
     },
     ts_ls = {
       settings = {
-        typescript = {
-          inlayHints = {
-            includeInlayEnumMemberValueHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayParameterNameHints = "all",
-            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayVariableTypeHints = true,
-          },
-        },
-        javascript = {
-          inlayHints = {
-            includeInlayEnumMemberValueHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayParameterNameHints = "all",
-            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayVariableTypeHints = true,
-          },
+        typescript = js_ts_default_settings,
+        javascript = js_ts_default_settings,
+      },
+      init_options = {
+        preferences = {
+          importModuleSpecifierPreference = "relative",
+          importModuleSpecifierEnding = "minimal",
         },
       },
     },
@@ -121,6 +119,10 @@ local function configure_lsp()
 
     if lsp_configs[lsp] and lsp_configs[lsp].settings then
       config.settings = lsp_configs[lsp].settings
+    end
+
+    if lsp_configs[lsp] and lsp_configs[lsp].init_options then
+      config.init_options = lsp_configs[lsp].init_options
     end
 
     lspconfig[lsp].setup(config)

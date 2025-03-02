@@ -190,8 +190,8 @@ M.cmp = function(cmp)
 end
 
 M.neotree = function()
-  map("n", "<leader>n", "<cmd>Neotree<CR>", { desc = "nvimtree toggle window" })
-  map("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "nvimtree focus window" })
+  map("n", "<leader>e", "<cmd>Neotree<CR>", { desc = "nvimtree toggle window" })
+  map("n", "<leader>n", "<cmd>Neotree toggle<CR>", { desc = "nvimtree focus window" })
 end
 
 M.oil = function()
@@ -242,11 +242,27 @@ M.lsp = function(client, bufnr)
     return { buffer = bufnr, desc = "LSP " .. desc }
   end
 
+  local function quickfix_action()
+    vim.lsp.buf.code_action {
+      context = { only = { "quickfix" } },
+    }
+  end
+  local function source_action()
+    vim.lsp.buf.code_action {
+      context = { only = { "source" } },
+    }
+  end
+
   map("n", "gd", vim.lsp.buf.definition, opts "[G]o to [D]efinition")
   map("n", "gi", vim.lsp.buf.implementation, opts "[G]o to [I]mplementation")
   map("n", "<leader>rn", vim.lsp.buf.rename, opts "[R]e[N]ame")
-  map("n", "<leader>ca", vim.lsp.buf.code_action, opts "[C]ode [A]ction")
-  map("v", "<leader>ca", vim.lsp.buf.code_action, opts "[C]ode [A]ction")
+
+  map("n", "<leader>ca", quickfix_action, opts "[C]ode [A]ction")
+  map("v", "<leader>ca", quickfix_action, opts "[C]ode [A]ction")
+
+  map("n", "<leader>cs", source_action, opts "[C]ode [S]ource action")
+  map("v", "<leader>cs", source_action, opts "[C]ode [S]ource action")
+
   map("n", "<leader>ha", vim.lsp.buf.hover, opts "[H]over [A]ction")
 
   if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
@@ -311,34 +327,34 @@ end
 M.trouble = function()
   return {
     {
-      "<leader>xx",
+      "<leader>dt",
       "<cmd>Trouble diagnostics toggle<cr>",
-      desc = "Diagnostics (Trouble)",
+      desc = "[D]iagnostics [T]oggle (Trouble)",
     },
     {
-      "<leader>xX",
+      "<leader>db",
       "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-      desc = "Buffer Diagnostics (Trouble)",
+      desc = "[D]iagnostics [B]uffer (Trouble)",
     },
     {
-      "<leader>cs",
+      "<leader>ds",
       "<cmd>Trouble symbols toggle focus=false<cr>",
-      desc = "Symbols (Trouble)",
+      desc = "[D]iagnostics [S]ymbols (Trouble)",
     },
     {
-      "<leader>cl",
+      "<leader>dl",
       "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-      desc = "LSP Definitions / references / ... (Trouble)",
+      desc = "[D]iagnostics [L]SP Definitions / references / ... (Trouble)",
     },
     {
-      "<leader>xL",
+      "<leader>dL",
       "<cmd>Trouble loclist toggle<cr>",
-      desc = "Location List (Trouble)",
+      desc = "[D]iagnostics [L]ocation List (Trouble)",
     },
     {
-      "<leader>xQ",
+      "<leader>dQ",
       "<cmd>Trouble qflist toggle<cr>",
-      desc = "Quickfix List (Trouble)",
+      desc = "[D]iagnostics [Q]uickfix List (Trouble)",
     },
   }
 end
