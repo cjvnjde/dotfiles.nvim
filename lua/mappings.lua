@@ -189,9 +189,14 @@ M.cmp = function(cmp)
   }
 end
 
+M.nvimtree = function()
+  map("n", "<leader>n", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+  map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+end
+
 M.neotree = function()
-  map("n", "<leader>e", "<cmd>Neotree<CR>", { desc = "nvimtree toggle window" })
-  map("n", "<leader>n", "<cmd>Neotree toggle<CR>", { desc = "nvimtree focus window" })
+  -- map("n", "<leader>n", "<cmd>Neotree toggle<CR>", { desc = "neotree focus window" })
+  -- map("n", "<leader>e", "<cmd>Neotree<CR>", { desc = "neotree toggle window" })
 end
 
 M.oil = function()
