@@ -62,7 +62,7 @@ local function configure_lsp()
       },
       init_options = {
         preferences = {
-          importModuleSpecifierPreference = "non-relative",
+          importModuleSpecifierPreference = "minimal",
           importModuleSpecifierEnding = "minimal",
         },
       },
