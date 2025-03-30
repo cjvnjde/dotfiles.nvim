@@ -31,3 +31,5 @@ vim.lsp.enable {
 vim.schedule(function()
   mappings.global()
 end)
+
+vim.diagnostic.config { virtual_text = true }
