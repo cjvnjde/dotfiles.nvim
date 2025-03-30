@@ -1,5 +1,4 @@
 return {
-
   -- Extended text objects for selection
   {
     "echasnovski/mini.nvim",
@@ -7,31 +6,31 @@ return {
     config = true,
   },
 
-  {
-    "folke/trouble.nvim",
-    cmd = "Trouble",
-    config = true,
-    keys = require("config.mappings").trouble(),
-  },
+  -- {
+  --   "folke/trouble.nvim",
+  --   cmd = "Trouble",
+  --   config = true,
+  --   keys = require("config.mappings").trouble(),
+  -- },
 
-  {
-    "rest-nvim/rest.nvim",
-    config = function()
-      ---@class rest.Config
-      local config = {
-        env = {
-          pattern = ".*%.http.env.*",
-        },
-      }
+  -- {
+  --   "rest-nvim/rest.nvim",
+  --   config = function()
+  --     ---@class rest.Config
+  --     local config = {
+  --       env = {
+  --         pattern = ".*%.http.env.*",
+  --       },
+  --     }
+  --
+  --     vim.g.rest_nvim = config
+  --
+  --     require("config.mappings").rest()
+  --   end,
+  -- },
 
-      vim.g.rest_nvim = config
-
-      require("config.mappings").rest()
-    end,
-  },
-
-  {
-    "alunny/pegjs-vim",
-    lazy = true,
-  },
+  -- {
+  --   "alunny/pegjs-vim",
+  --   lazy = true,
+  -- },
 }
