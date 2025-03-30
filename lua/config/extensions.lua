@@ -1,19 +1,4 @@
 local M = {
-  -- lsp = {
-  --   "lua_ls",
-  --   "ts_ls",
-  --   "html",
-  --   "cssls",
-  --   "tailwindcss",
-  --   "rust_analyzer",
-  --   "rescriptls",
-  --   "jsonls",
-  --   "eslint",
-  --   "emmet_language_server",
-  --   "bashls",
-  --   "pylsp",
-  --   "vuels",
-  -- },
   mason = {
     -- lsp
     "lua-language-server",

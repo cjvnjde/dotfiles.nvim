@@ -79,16 +79,13 @@ M.global = function()
   map("n", "grd", function()
     vim.lsp.buf.definition { loclist = true }
   end, { desc = "Go to definition" })
+  -- TODO: make it togglable
   map("n", "grh", function()
     vim.lsp.inlay_hint.enable()
   end, { desc = "LSP Hint enable" })
   map("n", "gru", function()
     vim.lsp.inlay_hint.enable(false)
   end, { desc = "LSP Hint disable" })
-end
-
-M.rest = function()
-  map("n", "<leader>rr", "<CMD>Rest run<CR>", { desc = "[R]run[R]rest request" })
 end
 
 M.harpoon = function()
@@ -164,55 +161,14 @@ M.conform = function()
   end, { desc = "[F]or[M]at document" })
 end
 
-M.cmp = function(cmp)
-  map("n", "<C-n>", function()
-    if not cmp.visible() then
-      return "<cmd>cnext<CR>"
-    end
-  end, { expr = true, silent = true, desc = "[N]ext quickfix (when 'cmp' is hidden)" })
-
-  map("n", "<C-p>", function()
-    if not cmp.visible() then
-      return "<cmd>cprevious<CR>"
-    end
-  end, { expr = true, silent = true, desc = "[P]previous quickfix (when 'cmp' is hidden)" })
-
-  return {
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
-
-    ["<CR>"] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    },
-
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  }
-end
-
 M.nvimtree = function()
   map("n", "<leader>n", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
   map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
 end
 
-M.neotree = function()
-  -- map("n", "<leader>n", "<cmd>Neotree toggle<CR>", { desc = "neotree focus window" })
-  -- map("n", "<leader>e", "<cmd>Neotree<CR>", { desc = "neotree toggle window" })
-end
-
-M.oil = function()
-  map("n", "<leader>fs", "<CMD>Oil<CR>", { desc = "Open [F]ile[S]ystem directory" })
-end
+-- M.oil = function()
+--   map("n", "<leader>fs", "<CMD>Oil<CR>", { desc = "Open [F]ile[S]ystem directory" })
+-- end
 
 M.gitsigns = function(gs, bufnr)
   local function opts(desc)
@@ -251,50 +207,6 @@ M.gitsigns = function(gs, bufnr)
 
   -- Blame Operations
   map("n", "<leader>bl", gs.blame_line, opts "[B]lame [L]ine")
-end
-
-M.lsp = function(client, bufnr)
-  local function opts(desc)
-    return { buffer = bufnr, desc = "LSP " .. desc }
-  end
-
-  local function quickfix_action()
-    vim.lsp.buf.code_action {
-      context = { only = { "quickfix" } },
-    }
-  end
-  local function source_action()
-    vim.lsp.buf.code_action {
-      context = { only = { "source" } },
-    }
-  end
-  local function remove_unused()
-    vim.lsp.buf.code_action {
-      apply = true,
-      context = {
-        only = { "source.removeUnused.ts" },
-        diagnostics = {},
-      },
-    }
-  end
-
-  map("n", "gd", vim.lsp.buf.definition, opts "[G]o to [D]efinition")
-  map("n", "gi", vim.lsp.buf.implementation, opts "[G]o to [I]mplementation")
-  map("n", "<leader>rn", vim.lsp.buf.rename, opts "[R]e[N]ame")
-
-  map("n", "<leader>ca", quickfix_action, opts "[C]ode [A]ction")
-  map("v", "<leader>ca", quickfix_action, opts "[C]ode [A]ction")
-
-  map("n", "<leader>cs", source_action, opts "[C]ode [S]ource action")
-  map("n", "<leader>cc", remove_unused, opts "[C]ode [C]clean action")
-
-  map("n", "<leader>ha", vim.lsp.buf.hover, opts "[H]over [A]ction")
-
-  if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-    map("n", "<leader>th", function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr })
-    end, opts "LSP [T]oggle Inlay [H]ints")
-  end
 end
 
 M.neotest = function()

@@ -6,12 +6,12 @@ return {
     config = true,
   },
 
-  -- {
-  --   "folke/trouble.nvim",
-  --   cmd = "Trouble",
-  --   config = true,
-  --   keys = require("config.mappings").trouble(),
-  -- },
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    config = true,
+    keys = require("config.mappings").trouble(),
+  },
 
   -- {
   --   "rest-nvim/rest.nvim",
