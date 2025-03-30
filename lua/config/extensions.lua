@@ -12,7 +12,6 @@ local M = {
     "bash-language-server",
     "python-lsp-server",
     "rust-analyzer",
-    "ltex-ls",
 
     -- "vue-language-server",
     -- "rescript-language-server"
