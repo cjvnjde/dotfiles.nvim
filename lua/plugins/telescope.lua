@@ -1,4 +1,4 @@
-local mappings = require "mappings"
+local mappings = require "config.mappings"
 
 return {
   -- Fuzzy finder and search tool
@@ -26,7 +26,7 @@ return {
     },
     config = function(_, opts)
       require("telescope").setup(opts)
-      require("mappings").telescope()
+      require("config.mappings").telescope()
     end,
   },
 }

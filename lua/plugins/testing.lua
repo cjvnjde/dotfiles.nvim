@@ -19,7 +19,7 @@ return {
           require "neotest-jest",
         },
       }
-      require("mappings").neotest()
+      require("config.mappings").neotest()
     end,
   },
   {
@@ -32,7 +32,7 @@ return {
     },
     config = function(_, opts)
       require("coverage").setup(opts)
-      require("mappings").coverage()
+      require("config.mappings").coverage()
     end,
   },
 }

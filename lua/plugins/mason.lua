@@ -1,4 +1,4 @@
-local extensions = require "extensions"
+local extensions = require "config.extensions"
 
 return {
   -- Tool installer for LSP, linters, and formatters

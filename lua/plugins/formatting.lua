@@ -30,7 +30,7 @@ return {
     },
     config = function(_, opts)
       require("conform").setup(opts)
-      require("mappings").conform()
+      require("config.mappings").conform()
     end,
   },
 }

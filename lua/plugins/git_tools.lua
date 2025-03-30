@@ -3,7 +3,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     opts = function()
-      local mappings = require "mappings"
+      local mappings = require "config.mappings"
 
       return {
         current_line_blame = true,

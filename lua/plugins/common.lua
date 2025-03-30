@@ -11,7 +11,7 @@ return {
     "folke/trouble.nvim",
     cmd = "Trouble",
     config = true,
-    keys = require("mappings").trouble(),
+    keys = require("config.mappings").trouble(),
   },
 
   {
@@ -26,7 +26,7 @@ return {
 
       vim.g.rest_nvim = config
 
-      require("mappings").rest()
+      require("config.mappings").rest()
     end,
   },
 

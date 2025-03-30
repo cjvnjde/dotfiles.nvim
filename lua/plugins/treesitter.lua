@@ -1,4 +1,4 @@
-local extensions = require "extensions"
+local extensions = require "config.extensions"
 
 return {
   -- Treesitter for enhanced syntax highlighting and indentation

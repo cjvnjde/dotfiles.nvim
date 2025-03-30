@@ -3,7 +3,7 @@ return {
     "ggandor/leap.nvim",
     dependencies = "tpope/vim-repeat",
     config = function()
-      require("mappings").leap()
+      require("config.mappings").leap()
     end,
   },
   {
@@ -12,7 +12,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("harpoon"):setup {}
-      require("mappings").harpoon()
+      require("config.mappings").harpoon()
     end,
   },
 }
