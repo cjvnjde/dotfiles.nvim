@@ -23,7 +23,7 @@ vim.lsp.enable {
   -- bash
   "bashls", -- bash-language-server
   -- python
-  "pythonlsp", -- python-lsp-server
+  "pythonls", -- python-lsp-server
   -- rust
   "rustls", -- rust-analyzer
 }
