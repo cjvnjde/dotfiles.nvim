@@ -79,13 +79,6 @@ M.global = function()
   map("n", "grd", function()
     vim.lsp.buf.definition { loclist = true }
   end, { desc = "Go to definition" })
-  -- TODO: make it togglable
-  map("n", "grh", function()
-    vim.lsp.inlay_hint.enable()
-  end, { desc = "LSP Hint enable" })
-  map("n", "gru", function()
-    vim.lsp.inlay_hint.enable(false)
-  end, { desc = "LSP Hint disable" })
 end
 
 M.harpoon = function()
@@ -298,7 +291,7 @@ end
 
 M.blink = {
   preset = "default",
-  ["<C-space>"] = {
+  ["<C-f>"] = {
     function(cmp)
       if cmp.snippet_active() then
         return cmp.accept()
