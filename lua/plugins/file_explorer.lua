@@ -14,7 +14,7 @@ return {
     opts = {
       filters = {
         dotfiles = false,
-        custom = { "node_modules", "dist", "build", "\\.git" },
+        custom = { "node_modules", "dist", "^build$", "\\.git" },
       },
       update_focused_file = {
         enable = true,
