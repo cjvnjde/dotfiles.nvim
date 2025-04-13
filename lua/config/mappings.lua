@@ -74,11 +74,30 @@ M.global = function()
       return "<cmd>copen<CR>"
     end
   end, { expr = true, desc = "[T]oggle [Q]uit quick fix list", silent = true })
+end
 
-  -- LSP
-  map("n", "grd", function()
-    vim.lsp.buf.definition { loclist = true }
-  end, { desc = "Go to definition" })
+M.lsp = function(data)
+  vim.keymap.set("n", "<leader>th", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = data.buf })
+  end, { desc = "LSP [T]oggle Inlay [H]ints" })
+  map("n", "gd", function()
+    vim.lsp.buf.definition()
+  end, { desc = "[G]o to [D]efinition" })
+  map("n", "gi", function()
+    vim.lsp.buf.mplementation()
+  end, { desc = "[G]o to [I]mplementation" })
+  map("n", "<leader>rn", function()
+    vim.lsp.buf.rename()
+  end, { desc = "[R]e[N]ame" })
+  map("n", "gr", function()
+    vim.lsp.buf.references()
+  end, { desc = "[R]e[N]ame" })
+  map("n", "<leader>ca", function()
+    vim.lsp.buf.code_action()
+  end, { desc = "[C]ode [A]ction" })
+  map("v", "<leader>ca", function()
+    vim.lsp.buf.code_action()
+  end, { desc = "[C]ode [A]ction" })
 end
 
 M.harpoon = function()

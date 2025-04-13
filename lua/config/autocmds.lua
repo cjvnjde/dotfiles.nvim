@@ -1,3 +1,5 @@
+local mappings = require "config.mappings"
+
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 
@@ -18,8 +20,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(data)
-    vim.keymap.set("n", "<leader>th", function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = data.buf })
-    end, { desc = "LSP [T]oggle Inlay [H]ints" })
+    mappings.lsp(data)
   end,
 })
