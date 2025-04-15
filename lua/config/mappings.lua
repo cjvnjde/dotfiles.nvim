@@ -309,8 +309,8 @@ M.trouble = function()
 end
 
 M.blink = {
-  preset = "enter",
-  ["<Tab>"] = { "fallback_to_mappings" },
+  preset = "default",
+  ["<C-f>"] = { "accept", "fallback" },
 }
 
 return M
