@@ -77,27 +77,70 @@ M.global = function()
 end
 
 M.lsp = function(data)
+  local function filter_import_updates(action)
+    local kind = action.kind or ""
+    local title = action.title or ""
+    title = title:lower()
+
+    if kind == "source.organizeImports" then
+      return true
+    end
+
+    if title:match "import" then
+      return true
+    end
+
+    if kind:match "quickfix" and title:match "import" then
+      return true
+    end
+
+    if kind:match "import" then
+      return true
+    end
+
+    return false
+  end
+
+  local import_update_action_opts = {
+    filter = filter_import_updates,
+    apply = true,
+  }
+
   vim.keymap.set("n", "<leader>th", function()
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = data.buf })
+    local clients = vim.lsp.get_active_clients { bufnr = data.buf }
+    local supports_inlay_hints = false
+
+    for _, client in ipairs(clients) do
+      if client.supports_method "textDocument/inlayHint" then
+        supports_inlay_hints = true
+        break
+      end
+    end
+
+    if not supports_inlay_hints then
+      vim.notify("No active LSP client supports inlay hints for this buffer.", vim.log.levels.WARN)
+      return
+    end
+
+    local current_state = vim.lsp.inlay_hint.is_enabled { bufnr = data.buf }
+    vim.lsp.inlay_hint.enable(not current_state, { bufnr = data.buf })
+    vim.notify("Inlay hints " .. (not current_state and "enabled" or "disabled"), vim.log.levels.INFO)
   end, { desc = "LSP [T]oggle Inlay [H]ints" })
-  map("n", "gd", function()
-    vim.lsp.buf.definition()
-  end, { desc = "[G]o to [D]efinition" })
-  map("n", "gi", function()
-    vim.lsp.buf.mplementation()
-  end, { desc = "[G]o to [I]mplementation" })
-  map("n", "<leader>rn", function()
-    vim.lsp.buf.rename()
-  end, { desc = "[R]e[N]ame" })
-  map("n", "gr", function()
-    vim.lsp.buf.references()
-  end, { desc = "[R]e[N]ame" })
-  map("n", "<leader>ca", function()
-    vim.lsp.buf.code_action()
-  end, { desc = "[C]ode [A]ction" })
-  map("v", "<leader>ca", function()
-    vim.lsp.buf.code_action()
-  end, { desc = "[C]ode [A]ction" })
+
+  map("n", "gd", vim.lsp.buf.definition, { desc = "[G]o to [D]efinition" })
+  map("n", "gi", vim.lsp.buf.implementation, { desc = "[G]o to [I]mplementation" })
+  map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[N]ame" })
+  map("n", "gr", vim.lsp.buf.references, { desc = "[R]e[N]ame" })
+
+  map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+  map("v", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+
+  map("n", "<leader>ci", function()
+    vim.lsp.buf.code_action(import_update_action_opts)
+  end, { desc = "[C]ode [I]mport" })
+  map("v", "<leader>ci", function()
+    vim.lsp.buf.code_action(import_update_action_opts)
+  end, { desc = "[C]ode [I]mport" })
 end
 
 M.harpoon = function()
