@@ -24,9 +24,7 @@ local function try_require(module_name)
 end
 
 M.global = function()
-  -- [[ NATIVE ]]
   -- move cursor in input mode
-  -- TODO: zellij / tmux conflict
   map("i", "<C-b>", "<ESC>^i", { desc = "Move [B]eginning of line" })
   map("i", "<C-e>", "<End>", { desc = "Move [E]nd of line" })
   map("i", "<C-h>", "<Left>", { desc = "move left" })
@@ -43,18 +41,14 @@ M.global = function()
   -- common
   map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
 
-  map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
-  map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
-
   map("n", "<C-u>", "<C-u>zz", { desc = "Move middle up" })
   map("n", "<C-d>", "<C-d>zz", { desc = "Move middle down" })
 
   map("v", "<leader>p", '"_dP', { desc = "Paste without yanking" })
-  map("v", "y", "ygv<Esc>", { desc = "Yank and keep selection" })
 
   map("v", ">", ">gv", { desc = "Indent text" })
 
-  -- sway ; and : keys
+  -- swap ; and : keys
   map("n", ";", ":", { noremap = true, silent = false })
   map("v", ";", ":", { noremap = true, silent = false })
 
@@ -205,9 +199,6 @@ end
 
 M.leap = function()
   map("n", "<leader><leader>", "<Plug>(leap)")
-  -- map("n", "S", "<Plug>(leap-from-window)")
-  -- map({ "x", "o" }, "s", "<Plug>(leap-forward)")
-  -- map({ "x", "o" }, "S", "<Plug>(leap-backward)")
 end
 
 M.conform = function()
@@ -220,10 +211,6 @@ M.nvimtree = function()
   map("n", "<leader>n", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
   map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
 end
-
--- M.oil = function()
---   map("n", "<leader>fs", "<CMD>Oil<CR>", { desc = "Open [F]ile[S]ystem directory" })
--- end
 
 M.gitsigns = function(gs, bufnr)
   local function opts(desc)
