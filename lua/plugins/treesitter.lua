@@ -10,6 +10,13 @@ return {
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },
+      matchup = {
+        enable = true, -- mandatory, false will disable the whole extension
+      },
     },
+  },
+  {
+    "andymass/vim-matchup",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
 }
