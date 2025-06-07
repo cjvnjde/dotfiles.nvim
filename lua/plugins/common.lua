@@ -12,17 +12,6 @@ return {
     config = true,
     keys = require("config.mappings").trouble(),
   },
-  {
-    "nvimdev/lspsaga.nvim",
-    config = function()
-      require("lspsaga").setup {}
-    end,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-  },
-
   -- {
   --   "rest-nvim/rest.nvim",
   --   config = function()
