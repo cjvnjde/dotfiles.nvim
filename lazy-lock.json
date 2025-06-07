@@ -1,8 +1,8 @@
 {
   "FixCursorHold.nvim": { "branch": "master", "commit": "1900f89dc17c603eec29960f57c00bd9ae696495" },
   "LuaSnip": { "branch": "master", "commit": "03c8e67eb7293c404845b3982db895d59c0d1538" },
-  "ai-commit.nvim": { "branch": "main", "commit": "4c0ebc3316c245436c1d323c403a5bca079fc336" },
-  "avante.nvim": { "branch": "main", "commit": "687da816f9088b3c803d62ea7f5a14302552ff88" },
+  "ai-commit.nvim": { "branch": "main", "commit": "76480e5e2e3b08bac8d84a33318f2456464c40ed" },
+  "avante.nvim": { "branch": "main", "commit": "b7959191a33d3736a4a807e9610aadba51264627" },
   "blink-cmp-avante": { "branch": "master", "commit": "ddefb8de3cb1286ab39e0ccec0f32a45d03391f2" },
   "blink.cmp": { "branch": "main", "commit": "022521a8910a5543b0251b21c9e1a1e989745796" },
   "catppuccin": { "branch": "main", "commit": "fa42eb5e26819ef58884257d5ae95dd0552b9a66" },
