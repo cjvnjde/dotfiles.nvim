@@ -11,19 +11,6 @@ return {
     },
   },
   {
-    "cjvnjde/ai-commit.nvim",
-    branch = "main",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    config = function()
-      require("ai-commit").setup {
-        model = "google/gemini-2.0-flash-001",
-      }
-    end,
-  },
-  {
     "yetone/avante.nvim",
     event = "VeryLazy",
     version = false,
