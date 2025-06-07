@@ -63,4 +63,9 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
   },
+
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "codecompanion" },
+  },
 }
