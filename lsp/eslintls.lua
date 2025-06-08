@@ -27,8 +27,6 @@ return {
   },
   settings = {
     validate = "on",
-    packageManager = nil,
-    useESLintClass = false,
     experimental = {
       useFlatConfig = false,
     },
@@ -37,10 +35,8 @@ return {
       mode = "all",
     },
     format = true,
-    quiet = false,
     onIgnoredFiles = "off",
     rulesCustomizations = {},
-    run = "onType",
     problems = {
       shortenToSingleLine = false,
     },

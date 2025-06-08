@@ -4,13 +4,17 @@ return {
   },
   {
     "cjvnjde/ai-commit.nvim",
-    branch = "main",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
     opts = {
       model = "google/gemini-2.0-flash-001",
+      ignored_files = {
+        "package-lock.json",
+        "yarn.lock",
+        "pnpm-lock.yaml",
+      },
     },
   },
   {

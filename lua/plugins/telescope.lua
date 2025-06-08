@@ -22,7 +22,6 @@ return {
         },
         mappings = mappings.telescope(),
       },
-      extensions = {},
     },
     config = function(_, opts)
       require("telescope").setup(opts)
