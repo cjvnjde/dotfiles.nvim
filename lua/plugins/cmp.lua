@@ -16,19 +16,10 @@ return {
       completion = { documentation = { auto_show = false } },
       signature = { enabled = true },
       sources = {
-        default = { "avante", "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "path", "snippets", "buffer" },
 
         per_filetype = {
           codecompanion = { "codecompanion" },
-        },
-        providers = {
-          avante = {
-            module = "blink-cmp-avante",
-            name = "Avante",
-            opts = {
-              -- options for blink-cmp-avante
-            },
-          },
         },
       },
       fuzzy = { implementation = "prefer_rust_with_warning" },

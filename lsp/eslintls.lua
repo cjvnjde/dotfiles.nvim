@@ -28,28 +28,12 @@ return {
   settings = {
     validate = "on",
     experimental = {
-      useFlatConfig = false,
+      useFlatConfig = true,
     },
-    codeActionOnSave = {
-      enable = false,
-      mode = "all",
-    },
-    format = true,
-    onIgnoredFiles = "off",
     rulesCustomizations = {},
     problems = {
       shortenToSingleLine = false,
     },
     nodePath = "",
-    workingDirectory = { mode = "location" },
-    codeAction = {
-      disableRuleComment = {
-        enable = true,
-        location = "separateLine",
-      },
-      showDocumentation = {
-        enable = true,
-      },
-    },
   },
 }

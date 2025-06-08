@@ -1,17 +1,17 @@
 local M = {
   mason = {
     -- lsp
-    "lua-language-server",
-    "typescript-language-server",
-    "css-lsp",
-    "html-lsp",
-    "eslint-lsp",
-    "tailwindcss-language-server",
-    "json-lsp",
-    "emmet-language-server",
     "bash-language-server",
+    "css-lsp",
+    "emmet-language-server",
+    "eslint-lsp",
+    "html-lsp",
+    "json-lsp",
+    "lua-language-server",
     "python-lsp-server",
     "rust-analyzer",
+    "tailwindcss-language-server",
+    "typescript-language-server",
 
     -- "vue-language-server",
     -- "rescript-language-server"
