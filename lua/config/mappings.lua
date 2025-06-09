@@ -135,6 +135,16 @@ M.lsp = function(data)
   map("v", "<leader>ci", function()
     vim.lsp.buf.code_action(import_update_action_opts)
   end, { desc = "[C]ode [I]mport" })
+
+  vim.keymap.set("n", "<leader>cu", function()
+    vim.lsp.buf.code_action {
+      context = {
+        only = { "source.removeUnused.ts" },
+        diagnostics = {},
+      },
+      apply = true,
+    }
+  end, { desc = "[C]lean [U]nused (only Typescript)" })
 end
 
 M.harpoon = function()
