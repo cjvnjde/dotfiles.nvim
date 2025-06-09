@@ -12,7 +12,7 @@ o.laststatus = 3
 o.showmode = false
 
 -- Use system clipboard for all operations instead of vim's internal clipboard
-o.clipboard = "unnamedplus"
+-- o.clipboard = "unnamedplus"
 
 -- Highlight the entire line the cursor is on
 o.cursorline = true
