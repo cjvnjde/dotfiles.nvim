@@ -24,6 +24,13 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
   },
+  {
+    "brenoprata10/nvim-highlight-colors",
+    opts = {
+      render = "virtual",
+      enable_tailwind = true,
+    },
+  },
   -- {
   --   "rest-nvim/rest.nvim",
   --   config = function()

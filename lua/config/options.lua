@@ -5,6 +5,8 @@ local g = vim.g
 g.mapleader = " "
 g.maplocalleader = "\\"
 
+opt.termguicolors = true
+
 -- Set the global statusline (appears at the bottom of all windows)
 o.laststatus = 3
 
@@ -12,19 +14,29 @@ o.laststatus = 3
 o.showmode = false
 
 -- Use system clipboard for all operations instead of vim's internal clipboard
+
 o.clipboard = "unnamedplus"
 
-vim.g.clipboard = {
-  name = "OSC 52",
-  copy = {
-    ["+"] = require("vim.ui.clipboard.osc52").copy "+",
-    ["*"] = require("vim.ui.clipboard.osc52").copy "*",
-  },
-  paste = {
-    ["+"] = require("vim.ui.clipboard.osc52").paste "+",
-    ["*"] = require("vim.ui.clipboard.osc52").paste "*",
-  },
-}
+if os.getenv "SSH_TTY" then
+  local function paste()
+    return {
+      vim.fn.split(vim.fn.getreg "", "\n"),
+      vim.fn.getregtype "",
+    }
+  end
+
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy "+",
+      ["*"] = require("vim.ui.clipboard.osc52").copy "*",
+    },
+    paste = {
+      ["+"] = paste,
+      ["*"] = paste,
+    },
+  }
+end
 
 -- Highlight the entire line the cursor is on
 o.cursorline = true
