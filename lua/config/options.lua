@@ -12,7 +12,19 @@ o.laststatus = 3
 o.showmode = false
 
 -- Use system clipboard for all operations instead of vim's internal clipboard
--- o.clipboard = "unnamedplus"
+o.clipboard = "unnamedplus"
+
+vim.g.clipboard = {
+  name = "OSC 52",
+  copy = {
+    ["+"] = require("vim.ui.clipboard.osc52").copy "+",
+    ["*"] = require("vim.ui.clipboard.osc52").copy "*",
+  },
+  paste = {
+    ["+"] = require("vim.ui.clipboard.osc52").paste "+",
+    ["*"] = require("vim.ui.clipboard.osc52").paste "*",
+  },
+}
 
 -- Highlight the entire line the cursor is on
 o.cursorline = true
