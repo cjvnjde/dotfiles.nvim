@@ -45,6 +45,7 @@ M.global = function()
   map("n", "<C-d>", "<C-d>zz", { desc = "Move middle down" })
 
   map("v", "<leader>p", '"_dP', { desc = "Paste without yanking" })
+  map("v", "y", "ygv<Esc>", { desc = "Yank and keep selection" })
 
   map("v", ">", ">gv", { desc = "Indent text" })
 

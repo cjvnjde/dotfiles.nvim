@@ -9,11 +9,17 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     opts = {
+      env = {
+        api_key = vim.env.OPENROUTER_API_KEY,
+        url = "https://openrouter.ai/api",
+        chat_url = "/v1/chat/completions",
+      },
       model = "google/gemini-2.0-flash-001",
       ignored_files = {
         "package-lock.json",
         "yarn.lock",
         "pnpm-lock.yaml",
+        "lazy-lock.json",
       },
     },
   },
