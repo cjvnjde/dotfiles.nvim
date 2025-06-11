@@ -43,4 +43,12 @@ return {
       require("lsp-file-operations").setup()
     end,
   },
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    lazy = false,
+  },
 }
