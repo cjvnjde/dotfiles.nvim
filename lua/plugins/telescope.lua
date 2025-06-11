@@ -8,6 +8,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
       defaults = {
+        path_display = { "smart" },
         prompt_prefix = "   ",
         selection_caret = " ",
         entry_prefix = " ",
