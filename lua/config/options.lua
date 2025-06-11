@@ -15,15 +15,15 @@ o.showmode = false
 
 -- Use system clipboard for all operations instead of vim's internal clipboard
 
-o.clipboard = "unnamedplus"
+-- o.clipboard = "unnamedplus"
 
 if os.getenv "SSH_TTY" then
-  local function paste()
-    return {
-      vim.fn.split(vim.fn.getreg "", "\n"),
-      vim.fn.getregtype "",
-    }
-  end
+  -- local function paste()
+  --   return {
+  --     vim.fn.split(vim.fn.getreg "", "\n"),
+  --     vim.fn.getregtype "",
+  --   }
+  -- end
 
   vim.g.clipboard = {
     name = "OSC 52",
@@ -32,8 +32,11 @@ if os.getenv "SSH_TTY" then
       ["*"] = require("vim.ui.clipboard.osc52").copy "*",
     },
     paste = {
-      ["+"] = paste,
-      ["*"] = paste,
+      -- ["+"] = paste,
+      -- ["*"] = paste,
+
+      ["+"] = require("vim.ui.clipboard.osc52").paste "+",
+      ["*"] = require("vim.ui.clipboard.osc52").paste "*",
     },
   }
 end
