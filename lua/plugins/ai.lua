@@ -10,7 +10,7 @@ return {
     },
     opts = {
       env = {
-        api_key = vim.env.OPENROUTER_API_KEY,
+        api_key = os.getenv "OPENROUTER_API_KEY",
         url = "https://openrouter.ai/api",
         chat_url = "/v1/chat/completions",
       },
@@ -30,7 +30,7 @@ return {
         openrouter = function()
           return require("codecompanion.adapters").extend("openai_compatible", {
             env = {
-              api_key = vim.env.OPENROUTER_API_KEY,
+              api_key = os.getenv "OPENROUTER_API_KEY",
               url = "https://openrouter.ai/api",
               chat_url = "/v1/chat/completions",
             },

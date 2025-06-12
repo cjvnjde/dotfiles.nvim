@@ -13,17 +13,17 @@ return {
     keys = require("config.mappings").trouble(),
   },
   -- LspSaga used only for breadcrumbs
-  {
-    "nvimdev/lspsaga.nvim",
-    event = "LspAttach",
-    config = function()
-      require("lspsaga").setup {}
-    end,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-  },
+  -- {
+  --   "nvimdev/lspsaga.nvim",
+  --   event = "LspAttach",
+  --   config = function()
+  --     require("lspsaga").setup {}
+  --   end,
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  -- },
   {
     "brenoprata10/nvim-highlight-colors",
     opts = {
