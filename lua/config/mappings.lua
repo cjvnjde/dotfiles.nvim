@@ -223,6 +223,11 @@ M.nvimtree = function()
   map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
 end
 
+M.neotree = function()
+  map("n", "<leader>n", "<cmd>Neotree show toggle focus<CR>", { desc = "nvimtree toggle window" })
+  map("n", "<leader>e", "<cmd>Neotree show focus<CR>", { desc = "nvimtree focus window" })
+end
+
 M.gitsigns = function(gs, bufnr)
   local function opts(desc)
     return { buffer = bufnr, desc = desc }
