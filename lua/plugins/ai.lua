@@ -64,6 +64,8 @@ return {
           adapter = "openrouter",
           tools = {
             opts = {
+              auto_submit_errors = true,
+              auto_submit_success = true,
               default_tools = {
                 "full_stack_dev",
               },
@@ -75,6 +77,13 @@ return {
         },
         cmd = {
           adapter = "openrouter",
+        },
+      },
+      display = {
+        chat = {
+          show_token_count = true,
+          show_settings = true,
+          show_header_separator = true,
         },
       },
     },
