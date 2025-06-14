@@ -1,3 +1,7 @@
+-- Trust me bro, I know what I'm doing
+vim.g.codecompanion_auto_tool_mode = true
+vim.g.mcphub_auto_approve = true
+
 return {
   {
     "github/copilot.vim",
@@ -14,7 +18,7 @@ return {
         url = "https://openrouter.ai/api",
         chat_url = "/v1/chat/completions",
       },
-      model = "google/gemini-2.0-flash-001",
+      model = "google/gemini-2.5-flash-preview-05-20",
       ignored_files = {
         "package-lock.json",
         "yarn.lock",
@@ -27,6 +31,9 @@ return {
     "olimorris/codecompanion.nvim",
     opts = {
       adapters = {
+        opts = {
+          show_model_choices = false,
+        },
         openrouter = function()
           return require("codecompanion.adapters").extend("openai_compatible", {
             env = {
@@ -36,7 +43,7 @@ return {
             },
             schema = {
               model = {
-                default = "google/gemini-2.0-flash-001",
+                default = "google/gemini-2.5-pro-preview",
               },
             },
           })
@@ -46,23 +53,30 @@ return {
         mcphub = {
           callback = "mcphub.extensions.codecompanion",
           opts = {
-            show_result_in_chat = true, -- Show mcp tool results in chat
-            make_vars = true, -- Convert resources to #variables
-            make_slash_commands = true, -- Add prompts as /slash commands
+            show_result_in_chat = true,
+            make_vars = true,
+            make_slash_commands = true,
           },
         },
       },
-      -- strategies = {
-      --   chat = {
-      --     adapter = "openrouter",
-      --   },
-      --   inline = {
-      --     adapter = "openrouter",
-      --   },
-      --   cmd = {
-      --     adapter = "openrouter",
-      --   },
-      -- },
+      strategies = {
+        chat = {
+          adapter = "openrouter",
+          tools = {
+            opts = {
+              default_tools = {
+                "full_stack_dev",
+              },
+            },
+          },
+        },
+        inline = {
+          adapter = "openrouter",
+        },
+        cmd = {
+          adapter = "openrouter",
+        },
+      },
     },
     config = true,
     dependencies = {
@@ -73,6 +87,9 @@ return {
   },
   {
     "ravitemer/mcphub.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
     build = "npm install -g mcp-hub@latest",
     config = function()
       require("mcphub").setup {
