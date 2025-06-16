@@ -1,5 +1,9 @@
 local mappings = require "config.mappings"
 
+local is_log = function(entry)
+  return entry.label == "log" and entry.source_name == "Snippets"
+end
+
 return {
   {
     "saghen/blink.cmp",
@@ -59,7 +63,21 @@ return {
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
         },
       },
-      fuzzy = { implementation = "prefer_rust_with_warning" },
+      fuzzy = {
+        implementation = "prefer_rust_with_warning",
+        sorts = {
+          function(a, b)
+            if is_log(a) and not is_log(b) then
+              return true
+            end
+            if is_log(b) and not is_log(a) then
+              return false
+            end
+          end,
+          "score",
+          "sort_text",
+        },
+      },
     },
     opts_extend = { "sources.default" },
   },
