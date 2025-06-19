@@ -26,6 +26,7 @@ vim.lsp.enable {
   "pythonls", -- python-lsp-server
   -- rust
   "rustls", -- rust-analyzer
+  "cspell",
 }
 
 vim.schedule(function()
