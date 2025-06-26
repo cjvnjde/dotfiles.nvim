@@ -1,10 +1,14 @@
 -- Trust me bro, I know what I'm doing
-vim.g.codecompanion_auto_tool_mode = true
-vim.g.mcphub_auto_approve = true
+-- vim.g.codecompanion_auto_tool_mode = true
+-- vim.g.mcphub_auto_approve = true
 
 return {
+  -- {
+  --   "github/copilot.vim",
+  -- },
   {
-    "github/copilot.vim",
+    "supermaven-inc/supermaven-nvim",
+    config = true,
   },
   {
     "cjvnjde/ai-commit.nvim",
@@ -27,6 +31,7 @@ return {
       },
     },
   },
+  --[[
   {
     "olimorris/codecompanion.nvim",
     opts = {
@@ -119,4 +124,5 @@ return {
       },
     },
   },
+  ]]
 }
