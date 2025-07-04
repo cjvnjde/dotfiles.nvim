@@ -69,6 +69,8 @@ M.global = function()
       return "<cmd>copen<CR>"
     end
   end, { expr = true, desc = "[T]oggle [Q]uit quick fix list", silent = true })
+  -- Undotree
+  map("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "[U]ndo [T]ree" })
 end
 
 M.lsp = function(data)

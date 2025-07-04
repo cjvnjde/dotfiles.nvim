@@ -56,4 +56,7 @@ return {
       })
     end,
   },
+  {
+    "mbbill/undotree",
+  },
 }
