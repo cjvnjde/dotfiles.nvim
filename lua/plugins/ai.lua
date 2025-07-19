@@ -22,7 +22,7 @@ return {
         url = "https://openrouter.ai/api",
         chat_url = "/v1/chat/completions",
       },
-      model = "google/gemini-2.5-flash-preview-05-20",
+      model = "google/gemini-2.5-flash",
       ignored_files = {
         "package-lock.json",
         "yarn.lock",
