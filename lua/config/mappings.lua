@@ -40,6 +40,7 @@ M.global = function()
 
   -- common
   map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
+  map("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
   map("n", "<C-u>", "<C-u>zz", { desc = "Move middle up" })
   map("n", "<C-d>", "<C-d>zz", { desc = "Move middle down" })
