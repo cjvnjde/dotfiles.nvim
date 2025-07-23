@@ -15,6 +15,7 @@ return {
       },
     },
   },
+  -- Better operate text pairs like quotes, brackets, functions, tags etc
   {
     "andymass/vim-matchup",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
