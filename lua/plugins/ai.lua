@@ -1,7 +1,6 @@
 return {
   {
-    "supermaven-inc/supermaven-nvim",
-    config = true,
+    "github/copilot.vim",
   },
   {
     "cjvnjde/ai-commit.nvim",
