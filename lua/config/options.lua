@@ -64,7 +64,7 @@ opt.breakindent = true
 -- Break lines at word boundaries
 opt.linebreak = true
 -- Enable soft wrapping of long lines
-opt.wrap = true
+opt.wrap = false
 
 -- Set the characters that WORD boundaries are allowed to occur at
 opt.breakat = " ^I!@+;:,./?()[]{}='\"`–—­"

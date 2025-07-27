@@ -31,6 +31,9 @@ M.global = function()
   map("i", "<C-l>", "<Right>", { desc = "move right" })
   map("i", "<C-j>", "<Down>", { desc = "move down" })
   map("i", "<C-k>", "<Up>", { desc = "move up" })
+  map("n", "<leader>w", function()
+    vim.opt.wrap = not vim.opt.wrap:get()
+  end, { desc = "Toggle line wrap" })
 
   -- navigate between windows
   map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
@@ -47,6 +50,9 @@ M.global = function()
 
   map("v", "<leader>p", '"_dP', { desc = "Paste without yanking" })
   map("v", "y", "ygv<Esc>", { desc = "Yank and keep selection" })
+
+  map("v", "<leader>y", '"+y', { desc = "Yank to a clipboard" })
+  map("n", "<leader>p", '"+p', { desc = "Paste from a clipboard" })
 
   map("v", ">", ">gv", { desc = "Indent text" })
 

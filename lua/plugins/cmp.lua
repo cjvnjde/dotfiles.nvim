@@ -19,6 +19,7 @@ return {
       },
       completion = {
         documentation = { auto_show = true },
+        list = { selection = { preselect = true, auto_insert = false } },
         menu = {
           draw = {
             components = {
