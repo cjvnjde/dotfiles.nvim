@@ -67,6 +67,16 @@ M.global = function()
   map("n", "<leader>/", "gcc", { desc = "Toggle Comment", remap = true })
   map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 
+  -- Colors
+  map("n", "<leader>tc", function()
+    local colors = try_require "nvim-highlight-colors"
+    if colors then
+      colors.toggle()
+    else
+      vim.notify("nvim-highlight-colors not found", vim.log.levels.WARN)
+    end
+  end, { desc = "[T]oggle [C]olors" })
+
   -- Quickfix
   map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
   map("n", "<leader>tq", function()

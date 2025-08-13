@@ -43,15 +43,6 @@ return {
     main = "ibl",
     config = true,
   },
-
-  -- Color highlighter for hex codes and color names
-  {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end,
-  },
-
   -- Display keybindings in a popup
   {
     "folke/which-key.nvim",
