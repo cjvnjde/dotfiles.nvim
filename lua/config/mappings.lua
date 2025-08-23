@@ -1,36 +1,10 @@
+local utils = require "utils"
+
 local M = {}
 
 local map = vim.keymap.set
 
-local function is_quickfix_open()
-  for _, win in ipairs(vim.fn.getwininfo()) do
-    if win.quickfix == 1 then
-      return true
-    end
-  end
-
-  return false
-end
-
-local function try_require(module_name)
-  local ok, module = pcall(require, module_name)
-
-  if ok then
-    return module
-  else
-    print(string.format("Module '%s' not found.", module_name))
-    return nil
-  end
-end
-
 M.global = function()
-  -- move cursor in input mode
-  map("i", "<C-b>", "<ESC>^i", { desc = "Move [B]eginning of line" })
-  map("i", "<C-e>", "<End>", { desc = "Move [E]nd of line" })
-  map("i", "<C-h>", "<Left>", { desc = "move left" })
-  map("i", "<C-l>", "<Right>", { desc = "move right" })
-  map("i", "<C-j>", "<Down>", { desc = "move down" })
-  map("i", "<C-k>", "<Up>", { desc = "move up" })
   map("n", "<leader>w", function()
     vim.opt.wrap = not vim.opt.wrap:get()
   end, { desc = "Toggle line wrap" })
@@ -49,12 +23,13 @@ M.global = function()
   map("n", "<C-d>", "<C-d>zz", { desc = "Move middle down" })
 
   map("v", "<leader>p", '"_dP', { desc = "Paste without yanking" })
-  map("v", "y", "ygv<Esc>", { desc = "Yank and keep selection" })
+  -- map("v", "y", "ygv<Esc>", { desc = "Yank and keep selection" })
 
   map("v", "<leader>y", '"+y', { desc = "Yank to a clipboard" })
   map("n", "<leader>p", '"+p', { desc = "Paste from a clipboard" })
 
   map("v", ">", ">gv", { desc = "Indent text" })
+  map("v", "<", "<gv", { desc = "Indent text" })
 
   -- swap ; and : keys
   map("n", ";", ":", { noremap = true, silent = false })
@@ -69,7 +44,7 @@ M.global = function()
 
   -- Colors
   map("n", "<leader>tc", function()
-    local colors = try_require "nvim-highlight-colors"
+    local colors = utils.try_require "nvim-highlight-colors"
     if colors then
       colors.toggle()
     else
@@ -80,7 +55,7 @@ M.global = function()
   -- Quickfix
   map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
   map("n", "<leader>tq", function()
-    if is_quickfix_open() then
+    if utils.is_quickfix_open() then
       return "<cmd>cclose<CR>"
     else
       return "<cmd>copen<CR>"
@@ -167,66 +142,6 @@ M.lsp = function(data)
   end, { desc = "[C]lean [U]nused (only Typescript)" })
 end
 
-M.harpoon = function()
-  local harpoon = try_require "harpoon"
-
-  if harpoon then
-    map("n", "<M-a>", function()
-      harpoon:list():add()
-    end)
-
-    map("n", "<M-d>", function()
-      harpoon:list():remove()
-    end)
-
-    local conf = require("telescope.config").values
-
-    local function toggle_telescope(harpoon_files)
-      local file_paths = {}
-      for _, item in ipairs(harpoon_files.items) do
-        table.insert(file_paths, item.value)
-      end
-
-      require("telescope.pickers")
-        .new({}, {
-          prompt_title = "Harpoon",
-          finder = require("telescope.finders").new_table {
-            results = file_paths,
-          },
-          previewer = conf.file_previewer {},
-          sorter = conf.generic_sorter {},
-        })
-        :find()
-    end
-
-    map("n", "<leader>fh", function()
-      toggle_telescope(harpoon:list())
-    end, { desc = "[F]ind [H]arpoon" })
-
-    map("n", "<M-e>", function()
-      harpoon.ui:toggle_quick_menu(harpoon:list())
-    end)
-    map("n", "<M-h>", function()
-      harpoon:list():select(1)
-    end, { desc = "Go to Harpoon 1" })
-    map("n", "<M-t>", function()
-      harpoon:list():select(2)
-    end, { desc = "Go to Harpoon 2" })
-    map("n", "<M-n>", function()
-      harpoon:list():select(3)
-    end, { desc = "Go to Harpoon 3" })
-    map("n", "<M-s>", function()
-      harpoon:list():select(4)
-    end, { desc = "Go to Harpoon 4" })
-    map("n", "<M-b>", function()
-      harpoon:list():prev()
-    end)
-    map("n", "<M-l>", function()
-      harpoon:list():next()
-    end)
-  end
-end
-
 M.leap = function()
   map("n", "<leader><leader>", "<Plug>(leap)")
 end
@@ -235,11 +150,6 @@ M.conform = function()
   map("n", "<leader>fm", function()
     require("conform").format { lsp_fallback = true }
   end, { desc = "[F]or[M]at document" })
-end
-
-M.nvimtree = function()
-  map("n", "<leader>n", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-  map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
 end
 
 M.neotree = function()
@@ -257,7 +167,7 @@ M.gitsigns = function(gs, bufnr)
     if vim.wo.diff then
       vim.cmd.normal { "]c", bang = true }
     else
-      gs.nav_hunk "next"
+      gs.nav_hunk("next", { navigation = "all" })
     end
   end)
 
@@ -265,7 +175,7 @@ M.gitsigns = function(gs, bufnr)
     if vim.wo.diff then
       vim.cmd.normal { "[c", bang = true }
     else
-      gs.nav_hunk "prev"
+      gs.nav_hunk("prev", { navigation = "all" })
     end
   end)
 
@@ -321,7 +231,7 @@ M.coverage = function()
 end
 
 M.telescope = function()
-  local telescope_actions = try_require "telescope.actions"
+  local telescope_actions = utils.try_require "telescope.actions"
 
   map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "[F]ind [W]ord (live grep)" })
   map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "[F]ind [B]uffers" })
