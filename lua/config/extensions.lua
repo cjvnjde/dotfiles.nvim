@@ -24,6 +24,7 @@ local M = {
 
     -- others
     "deno",
+    "sql-formatter",
   },
   treesitter = {
     "bash",

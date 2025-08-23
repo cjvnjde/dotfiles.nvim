@@ -23,6 +23,17 @@ return {
         vue = { "prettier" },
         lua = { "stylua" },
         rust = { "rustfmt" },
+        sql = { "sql_formatter" },
+      },
+      formatters = {
+        sql_formatter = {
+          args = {
+            "--language",
+            "postgresql",
+            "--config",
+            '{"keywordCase":"upper","functionCase":"upper","dataTypeCase":"upper"}',
+          },
+        },
       },
       format_after_save = {
         lsp_fallback = true,
