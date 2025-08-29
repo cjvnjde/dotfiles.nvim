@@ -27,6 +27,7 @@ vim.lsp.enable {
   -- rust
   "rustls", -- rust-analyzer
   "cspell",
+  "sveltels",
 }
 
 vim.schedule(function()

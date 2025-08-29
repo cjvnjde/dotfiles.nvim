@@ -12,6 +12,7 @@ local M = {
     "rust-analyzer",
     "tailwindcss-language-server",
     "typescript-language-server",
+    "svelte-language-server",
 
     -- "vue-language-server",
     -- "rescript-language-server"
@@ -47,6 +48,7 @@ local M = {
     "sql",
     "toml",
     "jsdoc",
+    "svelte",
   },
 }
 
