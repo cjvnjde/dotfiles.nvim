@@ -17,30 +17,6 @@ o.showmode = false
 
 -- o.clipboard = "unnamedplus"
 
-if os.getenv "SSH_TTY" then
-  -- local function paste()
-  --   return {
-  --     vim.fn.split(vim.fn.getreg "", "\n"),
-  --     vim.fn.getregtype "",
-  --   }
-  -- end
-
-  vim.g.clipboard = {
-    name = "OSC 52",
-    copy = {
-      ["+"] = require("vim.ui.clipboard.osc52").copy "+",
-      ["*"] = require("vim.ui.clipboard.osc52").copy "*",
-    },
-    paste = {
-      -- ["+"] = paste,
-      -- ["*"] = paste,
-
-      ["+"] = require("vim.ui.clipboard.osc52").paste "+",
-      ["*"] = require("vim.ui.clipboard.osc52").paste "*",
-    },
-  }
-end
-
 -- Highlight the entire line the cursor is on
 o.cursorline = true
 

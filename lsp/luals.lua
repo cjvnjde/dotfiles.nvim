@@ -6,6 +6,10 @@ return {
     Lua = {
       runtime = {
         version = "LuaJIT",
+        path = {
+          "?.lua",
+          "?/init.lua",
+        },
       },
       signatureHelp = { enabled = true },
       hint = {

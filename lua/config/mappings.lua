@@ -23,7 +23,6 @@ M.global = function()
   map("n", "<C-d>", "<C-d>zz", { desc = "Move middle down" })
 
   map("v", "<leader>p", '"_dP', { desc = "Paste without yanking" })
-  -- map("v", "y", "ygv<Esc>", { desc = "Yank and keep selection" })
 
   map("v", "<leader>y", '"+y', { desc = "Yank to a clipboard" })
   map("n", "<leader>p", '"+p', { desc = "Paste from a clipboard" })
@@ -118,8 +117,9 @@ M.lsp = function(data)
 
   map("n", "gd", vim.lsp.buf.definition, { desc = "[G]o to [D]efinition" })
   map("n", "gi", vim.lsp.buf.implementation, { desc = "[G]o to [I]mplementation" })
+  map("n", "gr", vim.lsp.buf.references, { desc = "[G]o to [R]eference" })
+
   map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[N]ame" })
-  map("n", "gr", vim.lsp.buf.references, { desc = "[R]e[N]ame" })
 
   map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
   map("v", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
