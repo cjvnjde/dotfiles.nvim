@@ -238,6 +238,7 @@ M.telescope = function()
   map("n", "<leader>fa", "<cmd>Telescope marks<CR>", { desc = "[F]ind [M]arks" })
   map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "[F]ind [O]ldfiles" })
   map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "[F]ind [F]iles" })
+  map("n", "<leader>fg", "<cmd>Telescope git_status<CR>", { desc = "[F]ind [G]it files" })
 
   if telescope_actions then
     return {
