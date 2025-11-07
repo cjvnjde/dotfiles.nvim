@@ -19,4 +19,7 @@ return {
       enable_tailwind = true,
     },
   },
+  {
+    "j-hui/fidget.nvim",
+  },
 }
