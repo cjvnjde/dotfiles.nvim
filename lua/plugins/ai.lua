@@ -14,7 +14,7 @@ return {
         url = "https://openrouter.ai/api",
         chat_url = "/v1/chat/completions",
       },
-      model = "x-ai/grok-code-fast-1",
+      model = "x-ai/grok-4-fast",
       ignored_files = {
         "package-lock.json",
         "yarn.lock",
