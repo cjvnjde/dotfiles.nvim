@@ -22,7 +22,10 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { "filename" },
+        lualine_c = {
+          "filename",
+          "filetype",
+        },
         lualine_x = {
           {
             "rest",
@@ -31,7 +34,6 @@ return {
           },
           "encoding",
           "fileformat",
-          "filetype",
         },
         lualine_z = { "location" },
       },
@@ -64,6 +66,21 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     opts = {
       max_lines = 5,
+    },
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+      },
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
     },
   },
 }

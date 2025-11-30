@@ -1,7 +1,7 @@
 return {
-  {
-    "github/copilot.vim",
-  },
+  -- {
+  --   "github/copilot.vim",
+  -- },
   {
     "cjvnjde/ai-commit.nvim",
     dependencies = {
