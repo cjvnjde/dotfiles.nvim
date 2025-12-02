@@ -1,3 +1,6 @@
+local mappings = require "config.mappings"
+local nesting_rules = require "config.file_nesting_rules"
+
 return {
   -- Theme configuration
   {
@@ -58,55 +61,39 @@ return {
   },
 
   {
-    "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown", "codecompanion" },
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    opts = {
-      max_lines = 5,
-    },
-  },
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      lsp = {
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-      routes = {
-        {
-          filter = {
-            event = "msg_show",
-            any = {
-              { find = "%d+L, %d+B" },
-              { find = "; after #%d+" },
-              { find = "; before #%d+" },
-            },
-          },
-          view = "mini",
-        },
-      },
-      presets = {
-        bottom_search = true,
-        command_palette = true,
-        long_message_to_split = true,
-      },
-    },
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
     dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
     },
+    lazy = false,
+    ---@module "neo-tree"
+    ---@type neotree.Config?
+    opts = {
+      popup_border_style = "",
+      nesting_rules = nesting_rules,
+    },
+    config = function(_, opts)
+      require("neo-tree").setup(opts)
+      mappings.neotree()
+    end,
   },
   {
-    "rcarriga/nvim-notify",
+    "brenoprata10/nvim-highlight-colors",
     opts = {
-      background_colour = "#000000",
+      render = "virtual",
+      enable_tailwind = true,
+    },
+  },
+  -- lsp notification
+  {
+    "j-hui/fidget.nvim",
+    opts = {
+      notification = {
+        window = { winblend = 0 },
+      },
     },
   },
 }

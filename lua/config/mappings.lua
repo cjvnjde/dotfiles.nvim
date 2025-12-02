@@ -231,57 +231,12 @@ M.coverage = function()
 end
 
 M.telescope = function()
-  local telescope_actions = utils.try_require "telescope.actions"
-
   map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "[F]ind [W]ord (live grep)" })
   map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "[F]ind [B]uffers" })
   map("n", "<leader>fa", "<cmd>Telescope marks<CR>", { desc = "[F]ind [M]arks" })
   map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "[F]ind [O]ldfiles" })
   map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "[F]ind [F]iles" })
   map("n", "<leader>fg", "<cmd>Telescope git_status<CR>", { desc = "[F]ind [G]it files" })
-
-  if telescope_actions then
-    return {
-      n = { ["q"] = require("telescope.actions").close },
-    }
-  end
-
-  return {}
-end
-
-M.trouble = function()
-  return {
-    {
-      "<leader>dt",
-      "<cmd>Trouble diagnostics toggle<cr>",
-      desc = "[D]iagnostics [T]oggle (Trouble)",
-    },
-    {
-      "<leader>db",
-      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-      desc = "[D]iagnostics [B]uffer (Trouble)",
-    },
-    {
-      "<leader>ds",
-      "<cmd>Trouble symbols toggle focus=false<cr>",
-      desc = "[D]iagnostics [S]ymbols (Trouble)",
-    },
-    {
-      "<leader>dl",
-      "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-      desc = "[D]iagnostics [L]SP Definitions / references / ... (Trouble)",
-    },
-    {
-      "<leader>dL",
-      "<cmd>Trouble loclist toggle<cr>",
-      desc = "[D]iagnostics [L]ocation List (Trouble)",
-    },
-    {
-      "<leader>dQ",
-      "<cmd>Trouble qflist toggle<cr>",
-      desc = "[D]iagnostics [Q]uickfix List (Trouble)",
-    },
-  }
 end
 
 M.blink = {
