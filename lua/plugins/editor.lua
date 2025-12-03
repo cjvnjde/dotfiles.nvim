@@ -22,6 +22,11 @@ return {
         },
         mappings = mappings.telescope(),
       },
+      pickers = {
+        oldfiles = {
+          only_cwd = true,
+        },
+      },
     },
     config = function(_, opts)
       require("telescope").setup(opts)
