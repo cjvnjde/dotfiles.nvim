@@ -134,8 +134,11 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    main = "nvim-treesitter.configs",
+    lazy = false,
+    build = ":TSUpdate",
     opts = {
-      ensure_installed = extensions.treesitter,
+      install = extensions.treesitter,
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },
