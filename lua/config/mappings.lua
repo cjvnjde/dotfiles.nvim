@@ -115,6 +115,18 @@ M.lsp = function(data)
     vim.notify("Inlay hints " .. (not current_state and "enabled" or "disabled"), vim.log.levels.INFO)
   end, { desc = "LSP [T]oggle Inlay [H]ints" })
 
+  map("n", "gl", function()
+    vim.diagnostic.open_float()
+  end, { desc = "Show full diagnostic message" })
+
+  map("n", "[d", function()
+    vim.diagnostic.goto_prev()
+  end, { desc = "Go to previous diagnostic" })
+
+  map("n", "]d", function()
+    vim.diagnostic.goto_next()
+  end, { desc = "Go to next diagnostic" })
+
   map("n", "gd", vim.lsp.buf.definition, { desc = "[G]o to [D]efinition" })
   map("n", "gi", vim.lsp.buf.implementation, { desc = "[G]o to [I]mplementation" })
   map("n", "gr", vim.lsp.buf.references, { desc = "[G]o to [R]eference" })

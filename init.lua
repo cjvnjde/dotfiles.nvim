@@ -34,4 +34,15 @@ vim.schedule(function()
   mappings.global()
 end)
 
-vim.diagnostic.config { virtual_text = true }
+vim.diagnostic.config {
+  virtual_text = true,
+  underline = true,
+  update_in_insert = true,
+  viltual_lines = true,
+  signs = true,
+  float = {
+    border = "rounded",
+    source = true,
+  },
+  severity_sort = true,
+}

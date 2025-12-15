@@ -139,12 +139,11 @@ return {
     build = ":TSUpdate",
     opts = {
       ensure_installed = extensions.treesitter,
-      install = extensions.treesitter,
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },
       matchup = {
-        enable = true, -- mandatory, false will disable the whole extension
+        enable = true,
       },
     },
   },
