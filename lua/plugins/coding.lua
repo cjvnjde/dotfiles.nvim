@@ -138,6 +138,7 @@ return {
     lazy = false,
     build = ":TSUpdate",
     opts = {
+      ensure_installed = extensions.treesitter,
       install = extensions.treesitter,
       auto_install = true,
       highlight = { enable = true },
