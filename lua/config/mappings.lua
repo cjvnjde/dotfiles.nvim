@@ -62,6 +62,12 @@ M.global = function()
   end, { expr = true, desc = "[T]oggle [Q]uit quick fix list", silent = true })
   -- Undotree
   map("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "[U]ndo [T]ree" })
+  map("n", "<leader>tv", function()
+    local current = vim.diagnostic.config()
+    local is_enabled = current and current.virtual_lines or false
+    vim.diagnostic.config { virtual_lines = not is_enabled }
+    vim.notify("Virtual lines " .. (not is_enabled and "enabled" or "disabled"), vim.log.levels.INFO)
+  end, { desc = "[T]oggle [V]irtual lines" })
 end
 
 M.lsp = function(data)

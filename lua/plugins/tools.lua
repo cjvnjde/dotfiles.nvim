@@ -1,7 +1,8 @@
 vim.g.db_ui_use_nerd_fonts = 1
 
+local default_ai_model = "x-ai/grok-code-fast-1"
+
 return {
-  -- Git integration
   {
     "lewis6991/gitsigns.nvim",
     opts = function()
@@ -92,7 +93,7 @@ return {
         url = "https://openrouter.ai/api",
         chat_url = "/v1/chat/completions",
       },
-      model = "x-ai/grok-4-fast",
+      model = default_ai_model,
       ignored_files = {
         "package-lock.json",
         "yarn.lock",
@@ -100,6 +101,61 @@ return {
         "lazy-lock.json",
       },
       -- debug = true,
+    },
+  },
+
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "ravitemer/mcphub.nvim",
+    },
+    opts = {
+      opts = {
+        log_level = "DEBUG",
+      },
+      display = {
+        diff = {
+          enabled = true,
+          provider = "split",
+        },
+      },
+      adapters = {
+        http = {
+          openrouter = function()
+            return require("codecompanion.adapters").extend("openai_compatible", {
+              env = {
+                url = "https://openrouter.ai/api",
+                api_key = os.getenv "OPENROUTER_API_KEY",
+                chat_url = "/v1/chat/completions",
+              },
+              schema = {
+                model = {
+                  default = default_ai_model,
+                },
+              },
+            })
+          end,
+        },
+      },
+      interactions = {
+        chat = {
+          adapter = "openrouter",
+        },
+        inline = {
+          adapter = {
+            name = "openrouter",
+            model = "x-ai/grok-code-fast-1",
+          },
+        },
+        cmd = {
+          adapter = "openrouter",
+        },
+        background = {
+          adapter = "openrouter",
+        },
+      },
     },
   },
 }

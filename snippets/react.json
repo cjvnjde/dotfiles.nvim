@@ -1,0 +1,14 @@
+{
+  "React Functional Component": {
+    "prefix": "rsc",
+    "body": [
+      "export const ${TM_FILENAME_BASE} = () => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t$0",
+      "\t\t</div>",
+      "\t);",
+      "};"
+    ]
+  }
+}
