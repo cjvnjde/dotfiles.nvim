@@ -202,7 +202,7 @@ return {
       require("lsp-file-operations").setup()
     end,
   },
-  {
-    "github/copilot.vim",
-  },
+  -- {
+  --   "github/copilot.vim",
+  -- },
 }
