@@ -68,6 +68,23 @@ M.global = function()
     vim.diagnostic.config { virtual_lines = not is_enabled }
     vim.notify("Virtual lines " .. (not is_enabled and "enabled" or "disabled"), vim.log.levels.INFO)
   end, { desc = "[T]oggle [V]irtual lines" })
+
+  map("n", "<leader>wt", function()
+    local clients = vim.lsp.get_clients { name = "codebookls" }
+    for _, client in ipairs(clients) do
+      local ns = vim.lsp.diagnostic.get_namespace(client.id)
+      vim.diagnostic.enable(not vim.diagnostic.is_enabled { ns_id = ns }, { ns_id = ns })
+    end
+  end, { desc = "[W]ordcheck [T]oggle errors" })
+
+  map("n", "<leader>wa", function()
+    vim.lsp.buf.code_action {
+      apply = true,
+      filter = function(action)
+        return action.title:lower():match "add"
+      end,
+    }
+  end, { desc = "[W]ordcheck [A]dd word" })
 end
 
 M.lsp = function(data)
