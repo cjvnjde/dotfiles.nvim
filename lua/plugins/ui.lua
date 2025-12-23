@@ -1,8 +1,48 @@
 local mappings = require "config.mappings"
 local nesting_rules = require "config.file_nesting_rules"
 
+local api_key = os.getenv "OPENROUTER_API_KEY"
+local cached_credits = "Loading..."
+local timer = vim.uv.new_timer()
+
+local function fetch_credits()
+  if not api_key then
+    cached_credits = "No Key"
+    return
+  end
+
+  vim.system(
+    {
+      "curl",
+      "-s",
+      "-H",
+      "Authorization: Bearer " .. api_key,
+      "https://openrouter.ai/api/v1/credits",
+    },
+    { text = true },
+    vim.schedule_wrap(function(out)
+      if out.code ~= 0 or not out.stdout then
+        return
+      end
+
+      local success, res = pcall(vim.json.decode, out.stdout)
+      if success and res and res.data then
+        local current = res.data.total_credits - res.data.total_usage
+        cached_credits = string.format("%.2f$", current)
+      end
+    end)
+  )
+end
+
+if timer then
+  timer:start(0, 60000, vim.schedule_wrap(fetch_credits))
+end
+
+local function openrouter_credits()
+  return cached_credits
+end
+
 return {
-  -- Theme configuration
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -38,7 +78,7 @@ return {
           "encoding",
           "fileformat",
         },
-        lualine_z = { "location" },
+        lualine_z = { "location", openrouter_credits },
       },
     },
   },
