@@ -5,10 +5,6 @@ local M = {}
 local map = vim.keymap.set
 
 M.global = function()
-  map("n", "<leader>w", function()
-    vim.opt.wrap = not vim.opt.wrap:get()
-  end, { desc = "Toggle line wrap" })
-
   -- navigate between windows
   map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
   map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
@@ -62,12 +58,28 @@ M.global = function()
   end, { expr = true, desc = "[T]oggle [Q]uit quick fix list", silent = true })
   -- Undotree
   map("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "[U]ndo [T]ree" })
+
   map("n", "<leader>tv", function()
     local current = vim.diagnostic.config()
-    local is_enabled = current and current.virtual_lines or false
-    vim.diagnostic.config { virtual_lines = not is_enabled }
-    vim.notify("Virtual lines " .. (not is_enabled and "enabled" or "disabled"), vim.log.levels.INFO)
-  end, { desc = "[T]oggle [V]irtual lines" })
+
+    if not current then
+      return
+    end
+
+    local is_lines_enabled = current.virtual_lines and true or false
+
+    vim.diagnostic.config {
+      virtual_lines = not is_lines_enabled,
+      virtual_text = is_lines_enabled,
+    }
+
+    vim.notify("Diagnostics: " .. (not is_lines_enabled and "Virtual Lines" or "Virtual Text"), vim.log.levels.INFO)
+  end, { desc = "[T]oggle [V]irtual lines/text" })
+
+  map("n", "<leader>ty", function()
+    local autocmds = require "config.typehint_autocmd"
+    autocmds.toggle_type_on_hover()
+  end, { desc = "[T]oggle t[Y]pe on hover" })
 
   map("n", "<leader>wt", function()
     local clients = vim.lsp.get_clients { name = "codebookls" }
@@ -75,7 +87,7 @@ M.global = function()
       local ns = vim.lsp.diagnostic.get_namespace(client.id)
       vim.diagnostic.enable(not vim.diagnostic.is_enabled { ns_id = ns }, { ns_id = ns })
     end
-  end, { desc = "[W]ordcheck [T]oggle errors" })
+  end, { desc = "[W]ords [T]oggle errors" })
 
   map("n", "<leader>wa", function()
     vim.lsp.buf.code_action {
@@ -84,7 +96,11 @@ M.global = function()
         return action.title:lower():match "add"
       end,
     }
-  end, { desc = "[W]ordcheck [A]dd word" })
+  end, { desc = "[W]ord [A]dd" })
+
+  map("n", "<leader>ww", function()
+    vim.opt.wrap = not vim.opt.wrap:get()
+  end, { desc = "Toggle [W]ord [w]rap" })
 end
 
 M.lsp = function(data)
