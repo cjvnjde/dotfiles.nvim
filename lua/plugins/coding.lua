@@ -6,22 +6,6 @@ local is_log = function(entry)
 end
 
 return {
-  -- Tool installer for LSP, linters, and formatters
-  {
-    "williamboman/mason.nvim",
-    config = true,
-  },
-
-  -- Auto-install tools using Mason
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    opts = {
-      ensure_installed = extensions.mason,
-      run_on_start = true,
-    },
-    dependencies = { { "williamboman/mason.nvim", config = true } },
-  },
-
   {
     "saghen/blink.cmp",
     version = "1.*",
@@ -105,18 +89,16 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    main = "nvim-treesitter.configs",
     lazy = false,
     build = ":TSUpdate",
-    opts = {
-      ensure_installed = extensions.treesitter,
-      auto_install = true,
-      highlight = { enable = true },
-      indent = { enable = true },
-      matchup = {
-        enable = true,
-      },
-    },
+    config = function(_, opts)
+      require("nvim-treesitter").setup(opts)
+      require("nvim-treesitter").install(extensions.treesitter)
+    end,
+  },
+  {
+    "mks-h/treesitter-autoinstall.nvim",
+    config = true,
   },
   -- Automatically detect and set tab width
   "tpope/vim-sleuth",
@@ -163,6 +145,7 @@ return {
       require("config.mappings").conform()
     end,
   },
+  { "neovim/nvim-lspconfig" },
   {
     "antosha417/nvim-lsp-file-operations",
     dependencies = {

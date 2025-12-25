@@ -1,8 +1,25 @@
+local extensions = require "config.extensions"
+
 vim.g.db_ui_use_nerd_fonts = 1
 
 local default_ai_model = "x-ai/grok-code-fast-1"
 
 return {
+  -- Tool installer for LSP, linters, and formatters
+  {
+    "williamboman/mason.nvim",
+    config = true,
+  },
+
+  -- Auto-install tools using Mason
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = {
+      ensure_installed = extensions.mason,
+      run_on_start = true,
+    },
+    dependencies = { { "williamboman/mason.nvim", config = true } },
+  },
   {
     "lewis6991/gitsigns.nvim",
     opts = function()

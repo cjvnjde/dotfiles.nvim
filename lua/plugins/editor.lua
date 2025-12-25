@@ -41,22 +41,14 @@ return {
     end,
   },
   {
-    "echasnovski/mini.nvim",
-    main = "mini.ai",
-    config = true,
-  },
-  -- Surround text with pairs (quotes, brackets, etc.)
-  {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    config = true,
-  },
-  -- Auto-close pairs like brackets and quotes
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true,
+    "nvim-mini/mini.nvim",
+    config = function()
+      require("mini.ai").setup()
+      require("mini.surround").setup()
+      require("mini.comment").setup()
+      require("mini.pairs").setup()
+      require("mini.operators").setup()
+    end,
   },
   -- Auto-tag HTML and XML elements
   {
@@ -78,6 +70,5 @@ return {
   -- Better operate text pairs like quotes, brackets, functions, tags etc
   {
     "andymass/vim-matchup",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
 }

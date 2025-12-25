@@ -33,10 +33,6 @@ M.global = function()
   map("n", ":", ";", { noremap = true, silent = false })
   map("v", ":", ";", { noremap = true, silent = false })
 
-  -- Comment
-  map("n", "<leader>/", "gcc", { desc = "Toggle Comment", remap = true })
-  map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
-
   -- Colors
   map("n", "<leader>tc", function()
     local colors = utils.try_require "nvim-highlight-colors"
