@@ -1,4 +1,3 @@
-local extensions = require "config.extensions"
 local mappings = require "config.mappings"
 
 local is_log = function(entry)
@@ -91,10 +90,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
     build = ":TSUpdate",
-    config = function(_, opts)
-      require("nvim-treesitter").setup(opts)
-      require("nvim-treesitter").install(extensions.treesitter)
-    end,
   },
   {
     "mks-h/treesitter-autoinstall.nvim",
