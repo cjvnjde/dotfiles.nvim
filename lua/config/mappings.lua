@@ -20,9 +20,6 @@ M.global = function()
 
   map("v", "<leader>p", '"_dP', { desc = "Paste without yanking" })
 
-  map("v", "<leader>y", '"+y', { desc = "Yank to a clipboard" })
-  map("n", "<leader>p", '"+p', { desc = "Paste from a clipboard" })
-
   map("v", ">", ">gv", { desc = "Indent text" })
   map("v", "<", "<gv", { desc = "Indent text" })
 
@@ -33,7 +30,7 @@ M.global = function()
   map("n", ":", ";", { noremap = true, silent = false })
   map("v", ":", ";", { noremap = true, silent = false })
 
-  -- Colors
+  -- TODO: move to :Tune colors
   map("n", "<leader>tc", function()
     local colors = utils.try_require "nvim-highlight-colors"
     if colors then
@@ -52,9 +49,11 @@ M.global = function()
       return "<cmd>copen<CR>"
     end
   end, { expr = true, desc = "[T]oggle [Q]uit quick fix list", silent = true })
+
   -- Undotree
   map("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "[U]ndo [T]ree" })
 
+  -- TODO: move to :Tune diagnostics
   map("n", "<leader>tv", function()
     local current = vim.diagnostic.config()
 
@@ -72,11 +71,13 @@ M.global = function()
     vim.notify("Diagnostics: " .. (not is_lines_enabled and "Virtual Lines" or "Virtual Text"), vim.log.levels.INFO)
   end, { desc = "[T]oggle [V]irtual lines/text" })
 
+  -- TODO: move to :Tune typehints
   map("n", "<leader>ty", function()
     local autocmds = require "config.typehint_autocmd"
     autocmds.toggle_type_on_hover()
   end, { desc = "[T]oggle t[Y]pe on hover" })
 
+  -- TODO: move to :Tune codebook
   map("n", "<leader>wt", function()
     local clients = vim.lsp.get_clients { name = "codebookls" }
     for _, client in ipairs(clients) do
@@ -94,6 +95,7 @@ M.global = function()
     }
   end, { desc = "[W]ord [A]dd" })
 
+  -- TODO: move to :Tune wrap
   map("n", "<leader>ww", function()
     vim.opt.wrap = not vim.opt.wrap:get()
   end, { desc = "Toggle [W]ord [w]rap" })
@@ -130,11 +132,11 @@ M.lsp = function(data)
   }
 
   vim.keymap.set("n", "<leader>th", function()
-    local clients = vim.lsp.get_active_clients { bufnr = data.buf }
+    local clients = vim.lsp.get_clients { bufnr = data.buf }
     local supports_inlay_hints = false
 
     for _, client in ipairs(clients) do
-      if client.supports_method "textDocument/inlayHint" then
+      if client.supports_method("textDocument/inlayHint", data.buf) then
         supports_inlay_hints = true
         break
       end
@@ -155,11 +157,11 @@ M.lsp = function(data)
   end, { desc = "Show full diagnostic message" })
 
   map("n", "[d", function()
-    vim.diagnostic.goto_prev()
+    vim.diagnostic.jupm { count = 1, float = true }
   end, { desc = "Go to previous diagnostic" })
 
   map("n", "]d", function()
-    vim.diagnostic.goto_next()
+    vim.diagnostic.jupm { count = -1, float = true }
   end, { desc = "Go to next diagnostic" })
 
   map("n", "gd", vim.lsp.buf.definition, { desc = "[G]o to [D]efinition" })
