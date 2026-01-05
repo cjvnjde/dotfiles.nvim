@@ -30,16 +30,6 @@ M.global = function()
   map("n", ":", ";", { noremap = true, silent = false })
   map("v", ":", ";", { noremap = true, silent = false })
 
-  -- TODO: move to :Tune colors
-  map("n", "<leader>tc", function()
-    local colors = utils.try_require "nvim-highlight-colors"
-    if colors then
-      colors.toggle()
-    else
-      vim.notify("nvim-highlight-colors not found", vim.log.levels.WARN)
-    end
-  end, { desc = "[T]oggle [C]olors" })
-
   -- Quickfix
   map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
   map("n", "<leader>tq", function()
@@ -53,39 +43,6 @@ M.global = function()
   -- Undotree
   map("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "[U]ndo [T]ree" })
 
-  -- TODO: move to :Tune diagnostics
-  map("n", "<leader>tv", function()
-    local current = vim.diagnostic.config()
-
-    if not current then
-      return
-    end
-
-    local is_lines_enabled = current.virtual_lines and true or false
-
-    vim.diagnostic.config {
-      virtual_lines = not is_lines_enabled,
-      virtual_text = is_lines_enabled,
-    }
-
-    vim.notify("Diagnostics: " .. (not is_lines_enabled and "Virtual Lines" or "Virtual Text"), vim.log.levels.INFO)
-  end, { desc = "[T]oggle [V]irtual lines/text" })
-
-  -- TODO: move to :Tune typehints
-  map("n", "<leader>ty", function()
-    local autocmds = require "config.typehint_autocmd"
-    autocmds.toggle_type_on_hover()
-  end, { desc = "[T]oggle t[Y]pe on hover" })
-
-  -- TODO: move to :Tune codebook
-  map("n", "<leader>wt", function()
-    local clients = vim.lsp.get_clients { name = "codebookls" }
-    for _, client in ipairs(clients) do
-      local ns = vim.lsp.diagnostic.get_namespace(client.id)
-      vim.diagnostic.enable(not vim.diagnostic.is_enabled { ns_id = ns }, { ns_id = ns })
-    end
-  end, { desc = "[W]ords [T]oggle errors" })
-
   map("n", "<leader>wa", function()
     vim.lsp.buf.code_action {
       apply = true,
@@ -94,11 +51,6 @@ M.global = function()
       end,
     }
   end, { desc = "[W]ord [A]dd" })
-
-  -- TODO: move to :Tune wrap
-  map("n", "<leader>ww", function()
-    vim.opt.wrap = not vim.opt.wrap:get()
-  end, { desc = "Toggle [W]ord [w]rap" })
 end
 
 M.lsp = function(data)
