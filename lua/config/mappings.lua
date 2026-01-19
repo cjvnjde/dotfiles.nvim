@@ -1,4 +1,5 @@
 local utils = require "utils"
+local typehint = require "config.typehint_autocmd"
 
 local M = {}
 
@@ -51,6 +52,50 @@ M.global = function()
       end,
     }
   end, { desc = "[W]ord [A]dd" })
+
+  -- Settings toggles
+  map("n", "<leader>sc", function()
+    local colors = utils.try_require "nvim-highlight-colors"
+
+    if colors then
+      colors.toggle()
+    else
+      vim.notify("nvim-highlight-colors not found", vim.log.levels.WARN)
+    end
+  end, { desc = "[S]et [C]olor view" })
+
+  map("n", "<leader>sd", function()
+    local current = vim.diagnostic.config()
+    if not current then
+      return
+    end
+    local is_lines_enabled = current.virtual_lines and true or false
+    vim.diagnostic.config {
+      virtual_lines = not is_lines_enabled,
+      virtual_text = is_lines_enabled,
+    }
+    vim.notify("Diagnostics: " .. (not is_lines_enabled and "Virtual Lines" or "Virtual Text"), vim.log.levels.INFO)
+  end, { desc = "[S]et [D]iagnostic view" })
+
+  map("n", "<leader>st", function()
+    typehint.toggle_type_on_hover()
+  end, { desc = "[S]et [T]ypehint on hover" })
+
+  map("n", "<leader>sc", function()
+    local clients = vim.lsp.get_clients { name = "codebookls" }
+
+    for _, client in ipairs(clients) do
+      local ns = vim.lsp.diagnostic.get_namespace(client.id)
+      local is_enabled = vim.diagnostic.is_enabled { ns_id = ns }
+      vim.diagnostic.enable(not is_enabled, { ns_id = ns })
+      vim.notify("Codebook diagnostics " .. (not is_enabled and "enabled" or "disabled"), vim.log.levels.INFO)
+    end
+  end, { desc = "[S]et [C]odebook diagnostics" })
+
+  map("n", "<leader>sw", function()
+    vim.opt.wrap = not vim.opt.wrap:get()
+    vim.notify("Word wrap " .. (vim.opt.wrap:get() and "enabled" or "disabled"), vim.log.levels.INFO)
+  end, { desc = "[S]et [W]ord wrap" })
 end
 
 M.lsp = function(data)

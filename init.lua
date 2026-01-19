@@ -2,7 +2,6 @@ require "config.options" -- should be first
 require "config.lazy"
 require "config.autocmds"
 require "config.typehint_autocmd"
-require "config.commands"
 
 local mappings = require "config.mappings"
 
