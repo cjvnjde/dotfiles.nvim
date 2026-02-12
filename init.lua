@@ -91,14 +91,14 @@ vim.lsp.config("lua_ls", {
   },
 })
 
+-- @see https://github.com/paolotiu/tailwind-intellisense-regex-list
 vim.lsp.config("tailwindcss", {
   settings = {
     tailwindCSS = {
       experimental = {
         classRegex = {
-          { "clsx\\(.*?\\)(?!\\])", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)" },
-          "(?:enter|leave)(?:From|To)?=\\s*(?:\"|'|{`)([^(?:\"|'|`})]*)",
-          { "(?:twMerge|twJoin)\\(([^;]*)[\\);]", "[`'\"`]([^'\"`;]*)[`'\"`]" },
+          { "clsx\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+          { "(?]twMerge|twJoin)\\(([^;]*)[\\);]", "[`'\"`]([^'\"`;]*)[`'\"`]" },
           { "tv\\({([^]*?)}\\)", "[\"'`]([^\"'`]*)[\"'`]" },
         },
       },
