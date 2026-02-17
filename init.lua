@@ -1,7 +1,7 @@
-require "config.options" -- should be first
-require "config.lazy"
-require "config.autocmds"
-require "config.typehint_autocmd"
+require "options"
+require "lazy_init"
+require "autocmds"
+require "typehint_autocmd"
 
 local mappings = require "config.mappings"
 

@@ -1,5 +1,5 @@
 local utils = require "utils"
-local typehint = require "config.typehint_autocmd"
+local typehint = require "typehint_autocmd"
 
 local M = {}
 
