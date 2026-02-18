@@ -12,6 +12,16 @@ return {
         selection_caret = " ",
         entry_prefix = " ",
         sorting_strategy = "ascending",
+        file_ignore_patterns = {
+          "node_modules",
+          "%.lock",
+          "lazy%-lock%.json",
+          "%.git",
+          "build",
+          "dist",
+          "yarn%.lock",
+          "package%-lock%.json",
+        },
         layout_config = {
           horizontal = {
             prompt_position = "top",
@@ -34,7 +44,7 @@ return {
     end,
   },
   {
-    "ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim",
     dependencies = "tpope/vim-repeat",
     config = function()
       require("config.mappings").leap()
@@ -69,5 +79,20 @@ return {
   -- Better operate text pairs like quotes, brackets, functions, tags etc
   {
     "andymass/vim-matchup",
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = function()
+      local mappings = require "config.mappings"
+
+      return {
+        current_line_blame = true,
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+          mappings.gitsigns(gs, bufnr)
+        end,
+      }
+    end,
   },
 }

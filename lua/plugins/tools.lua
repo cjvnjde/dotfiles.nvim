@@ -21,20 +21,6 @@ return {
     dependencies = { { "williamboman/mason.nvim", config = true } },
   },
   {
-    "lewis6991/gitsigns.nvim",
-    opts = function()
-      local mappings = require "config.mappings"
-
-      return {
-        current_line_blame = true,
-        on_attach = function(bufnr)
-          local gs = package.loaded.gitsigns
-          mappings.gitsigns(gs, bufnr)
-        end,
-      }
-    end,
-  },
-  {
     "kristijanhusak/vim-dadbod-ui",
     dependencies = {
       { "tpope/vim-dadbod", lazy = true },
