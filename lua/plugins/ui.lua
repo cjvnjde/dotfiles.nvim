@@ -50,7 +50,7 @@ return {
     lazy = false,
     opts = {
       flavour = "mocha",
-      transparent_background = true,
+      transparent_background = false,
     },
     config = function(self, opts)
       require(self.name).setup(opts)
