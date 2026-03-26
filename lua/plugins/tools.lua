@@ -2,8 +2,6 @@ local packages = require "config.mason_packages"
 
 vim.g.db_ui_use_nerd_fonts = 1
 
-local default_ai_model = "x-ai/grok-code-fast-1"
-
 return {
   -- Tool installer for LSP, linters, and formatters
   {
@@ -49,18 +47,16 @@ return {
   },
   {
     "cjvnjde/ai-commit.nvim",
-    -- dir = "/ai-commit.nvim",
+    -- dir = "/nvim-plugins/ai-commit.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
+      -- { dir = "/nvim-plugins/ai-provider.nvim" },
+      "cjvnjde/ai-provider.nvim",
     },
     opts = {
-      env = {
-        api_key = os.getenv "OPENROUTER_API_KEY",
-        url = "https://openrouter.ai/api",
-        chat_url = "/v1/chat/completions",
-      },
-      model = default_ai_model,
+      provider = "github-copilot",
+      model = "gpt-5-mini",
       ignored_files = {
         "package-lock.json",
         "yarn.lock",
