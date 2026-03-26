@@ -46,13 +46,24 @@ return {
     },
   },
   {
+    "cjvnjde/ai-split-commit.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "ai-provider.nvim",
+      "cjvnjde/ai-commit.nvim",
+      "cjvnjde/ai-provider.nvim",
+    },
+    opts = {
+      provider = "github-copilot",
+      model = "gpt-5-mini",
+    },
+  },
+  {
     "cjvnjde/ai-commit.nvim",
-    -- dir = "/nvim-plugins/ai-commit.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
-      -- { dir = "/nvim-plugins/ai-provider.nvim" },
-      "cjvnjde/ai-provider.nvim",
+      "ai-provider.nvim",
     },
     opts = {
       provider = "github-copilot",
