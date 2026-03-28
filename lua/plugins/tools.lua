@@ -64,4 +64,5 @@ return {
       -- debug = true,
     },
   },
+  { "github/copilot.vim" },
 }
