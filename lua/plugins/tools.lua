@@ -50,18 +50,20 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
-      "ai-provider.nvim",
+      "cjvnjde/ai-provider.nvim",
     },
     opts = {
       provider = "github-copilot",
       model = "gpt-5-mini",
+      ai_options = {
+        reasoning = "low",
+      },
       ignored_files = {
         "package-lock.json",
         "yarn.lock",
         "pnpm-lock.yaml",
         "lazy-lock.json",
       },
-      -- debug = true,
     },
   },
   { "github/copilot.vim" },
