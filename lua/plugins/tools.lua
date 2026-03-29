@@ -65,4 +65,8 @@ return {
     },
   },
   { "github/copilot.vim" },
+  {
+    "selimacerbas/markdown-preview.nvim",
+    dependencies = { "selimacerbas/live-server.nvim" },
+  },
 }
