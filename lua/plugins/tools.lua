@@ -2,73 +2,78 @@ local packages = require "config.mason_packages"
 
 vim.g.db_ui_use_nerd_fonts = 1
 
-return {
-  -- Tool installer for LSP, linters, and formatters
-  {
-    "williamboman/mason.nvim",
-    config = true,
-  },
+-- Mason START
+-- Tool installer for LSP servers, linters, and formatters
+vim.pack.add {
+  "https://github.com/williamboman/mason.nvim",
+  "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
+}
 
-  -- Auto-install tools using Mason
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    opts = {
-      ensure_installed = packages,
-      run_on_start = true,
-    },
-    dependencies = { { "williamboman/mason.nvim", config = true } },
+require("mason").setup()
+
+require("mason-tool-installer").setup {
+  ensure_installed = packages,
+  run_on_start = true,
+}
+-- Mason END
+
+-- Dadbod START
+-- Database client UI
+vim.pack.add {
+  "https://github.com/tpope/vim-dadbod",
+  "https://github.com/kristijanhusak/vim-dadbod-completion",
+  "https://github.com/kristijanhusak/vim-dadbod-ui",
+}
+-- Dadbod END
+
+-- Kulala START
+-- HTTP client for REST requests
+vim.pack.add {
+  "https://github.com/mistweaverco/kulala.nvim",
+}
+
+require("kulala").setup {
+  global_keymaps = false,
+  global_keymaps_prefix = "<leader>R",
+  kulala_keymaps_prefix = "",
+}
+-- Kulala END
+
+-- AI Commit START
+-- Generate commit messages with AI
+vim.pack.add {
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-telescope/telescope.nvim",
+  "https://github.com/cjvnjde/ai-provider.nvim",
+  "https://github.com/cjvnjde/ai-commit.nvim",
+}
+
+require("ai-commit").setup {
+  provider = "github-copilot",
+  model = "gpt-5-mini",
+  ai_options = {
+    reasoning = "low",
   },
-  {
-    "kristijanhusak/vim-dadbod-ui",
-    dependencies = {
-      { "tpope/vim-dadbod", lazy = true },
-      { "kristijanhusak/vim-dadbod-completion", ft = { "sql" }, lazy = true },
-    },
-    cmd = {
-      "DBUI",
-      "DBUIToggle",
-      "DBUIAddConnection",
-      "DBUIFindBuffer",
-    },
-  },
-  {
-    "mistweaverco/kulala.nvim",
-    keys = {
-      { "<leader>Rs", desc = "Send request" },
-      { "<leader>Ra", desc = "Send all requests" },
-      { "<leader>Rb", desc = "Open scratchpad" },
-    },
-    ft = { "http", "rest" },
-    opts = {
-      global_keymaps = false,
-      global_keymaps_prefix = "<leader>R",
-      kulala_keymaps_prefix = "",
-    },
-  },
-  {
-    "cjvnjde/ai-commit.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "cjvnjde/ai-provider.nvim",
-    },
-    opts = {
-      provider = "github-copilot",
-      model = "gpt-5-mini",
-      ai_options = {
-        reasoning = "low",
-      },
-      ignored_files = {
-        "package-lock.json",
-        "yarn.lock",
-        "pnpm-lock.yaml",
-        "lazy-lock.json",
-      },
-    },
-  },
-  { "github/copilot.vim" },
-  {
-    "selimacerbas/markdown-preview.nvim",
-    dependencies = { "selimacerbas/live-server.nvim" },
+  ignored_files = {
+    "package-lock.json",
+    "yarn.lock",
+    "pnpm-lock.yaml",
+    "lazy-lock.json",
   },
 }
+-- AI Commit END
+
+-- Copilot START
+-- GitHub Copilot integration
+vim.pack.add {
+  "https://github.com/github/copilot.vim",
+}
+-- Copilot END
+
+-- Markdown Preview START
+-- Preview markdown files in browser
+vim.pack.add {
+  "https://github.com/selimacerbas/live-server.nvim",
+  "https://github.com/selimacerbas/markdown-preview.nvim",
+}
+-- Markdown Preview END
