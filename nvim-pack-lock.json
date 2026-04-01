@@ -101,10 +101,6 @@
       "rev": "a939e425e363319d952a6c35fb3f38b34041ded2",
       "src": "https://github.com/andythigpen/nvim-coverage"
     },
-    "nvim-highlight-colors": {
-      "rev": "e2cb22089cc2358b2b995c09578224f142de6039",
-      "src": "https://github.com/brenoprata10/nvim-highlight-colors"
-    },
     "nvim-lsp-file-operations": {
       "rev": "b9c795d3973e8eec22706af14959bc60c579e771",
       "src": "https://github.com/antosha417/nvim-lsp-file-operations"

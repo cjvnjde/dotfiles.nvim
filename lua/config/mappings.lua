@@ -53,16 +53,6 @@ M.global = function()
   end, { desc = "[W]ord [A]dd" })
 
   -- Settings toggles
-  map("n", "<leader>sp", function()
-    local colors = utils.try_require "nvim-highlight-colors"
-
-    if colors then
-      colors.toggle()
-    else
-      vim.notify("nvim-highlight-colors not found", vim.log.levels.WARN)
-    end
-  end, { desc = "[S]et colors [P]review" })
-
   map("n", "<leader>sd", function()
     local current = vim.diagnostic.config()
     if not current then

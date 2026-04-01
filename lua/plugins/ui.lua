@@ -93,18 +93,6 @@ require("neo-tree").setup {
 mappings.neotree()
 -- Neo-tree END
 
--- Highlight Colors START
--- Show color previews for color values
-vim.pack.add {
-  "https://github.com/brenoprata10/nvim-highlight-colors",
-}
-
-require("nvim-highlight-colors").setup {
-  render = "virtual",
-  enable_tailwind = true,
-}
--- Highlight Colors END
-
 -- Fidget START
 -- LSP progress notification
 vim.pack.add {
