@@ -1,5 +1,3 @@
-local utils = require "utils"
-
 local M = {}
 
 local map = vim.keymap.set
@@ -29,16 +27,6 @@ M.global = function()
 
   map("n", ":", ";", { noremap = true, silent = false })
   map("v", ":", ";", { noremap = true, silent = false })
-
-  -- Quickfix
-  map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
-  map("n", "<leader>tq", function()
-    if utils.is_quickfix_open() then
-      return "<cmd>cclose<CR>"
-    else
-      return "<cmd>copen<CR>"
-    end
-  end, { expr = true, desc = "[T]oggle [Q]uit quick fix list", silent = true })
 
   -- Undotree
   map("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "[U]ndo [T]ree" })
@@ -103,11 +91,6 @@ M.lsp = function(data)
     return false
   end
 
-  local import_update_action_opts = {
-    filter = filter_import_updates,
-    apply = true,
-  }
-
   vim.keymap.set("n", "<leader>th", function()
     local clients = vim.lsp.get_clients { bufnr = data.buf }
     local supports_inlay_hints = false
@@ -149,6 +132,11 @@ M.lsp = function(data)
 
   map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
   map("v", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+
+  local import_update_action_opts = {
+    filter = filter_import_updates,
+    apply = true,
+  }
 
   map("n", "<leader>ci", function()
     vim.lsp.buf.code_action(import_update_action_opts)

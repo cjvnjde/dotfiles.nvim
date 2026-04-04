@@ -1,7 +1,7 @@
 local mappings = require "config.mappings"
 
--- Neotest START
--- Test runner framework
+-- Neotest {{{1
+-- Test runner framework.
 vim.pack.add {
   "https://github.com/nvim-neotest/nvim-nio",
   "https://github.com/nvim-lua/plenary.nvim",
@@ -21,10 +21,10 @@ require("neotest").setup {
 }
 
 mappings.neotest()
--- Neotest END
+-- }}}
 
--- Coverage START
--- Display test coverage indicators
+-- Coverage {{{1
+-- Display test coverage indicators.
 vim.pack.add {
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/andythigpen/nvim-coverage",
@@ -35,4 +35,6 @@ require("coverage").setup {
 }
 
 mappings.coverage()
--- Coverage END
+-- }}}
+
+-- vim: set fdm=marker fdl=0 fen:

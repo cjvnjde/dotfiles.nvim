@@ -4,8 +4,8 @@ local is_log = function(entry)
   return entry.label == "log" and entry.source_name == "Snippets"
 end
 
--- Blink CMP START
--- Autocompletion engine
+-- Blink CMP {{{1
+-- Autocompletion engine.
 vim.pack.add {
   "https://github.com/rafamadriz/friendly-snippets",
   {
@@ -50,10 +50,10 @@ require("blink.cmp").setup {
     },
   },
 }
--- Blink CMP END
+-- }}}
 
--- Treesitter START
--- Syntax highlighting and code parsing
+-- Treesitter {{{1
+-- Syntax highlighting and parser management.
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
     if ev.data.spec.name == "nvim-treesitter" and (ev.data.kind == "install" or ev.data.kind == "update") then
@@ -65,26 +65,26 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add {
   "https://github.com/nvim-treesitter/nvim-treesitter",
 }
--- Treesitter END
+-- }}}
 
--- Treesitter Autoinstall START
--- Automatically install treesitter parsers
+-- Treesitter Autoinstall {{{1
+-- Automatically install Tree-sitter parsers.
 vim.pack.add {
   "https://github.com/mks-h/treesitter-autoinstall.nvim",
 }
 
 require("treesitter-autoinstall").setup()
--- Treesitter Autoinstall END
+-- }}}
 
--- Vim Sleuth START
--- Automatically detect and set tab width
+-- Vim Sleuth {{{1
+-- Automatically detect and set tab width.
 vim.pack.add {
   "https://github.com/tpope/vim-sleuth",
 }
--- Vim Sleuth END
+-- }}}
 
--- Conform START
--- Auto-format files on save
+-- Conform {{{1
+-- Auto-format files on save.
 vim.pack.add {
   "https://github.com/stevearc/conform.nvim",
 }
@@ -124,16 +124,17 @@ require("conform").setup {
 }
 
 mappings.conform()
--- Conform END
+-- }}}
 
--- LSP Config START
+-- LSP Config {{{1
+-- Core LSP client configuration.
 vim.pack.add {
   "https://github.com/neovim/nvim-lspconfig",
 }
--- LSP Config END
+-- }}}
 
--- LSP File Operations START
--- Automatically update imports on file rename/move
+-- LSP File Operations {{{1
+-- Automatically update imports on file rename or move.
 vim.pack.add {
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/nvim-neo-tree/neo-tree.nvim",
@@ -141,4 +142,6 @@ vim.pack.add {
 }
 
 require("lsp-file-operations").setup()
--- LSP File Operations END
+-- }}}
+
+-- vim: set fdm=marker fdl=0 fen:

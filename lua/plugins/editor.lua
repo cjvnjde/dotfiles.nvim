@@ -1,7 +1,7 @@
 local mappings = require "config.mappings"
 
--- Telescope START
--- Fuzzy finder for files, buffers, grep, etc
+-- Telescope {{{1
+-- Fuzzy finder for files, buffers, grep, and more.
 vim.pack.add {
   "https://github.com/nvim-lua/plenary.nvim",
   {
@@ -44,20 +44,20 @@ require("telescope").setup {
 }
 
 mappings.telescope()
--- Telescope END
+-- }}}
 
--- Leap START
--- Quick cursor jumping with s/S
+-- Leap {{{1
+-- Quick cursor jumping with s and S.
 vim.pack.add {
   "https://github.com/tpope/vim-repeat",
   "https://codeberg.org/andyg/leap.nvim",
 }
 
 mappings.leap()
--- Leap END
+-- }}}
 
--- Mini START
--- Collection of small useful modules (ai, surround, comment, pairs)
+-- Mini {{{1
+-- Collection of small editing helpers.
 vim.pack.add {
   "https://github.com/echasnovski/mini.nvim",
 }
@@ -66,10 +66,10 @@ require("mini.ai").setup()
 require("mini.surround").setup()
 require("mini.comment").setup()
 require("mini.pairs").setup()
--- Mini END
+-- }}}
 
--- Autotag START
--- Auto-tag HTML and XML elements
+-- Autotag {{{1
+-- Auto-tag HTML and XML elements.
 vim.pack.add {
   "https://github.com/windwp/nvim-ts-autotag",
 }
@@ -81,24 +81,24 @@ require("nvim-ts-autotag").setup {
     enable_close_on_slash = true,
   },
 }
--- Autotag END
+-- }}}
 
--- Undotree START
--- Visualize and navigate undo history
+-- Undotree {{{1
+-- Visualize and navigate undo history.
 vim.pack.add {
   "https://github.com/mbbill/undotree",
 }
--- Undotree END
+-- }}}
 
--- Vim Matchup START
--- Better operate text pairs like quotes, brackets, functions, tags
+-- Vim Matchup {{{1
+-- Better text-object and pair matching for brackets, tags, and more.
 vim.pack.add {
   "https://github.com/andymass/vim-matchup",
 }
--- Vim Matchup END
+-- }}}
 
--- Gitsigns START
--- Git change indicators and hunk operations
+-- Gitsigns {{{1
+-- Git change indicators and hunk operations.
 vim.pack.add {
   "https://github.com/lewis6991/gitsigns.nvim",
 }
@@ -110,4 +110,6 @@ require("gitsigns").setup {
     mappings.gitsigns(gs, bufnr)
   end,
 }
--- Gitsigns END
+-- }}}
+
+-- vim: set fdm=marker fdl=0 fen:

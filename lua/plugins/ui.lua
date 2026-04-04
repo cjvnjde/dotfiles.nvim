@@ -1,7 +1,8 @@
 local mappings = require "config.mappings"
 local nesting_rules = require "config.file_nesting_rules"
 
--- Catppuccin START
+-- Catppuccin {{{1
+-- Colorscheme configuration.
 vim.pack.add {
   {
     src = "https://github.com/catppuccin/nvim",
@@ -15,10 +16,10 @@ require("catppuccin").setup {
 }
 
 vim.cmd.colorscheme "catppuccin"
--- Catppuccin END
+-- }}}
 
--- Lualine START
--- Configures how the bottom line looks like
+-- Lualine {{{1
+-- Configure the statusline.
 vim.pack.add {
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-lualine/lualine.nvim",
@@ -43,38 +44,38 @@ require("lualine").setup {
     },
   },
 }
--- Lualine END
+-- }}}
 
--- Indent Blankline START
--- Add vertical indentation lines
+-- Indent Blankline {{{1
+-- Add vertical indentation guides.
 vim.pack.add {
   "https://github.com/lukas-reineke/indent-blankline.nvim",
 }
 
 require("ibl").setup()
--- Indent Blankline END
+-- }}}
 
--- Which Key START
--- Display keybindings in a popup
+-- Which Key {{{1
+-- Display keybindings in a popup.
 vim.pack.add {
   "https://github.com/folke/which-key.nvim",
 }
 
 require("which-key").setup()
--- Which Key END
+-- }}}
 
--- Todo Comments START
--- Highlight and search TODO/FIXME/etc comments
+-- Todo Comments {{{1
+-- Highlight and search TODO, FIXME, and similar comments.
 vim.pack.add {
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/folke/todo-comments.nvim",
 }
 
 require("todo-comments").setup()
--- Todo Comments END
+-- }}}
 
--- Neo-tree START
--- File explorer tree
+-- Neo-tree {{{1
+-- File explorer tree.
 vim.pack.add {
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/nvim-tree/nvim-web-devicons",
@@ -91,10 +92,10 @@ require("neo-tree").setup {
 }
 
 mappings.neotree()
--- Neo-tree END
+-- }}}
 
--- Fidget START
--- LSP progress notification
+-- Fidget {{{1
+-- LSP progress notifications.
 vim.pack.add {
   "https://github.com/j-hui/fidget.nvim",
 }
@@ -104,4 +105,6 @@ require("fidget").setup {
     window = { winblend = 0 },
   },
 }
--- Fidget END
+-- }}}
+
+-- vim: set fdm=marker fdl=0 fen:

@@ -1,5 +1,5 @@
--- AI Split Commit START
--- Split changes into logical commits with AI
+-- AI Split Commit {{{1
+-- Split changes into logical commits with AI.
 vim.pack.add {
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/cjvnjde/ai-provider.nvim",
@@ -15,4 +15,6 @@ require("ai-split-commit").setup {
   },
   default_view_mode = "group_diff",
 }
--- AI Split Commit END
+-- }}}
+
+-- vim: set fdm=marker fdl=0 fen:
