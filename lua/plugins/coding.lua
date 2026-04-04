@@ -48,6 +48,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add {
   "https://github.com/nvim-treesitter/nvim-treesitter",
 }
+
+-- Use the stable bash parser for zsh files.
+vim.treesitter.language.register("bash", "zsh")
 -- }}}
 
 -- Treesitter Autoinstall {{{1
