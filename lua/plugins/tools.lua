@@ -78,4 +78,13 @@ vim.pack.add {
 }
 -- }}}
 
+-- Which Key {{{1
+-- Display keybindings in a popup.
+vim.pack.add {
+  "https://github.com/folke/which-key.nvim",
+}
+
+require("which-key").setup()
+-- }}}
+
 -- vim: set fdm=marker fdl=0 fen:

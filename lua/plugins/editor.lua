@@ -1,3 +1,4 @@
+local nesting_rules = require "config.file_nesting_rules"
 local mappings = require "config.mappings"
 
 -- Telescope {{{1
@@ -83,13 +84,6 @@ require("nvim-ts-autotag").setup {
 }
 -- }}}
 
--- Undotree {{{1
--- Visualize and navigate undo history.
-vim.pack.add {
-  "https://github.com/mbbill/undotree",
-}
--- }}}
-
 -- Vim Matchup {{{1
 -- Better text-object and pair matching for brackets, tags, and more.
 vim.pack.add {
@@ -110,6 +104,26 @@ require("gitsigns").setup {
     mappings.gitsigns(gs, bufnr)
   end,
 }
+-- }}}
+
+--z Neo-tree {{{1
+-- File explorer tree.
+vim.pack.add {
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-tree/nvim-web-devicons",
+  "https://github.com/MunifTanjim/nui.nvim",
+  {
+    src = "https://github.com/nvim-neo-tree/neo-tree.nvim",
+    version = "v3.x",
+  },
+}
+
+require("neo-tree").setup {
+  popup_border_style = "",
+  nesting_rules = nesting_rules,
+}
+
+mappings.neotree()
 -- }}}
 
 -- vim: set fdm=marker fdl=0 fen:

@@ -83,7 +83,8 @@
     },
     "neo-tree.nvim": {
       "rev": "84c75e7a7e443586f60508d12fc50f90d9aee14e",
-      "src": "https://github.com/nvim-neo-tree/neo-tree.nvim"
+      "src": "https://github.com/nvim-neo-tree/neo-tree.nvim",
+      "version": "'v3.x'"
     },
     "neotest": {
       "rev": "72bc8f1ec62a590fb47368c81f89610e0f353e28",

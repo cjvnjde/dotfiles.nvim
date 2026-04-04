@@ -1,7 +1,6 @@
 require "options"
 require "autocmds"
 require "lsp"
-require "plugins/ui"
 require "plugins/coding"
 require "plugins/editor"
 require "plugins/tools"

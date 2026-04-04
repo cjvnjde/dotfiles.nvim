@@ -1,9 +1,5 @@
 local mappings = require "config.mappings"
 
-local is_log = function(entry)
-  return entry.label == "log" and entry.source_name == "Snippets"
-end
-
 -- Blink CMP {{{1
 -- Autocompletion engine.
 vim.pack.add {
@@ -25,9 +21,8 @@ require("blink.cmp").setup {
   },
   signature = { enabled = true },
   sources = {
-    default = { "lsp", "path", "snippets", "buffer" },
+    default = { "snippets", "lsp", "path", "buffer" },
     per_filetype = {
-      codecompanion = { "codecompanion" },
       sql = { "snippets", "dadbod", "buffer" },
     },
     providers = {
@@ -36,18 +31,6 @@ require("blink.cmp").setup {
   },
   fuzzy = {
     implementation = "prefer_rust_with_warning",
-    sorts = {
-      function(a, b)
-        if is_log(a) and not is_log(b) then
-          return true
-        end
-        if is_log(b) and not is_log(a) then
-          return false
-        end
-      end,
-      "score",
-      "sort_text",
-    },
   },
 }
 -- }}}
