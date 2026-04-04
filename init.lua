@@ -7,6 +7,8 @@ require "plugins/tools"
 require "plugins/testing"
 require "plugins/experimental"
 
+require("config.pack").setup()
+
 local mappings = require "config.mappings"
 
 vim.schedule(function()
