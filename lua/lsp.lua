@@ -1,5 +1,3 @@
-local mappings = require "config.mappings"
-
 vim.lsp.enable {
   -- mason
   -- npm i -g bash-language-server

@@ -2,6 +2,7 @@ local M = {}
 
 local map = vim.keymap.set
 
+-- Global {{{1
 M.global = function()
   -- navigate between windows
   map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
@@ -65,38 +66,35 @@ M.global = function()
     end
   end, { desc = "[S]et [C]odebook diagnostics" })
 end
+-- }}}
 
+-- LSP {{{1
 M.lsp = function(data)
+  local bufnr = data.buf
+  local client = vim.lsp.get_client_by_id(data.data.client_id)
+
   local function filter_import_updates(action)
     local kind = action.kind or ""
-    local title = action.title or ""
-    title = title:lower()
+    local title = (action.title or ""):lower()
 
-    if kind == "source.organizeImports" then
-      return true
-    end
-
-    if title:match "import" then
-      return true
-    end
-
-    if kind:match "quickfix" and title:match "import" then
-      return true
-    end
-
-    if kind:match "import" then
-      return true
-    end
-
-    return false
+    return kind == "source.organizeImports"
+      or title:match "import"
+      or (kind:match "quickfix" and title:match "import")
+      or kind:match "import"
   end
 
-  vim.keymap.set("n", "<leader>th", function()
-    local clients = vim.lsp.get_clients { bufnr = data.buf }
+  local js_ts_filetypes = {
+    javascript = true,
+    javascriptreact = true,
+    typescript = true,
+    typescriptreact = true,
+  }
+
+  map("n", "<leader>th", function()
     local supports_inlay_hints = false
 
-    for _, client in ipairs(clients) do
-      if client.supports_method("textDocument/inlayHint", data.buf) then
+    for _, attached_client in ipairs(vim.lsp.get_clients { bufnr = bufnr }) do
+      if attached_client.supports_method("textDocument/inlayHint", bufnr) then
         supports_inlay_hints = true
         break
       end
@@ -107,31 +105,31 @@ M.lsp = function(data)
       return
     end
 
-    local current_state = vim.lsp.inlay_hint.is_enabled { bufnr = data.buf }
-    vim.lsp.inlay_hint.enable(not current_state, { bufnr = data.buf })
+    local current_state = vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }
+    vim.lsp.inlay_hint.enable(not current_state, { bufnr = bufnr })
     vim.notify("Inlay hints " .. (not current_state and "enabled" or "disabled"), vim.log.levels.INFO)
-  end, { desc = "LSP [T]oggle Inlay [H]ints" })
+  end, { buffer = bufnr, desc = "LSP [T]oggle Inlay [H]ints" })
 
   map("n", "gl", function()
     vim.diagnostic.open_float()
-  end, { desc = "Show full diagnostic message" })
+  end, { buffer = bufnr, desc = "Show full diagnostic message" })
 
   map("n", "[d", function()
     vim.diagnostic.jupm { count = 1, float = true }
-  end, { desc = "Go to previous diagnostic" })
+  end, { buffer = bufnr, desc = "Go to previous diagnostic" })
 
   map("n", "]d", function()
     vim.diagnostic.jupm { count = -1, float = true }
-  end, { desc = "Go to next diagnostic" })
+  end, { buffer = bufnr, desc = "Go to next diagnostic" })
 
-  map("n", "gd", vim.lsp.buf.definition, { desc = "[G]o to [D]efinition" })
-  map("n", "gi", vim.lsp.buf.implementation, { desc = "[G]o to [I]mplementation" })
-  map("n", "gr", vim.lsp.buf.references, { desc = "[G]o to [R]eference" })
+  map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "[G]o to [D]efinition" })
+  map("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "[G]o to [I]mplementation" })
+  map("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "[G]o to [R]eference" })
 
-  map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[N]ame" })
+  map("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "[R]e[N]ame" })
 
-  map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
-  map("v", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+  map("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "[C]ode [A]ction" })
+  map("v", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "[C]ode [A]ction" })
 
   local import_update_action_opts = {
     filter = filter_import_updates,
@@ -140,37 +138,48 @@ M.lsp = function(data)
 
   map("n", "<leader>ci", function()
     vim.lsp.buf.code_action(import_update_action_opts)
-  end, { desc = "[C]ode [I]mport" })
+  end, { buffer = bufnr, desc = "[C]ode [I]mport" })
+
   map("v", "<leader>ci", function()
     vim.lsp.buf.code_action(import_update_action_opts)
-  end, { desc = "[C]ode [I]mport" })
+  end, { buffer = bufnr, desc = "[C]ode [I]mport" })
 
-  vim.keymap.set("n", "<leader>cu", function()
-    vim.lsp.buf.code_action {
-      context = {
-        only = { "source.removeUnused.ts" },
-        diagnostics = {},
-      },
-      apply = true,
-    }
-  end, { desc = "[C]lean [U]nused (only Typescript)" })
+  if client and client.name == "ts_ls" and js_ts_filetypes[vim.bo[bufnr].filetype] then
+    map("n", "<leader>cu", function()
+      vim.lsp.buf.code_action {
+        context = {
+          only = { "source.removeUnused.ts" },
+          diagnostics = {},
+        },
+        apply = true,
+      }
+    end, { buffer = bufnr, desc = "[C]lean [U]nused" })
+  end
 end
+-- }}}
 
+-- Leap {{{1
 M.leap = function()
   map("n", "<leader><leader>", "<Plug>(leap)")
 end
+-- }}}
 
+-- Conform {{{1
 M.conform = function()
   map("n", "<leader>fm", function()
     require("conform").format { lsp_fallback = true }
   end, { desc = "[F]or[M]at document" })
 end
+-- }}}
 
+-- Neo-tree {{{1
 M.neotree = function()
   map("n", "<leader>n", "<cmd>Neotree show toggle focus float reveal<CR>", { desc = "nvimtree toggle window" })
   map("n", "<leader>e", "<cmd>Neotree show focus float reveal<CR>", { desc = "nvimtree focus window" })
 end
+-- }}}
 
+-- Gitsigns {{{1
 M.gitsigns = function(gs, bufnr)
   local function opts(desc)
     return { buffer = bufnr, desc = desc }
@@ -209,7 +218,9 @@ M.gitsigns = function(gs, bufnr)
   -- Blame Operations
   map("n", "<leader>bl", gs.blame_line, opts "[B]lame [L]ine")
 end
+-- }}}
 
+-- Neotest {{{1
 M.neotest = function()
   map("n", "<leader>tn", "<cmd>lua nequire('neotest').run.run()<CR>", { desc = "[T]est [N]earest" })
   map("n", "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", { desc = "[T]est [F]ile" })
@@ -232,7 +243,9 @@ M.neotest = function()
   )
   map("n", "<leader>tt", "<cmd>lua require('neotest').summary.toggle()<CR>", { desc = "[T]est [T]oggle summary" })
 end
+-- }}}
 
+-- Coverage {{{1
 M.coverage = function()
   map("n", "<leader>cot", function()
     require("coverage").load(true)
@@ -243,7 +256,9 @@ M.coverage = function()
     require("coverage").summary()
   end, { desc = "[C]overage [S]how test coverage summary" })
 end
+-- }}}
 
+-- Telescope {{{1
 M.telescope = function()
   map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "[F]ind [W]ord (live grep)" })
   map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "[F]ind [B]uffers" })
@@ -252,10 +267,15 @@ M.telescope = function()
   map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "[F]ind [F]iles" })
   map("n", "<leader>fg", "<cmd>Telescope git_status<CR>", { desc = "[F]ind [G]it files" })
 end
+-- }}}
 
+-- Blink {{{1
 M.blink = {
   preset = "default",
   ["<C-f>"] = { "accept", "fallback" },
 }
+-- }}}
 
 return M
+
+-- vim: set fdm=marker fdl=0 fen:
