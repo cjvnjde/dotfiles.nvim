@@ -1,6 +1,3 @@
-local utils = require "utils"
-local typehint = require "typehint_autocmd"
-
 local M = {}
 
 local map = vim.keymap.set
@@ -31,16 +28,6 @@ M.global = function()
   map("n", ":", ";", { noremap = true, silent = false })
   map("v", ":", ";", { noremap = true, silent = false })
 
-  -- Quickfix
-  map("n", "<leader>q", ":cclose<CR>", { desc = "[Q]uit quick fix list", silent = true })
-  map("n", "<leader>tq", function()
-    if utils.is_quickfix_open() then
-      return "<cmd>cclose<CR>"
-    else
-      return "<cmd>copen<CR>"
-    end
-  end, { expr = true, desc = "[T]oggle [Q]uit quick fix list", silent = true })
-
   -- Undotree
   map("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "[U]ndo [T]ree" })
 
@@ -54,16 +41,6 @@ M.global = function()
   end, { desc = "[W]ord [A]dd" })
 
   -- Settings toggles
-  map("n", "<leader>sp", function()
-    local colors = utils.try_require "nvim-highlight-colors"
-
-    if colors then
-      colors.toggle()
-    else
-      vim.notify("nvim-highlight-colors not found", vim.log.levels.WARN)
-    end
-  end, { desc = "[S]et colors [P]review" })
-
   map("n", "<leader>sd", function()
     local current = vim.diagnostic.config()
     if not current then
@@ -76,10 +53,6 @@ M.global = function()
     }
     vim.notify("Diagnostics: " .. (not is_lines_enabled and "Virtual Lines" or "Virtual Text"), vim.log.levels.INFO)
   end, { desc = "[S]et [D]iagnostic view" })
-
-  map("n", "<leader>st", function()
-    typehint.toggle_type_on_hover()
-  end, { desc = "[S]et [T]ypehint on hover" })
 
   map("n", "<leader>sc", function()
     local clients = vim.lsp.get_clients { name = "codebook" }
@@ -117,11 +90,6 @@ M.lsp = function(data)
 
     return false
   end
-
-  local import_update_action_opts = {
-    filter = filter_import_updates,
-    apply = true,
-  }
 
   vim.keymap.set("n", "<leader>th", function()
     local clients = vim.lsp.get_clients { bufnr = data.buf }
@@ -164,6 +132,11 @@ M.lsp = function(data)
 
   map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
   map("v", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+
+  local import_update_action_opts = {
+    filter = filter_import_updates,
+    apply = true,
+  }
 
   map("n", "<leader>ci", function()
     vim.lsp.buf.code_action(import_update_action_opts)

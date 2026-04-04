@@ -1,36 +1,40 @@
-return {
-  {
-    "nvim-neotest/neotest",
-    dependencies = {
-      "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "marilari88/neotest-vitest",
-    },
-    config = function()
-      require("neotest").setup {
-        discovery = {
-          enabled = false,
-        },
-        adapters = {
-          require "neotest-vitest",
-        },
-      }
-      require("config.mappings").neotest()
-    end,
+local mappings = require "config.mappings"
+
+-- Neotest {{{1
+-- Test runner framework.
+vim.pack.add {
+  "https://github.com/nvim-neotest/nvim-nio",
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/antoinemadec/FixCursorHold.nvim",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/marilari88/neotest-vitest",
+  "https://github.com/nvim-neotest/neotest",
+}
+
+require("neotest").setup {
+  discovery = {
+    enabled = false,
   },
-  {
-    "andythigpen/nvim-coverage",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      auto_reload = true,
-    },
-    config = function(_, opts)
-      require("coverage").setup(opts)
-      require("config.mappings").coverage()
-    end,
+  adapters = {
+    require "neotest-vitest",
   },
 }
+
+mappings.neotest()
+-- }}}
+
+-- Coverage {{{1
+-- Display test coverage indicators.
+vim.pack.add {
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/andythigpen/nvim-coverage",
+}
+
+require("coverage").setup {
+  auto_reload = true,
+}
+
+mappings.coverage()
+-- }}}
+
+-- vim: set fdm=marker fdl=0 fen:
