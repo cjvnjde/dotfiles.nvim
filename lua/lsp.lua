@@ -48,14 +48,6 @@ vim.lsp.config("cssls", {
   },
 })
 
-vim.lsp.config("eslint", {
-  settings = {
-    experimental = {
-      useFlatConfig = true,
-    },
-  },
-})
-
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
