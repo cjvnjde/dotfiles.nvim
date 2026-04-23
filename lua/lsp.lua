@@ -25,7 +25,7 @@ vim.lsp.enable {
   "lua_ls",
   -- pip install python-lsp-server
   -- mason
-  -- "pylsp",
+  "pylsp",
   -- mason
   -- "rust_analyzer",
   -- npm install -g svelte-language-server
