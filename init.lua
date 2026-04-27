@@ -28,3 +28,20 @@ vim.diagnostic.config {
   },
   severity_sort = true,
 }
+
+vim.api.nvim_create_user_command("RestartWithSession", function()
+  local session_dir = vim.fn.stdpath "state" .. "/sessions"
+
+  if vim.fn.isdirectory(session_dir) == 0 then
+    vim.fn.mkdir(session_dir, "p")
+  end
+
+  local cwd = vim.fn.getcwd()
+  local session_name = cwd:gsub("[\\/]", "%%") .. "_restart.vim"
+  local session_path = session_dir .. "/" .. session_name
+
+  local escaped_path = vim.fn.fnameescape(session_path)
+
+  local cmd = string.format("mksession! %s | restart source %s", escaped_path, escaped_path)
+  vim.cmd(cmd)
+end, { nargs = 0 })
