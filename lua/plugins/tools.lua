@@ -65,9 +65,9 @@ require("ai-commit").setup {
 
 -- Copilot {{{1
 -- GitHub Copilot integration.
-vim.pack.add {
-  "https://github.com/github/copilot.vim",
-}
+-- vim.pack.add {
+--   "https://github.com/github/copilot.vim",
+-- }
 -- }}}
 
 -- Markdown Preview {{{1
