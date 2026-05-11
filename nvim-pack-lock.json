@@ -50,7 +50,7 @@
       "src": "https://github.com/mistweaverco/kulala.nvim"
     },
     "leap.nvim": {
-      "rev": "ce97059584cc2c5a030f00018729ff70272e6dba",
+      "rev": "940bc5e716a8cde63bd47e1b13f30fd9075ec0c8",
       "src": "https://codeberg.org/andyg/leap.nvim"
     },
     "live-server.nvim": {
@@ -74,7 +74,7 @@
       "src": "https://github.com/williamboman/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "199b3344d4c0dab13e45483834ce11bb7744fa3a",
+      "rev": "a5fda91040763cf9ad70bdce1c656b0f4ba1d16e",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neo-tree.nvim": {
