@@ -1,4 +1,4 @@
-vim.lsp.enable {
+local enabled_servers = {
   -- mason
   -- npm i -g bash-language-server
   "bashls",
@@ -14,6 +14,8 @@ vim.lsp.enable {
   -- mason
   -- npm i -g vscode-langservers-extracted
   "eslint",
+  -- Godot editor built-in LSP. Requires the Godot editor to be open.
+  "gdscript",
   -- mason
   -- npm i -g vscode-langservers-extracted
   "html",
@@ -37,6 +39,14 @@ vim.lsp.enable {
   -- npm install -g typescript typescript-language-server
   "ts_ls",
 }
+
+local gdscript_port = tonumber(vim.env.GDScript_Port) or 6005
+
+vim.lsp.config("gdscript", {
+  cmd = vim.lsp.rpc.connect("127.0.0.1", gdscript_port),
+  filetypes = { "gd", "gdscript", "gdscript3" },
+  root_markers = { "project.godot" },
+})
 
 vim.lsp.config("cssls", {
   settings = {
@@ -108,3 +118,5 @@ vim.lsp.config("ts_ls", {
     javascript = js_ts_default_settings,
   },
 })
+
+vim.lsp.enable(enabled_servers)

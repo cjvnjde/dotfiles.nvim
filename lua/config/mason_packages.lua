@@ -8,7 +8,7 @@ local M = {
   "html-lsp",
   "json-lsp",
   "lua-language-server",
-  -- "python-lsp-server",
+  "python-lsp-server",
   -- "rust-analyzer",
   "svelte-language-server",
   "tailwindcss-language-server",
