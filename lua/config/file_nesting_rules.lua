@@ -27,6 +27,10 @@ local M = {
     files = { "%1.mjs.map" },
     pattern = "(.*)%.mjs$",
   },
+  ["*.gd"] = {
+    files = { "%1.gd.uid" },
+    pattern = "(.*)%.gd$",
+  },
 }
 
 return M
