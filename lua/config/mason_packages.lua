@@ -18,6 +18,7 @@ local M = {
   "stylua",
   "prettier",
   "markdownlint",
+  "gdscript-formatter",
 
   -- others
   "sql-formatter",

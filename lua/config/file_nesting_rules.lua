@@ -31,6 +31,18 @@ local M = {
     files = { "%1.gd.uid" },
     pattern = "(.*)%.gd$",
   },
+  ["*.glb"] = {
+    files = { "%1.glb.import" },
+    pattern = "(.*)%.glb$",
+  },
+  ["*.blend"] = {
+    files = { "%1.blend.import" },
+    pattern = "(.*)%.blend$",
+  },
+  ["*.png"] = {
+    files = { "%1.png.import" },
+    pattern = "(.*)%.png$",
+  },
 }
 
 return M
