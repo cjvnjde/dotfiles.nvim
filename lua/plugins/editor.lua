@@ -106,7 +106,7 @@ require("gitsigns").setup {
 }
 -- }}}
 
---z Neo-tree {{{1
+-- Neo-tree {{{1
 -- File explorer tree.
 vim.pack.add {
   "https://github.com/nvim-lua/plenary.nvim",

@@ -43,7 +43,6 @@ require("kulala").setup {
 -- Generate commit messages with AI.
 vim.pack.add {
   "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/nvim-telescope/telescope.nvim",
   "https://github.com/cjvnjde/ai-provider.nvim",
   "https://github.com/cjvnjde/ai-commit.nvim",
 }

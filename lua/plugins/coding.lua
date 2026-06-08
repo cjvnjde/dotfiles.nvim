@@ -124,7 +124,6 @@ vim.pack.add {
 -- Automatically update imports on file rename or move.
 vim.pack.add {
   "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/nvim-neo-tree/neo-tree.nvim",
   "https://github.com/antosha417/nvim-lsp-file-operations",
 }
 

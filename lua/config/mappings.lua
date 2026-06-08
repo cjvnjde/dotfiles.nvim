@@ -94,7 +94,7 @@ M.lsp = function(data)
     local supports_inlay_hints = false
 
     for _, attached_client in ipairs(vim.lsp.get_clients { bufnr = bufnr }) do
-      if attached_client.supports_method("textDocument/inlayHint", bufnr) then
+      if attached_client:supports_method("textDocument/inlayHint", { bufnr = bufnr }) then
         supports_inlay_hints = true
         break
       end
@@ -223,7 +223,7 @@ end
 
 -- Neotest {{{1
 M.neotest = function()
-  map("n", "<leader>tn", "<cmd>lua nequire('neotest').run.run()<CR>", { desc = "[T]est [N]earest" })
+  map("n", "<leader>tn", "<cmd>lua require('neotest').run.run()<CR>", { desc = "[T]est [N]earest" })
   map("n", "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", { desc = "[T]est [F]ile" })
   map("n", "<leader>tl", "<cmd>lua require('neotest').run.run_last()<CR>", { desc = "[T]est [L]ast" })
   map("n", "<leader>ts", function()
