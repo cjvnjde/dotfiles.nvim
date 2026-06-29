@@ -114,18 +114,7 @@ M.lsp = function(data)
     vim.diagnostic.open_float()
   end, { buffer = bufnr, desc = "Show full diagnostic message" })
 
-  map("n", "[d", function()
-    vim.diagnostic.jump { count = -1, float = true }
-  end, { buffer = bufnr, desc = "Go to previous diagnostic" })
-
-  map("n", "]d", function()
-    vim.diagnostic.jump { count = 1, float = true }
-  end, { buffer = bufnr, desc = "Go to next diagnostic" })
-
-  map("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP hover documentation" })
   map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "[G]o to [D]efinition" })
-  map("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "[G]o to [I]mplementation" })
-  map("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "[G]o to [R]eference" })
 
   map("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "[R]e[N]ame" })
 

@@ -74,7 +74,7 @@ vim.o.updatetime = 250
 -- Use Tree-sitter-based folds globally while keeping normal file folds expanded by default.
 -- }}}
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 
 -- vim: set fdm=marker fdl=0 fen:
