@@ -92,7 +92,6 @@ require("conform").setup {
     vue = { "prettier" },
     gdscript = { "gdscript-formatter" },
     lua = { "stylua" },
-    rust = { "rustfmt" },
     sql = { "sql_formatter" },
   },
   formatters = {

@@ -1,6 +1,3 @@
-local mappings = require "config.mappings"
-local nesting_rules = require "config.file_nesting_rules"
-
 -- Catppuccin {{{1
 -- Colorscheme configuration.
 vim.pack.add {

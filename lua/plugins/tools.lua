@@ -62,21 +62,6 @@ require("ai-commit").setup {
 }
 -- }}}
 
--- Copilot {{{1
--- GitHub Copilot integration.
--- vim.pack.add {
---   "https://github.com/github/copilot.vim",
--- }
--- }}}
-
--- Markdown Preview {{{1
--- Preview markdown files in the browser.
-vim.pack.add {
-  "https://github.com/selimacerbas/live-server.nvim",
-  "https://github.com/selimacerbas/markdown-preview.nvim",
-}
--- }}}
-
 -- Which Key {{{1
 -- Display keybindings in a popup.
 vim.pack.add {

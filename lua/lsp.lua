@@ -28,8 +28,6 @@ local enabled_servers = {
   -- pip install python-lsp-server
   -- mason
   "pylsp",
-  -- mason
-  -- "rust_analyzer",
   -- npm install -g svelte-language-server
   "svelte",
   -- mason

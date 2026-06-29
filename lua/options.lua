@@ -42,8 +42,6 @@ vim.opt.hlsearch = true
 
 -- Input and navigation {{{1
 -- Enable mouse support, keep context around the cursor, and keep mapped-sequence timing responsive.
--- Uncomment to allow certain keys to move across line boundaries.
--- opt.whichwrap:append "<>[]hl"
 -- }}}
 vim.o.mouse = "a"
 vim.o.timeoutlen = 300
