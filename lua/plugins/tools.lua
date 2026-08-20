@@ -39,29 +39,6 @@ require("kulala").setup {
 }
 -- }}}
 
--- AI Commit {{{1
--- Generate commit messages with AI.
-vim.pack.add {
-  "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/cjvnjde/ai-provider.nvim",
-  "https://github.com/cjvnjde/ai-commit.nvim",
-}
-
-require("ai-commit").setup {
-  provider = "github-copilot",
-  model = "gpt-5-mini",
-  ai_options = {
-    reasoning = "low",
-  },
-  ignored_files = {
-    "package-lock.json",
-    "yarn.lock",
-    "pnpm-lock.yaml",
-    "lazy-lock.json",
-  },
-}
--- }}}
-
 -- Which Key {{{1
 -- Display keybindings in a popup.
 vim.pack.add {

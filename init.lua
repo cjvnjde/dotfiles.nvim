@@ -5,7 +5,6 @@ require "plugins/coding"
 require "plugins/editor"
 require "plugins/tools"
 require "plugins/testing"
-require "plugins/experimental"
 require "plugins/ui"
 
 require("config.pack").setup()

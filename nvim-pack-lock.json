@@ -4,18 +4,6 @@
       "rev": "1900f89dc17c603eec29960f57c00bd9ae696495",
       "src": "https://github.com/antoinemadec/FixCursorHold.nvim"
     },
-    "ai-commit.nvim": {
-      "rev": "e37e9f9810f553bac7aef9481f3dc902a51597ca",
-      "src": "https://github.com/cjvnjde/ai-commit.nvim"
-    },
-    "ai-provider.nvim": {
-      "rev": "f89b93d5017639ec35d1641c504ee1f5442fe310",
-      "src": "https://github.com/cjvnjde/ai-provider.nvim"
-    },
-    "ai-split-commit.nvim": {
-      "rev": "951a3496254e735fae96096feb51226aa3617246",
-      "src": "https://github.com/cjvnjde/ai-split-commit.nvim"
-    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
@@ -68,10 +56,6 @@
     "mini.nvim": {
       "rev": "7c2caf0ae915d819f2f39467d6bb9313c2b3e90a",
       "src": "https://github.com/echasnovski/mini.nvim"
-    },
-    "minuet-ai.nvim": {
-      "rev": "d29dec4c36be2b41aa10e70938b7b09a03f0bdba",
-      "src": "git@github.com:milanglacier/minuet-ai.nvim"
     },
     "neo-tree.nvim": {
       "rev": "ebd66767191714e008ce73b769518a763ff31bdc",
