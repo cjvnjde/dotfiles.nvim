@@ -38,7 +38,7 @@
       "src": "https://github.com/mistweaverco/kulala.nvim"
     },
     "leap.nvim": {
-      "rev": "7884f9455e5bf07bd11a3dcd9f961095a966a5d7",
+      "rev": "5db34d1a302ef18bc819dc8a38011abe29dae229",
       "src": "https://codeberg.org/andyg/leap.nvim"
     },
     "lualine.nvim": {
@@ -54,7 +54,7 @@
       "src": "https://github.com/williamboman/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "8d86a057fa14681cf7cab74ea7cba894a0abe14f",
+      "rev": "1098976ddda3cf00f50c1dda5eef10ccf463d9eb",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neo-tree.nvim": {
@@ -83,7 +83,7 @@
       "src": "https://github.com/antosha417/nvim-lsp-file-operations"
     },
     "nvim-lspconfig": {
-      "rev": "221c43884319e791519f0d6c94a7f2fbcd653278",
+      "rev": "3928e638fdedf195b23ae5a18f024afa487982bc",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-nio": {
