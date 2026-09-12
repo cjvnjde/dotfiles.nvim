@@ -1,40 +1,43 @@
-local mappings = require "config.mappings"
+local M = {}
+local tests, coverage_plugin
 
--- Neotest {{{1
--- Test runner framework.
-vim.pack.add {
-  "https://github.com/nvim-neotest/nvim-nio",
-  "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/antoinemadec/FixCursorHold.nvim",
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/marilari88/neotest-vitest",
-  "https://github.com/nvim-neotest/neotest",
-}
+function M.neotest()
+  if not tests then
+    vim.cmd.packadd "nvim-nio"
+    vim.cmd.packadd "neotest-vitest"
+    vim.cmd.packadd "neotest"
+    local plugin = require "neotest"
+    plugin.setup {
+      discovery = { enabled = false },
+      adapters = { require "neotest-vitest" },
+    }
+    tests = plugin
+  end
+  return tests
+end
 
-require("neotest").setup {
-  discovery = {
-    enabled = false,
-  },
-  adapters = {
-    require "neotest-vitest",
-  },
-}
+function M.coverage()
+  if not coverage_plugin then
+    vim.cmd.packadd "nvim-coverage"
+    local plugin = require "coverage"
+    plugin.setup { auto_reload = true }
+    coverage_plugin = plugin
+  end
+  return coverage_plugin
+end
 
-mappings.neotest()
--- }}}
+local group = vim.api.nvim_create_augroup("TestToolActivation", { clear = true })
+vim.api.nvim_create_autocmd("CmdUndefined", {
+  group = group,
+  pattern = "Neotest",
+  once = true,
+  callback = M.neotest,
+})
+vim.api.nvim_create_autocmd("CmdUndefined", {
+  group = group,
+  pattern = "Coverage*",
+  once = true,
+  callback = M.coverage,
+})
 
--- Coverage {{{1
--- Display test coverage indicators.
-vim.pack.add {
-  "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/andythigpen/nvim-coverage",
-}
-
-require("coverage").setup {
-  auto_reload = true,
-}
-
-mappings.coverage()
--- }}}
-
--- vim: set fdm=marker fdl=0 fen:
+return M

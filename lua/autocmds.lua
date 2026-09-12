@@ -1,5 +1,3 @@
-local mappings = require "config.mappings"
-
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -7,18 +5,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.hl.on_yank()
   end,
   group = highlight_group,
-  pattern = "*",
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "json",
-  callback = function(ev)
-    vim.bo[ev.buf].formatprg = "jq"
-  end,
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(data)
-    mappings.lsp(data)
-  end,
 })

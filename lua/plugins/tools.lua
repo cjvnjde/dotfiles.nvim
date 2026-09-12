@@ -1,51 +1,44 @@
-local packages = require "config.mason_packages"
-
--- Mason {{{1
--- Tool installer for LSP servers, linters, and formatters.
-vim.pack.add {
-  "https://github.com/williamboman/mason.nvim",
-  "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
-}
+local M = {}
 
 require("mason").setup()
-
 require("mason-tool-installer").setup {
-  ensure_installed = packages,
-  run_on_start = true,
+  ensure_installed = require "config.mason_packages",
+  run_on_start = false, -- Provision explicitly with :MasonToolsInstall / :MasonToolsUpdate.
 }
--- }}}
+require("which-key").setup()
 
--- Dadbod {{{1
--- Database client UI and completion.
+-- Dadbod's commands and SQL completion already use Vim's native autoload.
 vim.g.db_ui_use_nerd_fonts = 1
 
-vim.pack.add {
-  "https://github.com/tpope/vim-dadbod",
-  "https://github.com/kristijanhusak/vim-dadbod-completion",
-  "https://github.com/kristijanhusak/vim-dadbod-ui",
-}
--- }}}
+local http
+function M.kulala()
+  if not http then
+    vim.cmd.packadd "kulala.nvim"
+    local plugin = require "kulala"
+    plugin.setup(require("config.mappings").kulala)
+    http = plugin
+  end
+  return http
+end
 
--- Kulala {{{1
--- HTTP client for REST requests.
-vim.pack.add {
-  "https://github.com/mistweaverco/kulala.nvim",
-}
+local group = vim.api.nvim_create_augroup("HttpActivation", { clear = true })
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+  group = group,
+  pattern = { "*.http", "*.rest" },
+  once = true,
+  callback = M.kulala,
+})
+vim.api.nvim_create_autocmd("FileType", {
+  group = group,
+  pattern = { "http", "rest" },
+  once = true,
+  callback = function(event)
+    if not http then
+      M.kulala()
+      -- Include newly registered HTTP handlers when a scratch buffer changes filetype.
+      vim.api.nvim_exec_autocmds("FileType", { buffer = event.buf, modeline = false })
+    end
+  end,
+})
 
-require("kulala").setup {
-  global_keymaps = false,
-  global_keymaps_prefix = "<leader>R",
-  kulala_keymaps_prefix = "",
-}
--- }}}
-
--- Which Key {{{1
--- Display keybindings in a popup.
-vim.pack.add {
-  "https://github.com/folke/which-key.nvim",
-}
-
-require("which-key").setup()
--- }}}
-
--- vim: set fdm=marker fdl=0 fen:
+return M

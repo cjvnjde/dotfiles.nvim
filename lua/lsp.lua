@@ -1,48 +1,21 @@
 local enabled_servers = {
-  -- mason
-  -- npm i -g bash-language-server
   "bashls",
-  -- mason
-  -- cargo install codebook-lsp
   "codebook",
-  -- mason
-  -- npm i -g vscode-langservers-extracted
   "cssls",
-  -- mason
-  -- npm install -g @olrtg/emmet-language-server
   "emmet_language_server",
-  -- mason
-  -- npm i -g vscode-langservers-extracted
   "eslint",
   -- Godot editor built-in LSP. Requires the Godot editor to be open.
   "gdscript",
-  -- mason
-  -- npm i -g vscode-langservers-extracted
   "html",
-  -- mason
-  -- npm i -g vscode-langservers-extracted
   "jsonls",
-  -- mason
-  -- brew install lua-language-server
   "lua_ls",
-  -- pip install python-lsp-server
-  -- mason
   "pylsp",
-  -- npm install -g svelte-language-server
   "svelte",
-  -- mason
-  -- npm install -g @tailwindcss/language-server
   "tailwindcss",
-  -- mason
-  -- npm install -g typescript typescript-language-server
   "ts_ls",
 }
 
-local gdscript_port = tonumber(vim.env.GDScript_Port) or 6005
-
 vim.lsp.config("gdscript", {
-  cmd = vim.lsp.rpc.connect("127.0.0.1", gdscript_port),
-  filetypes = { "gd", "gdscript", "gdscript3" },
   root_markers = { "project.godot" },
 })
 
@@ -57,31 +30,33 @@ vim.lsp.config("cssls", {
 })
 
 vim.lsp.config("lua_ls", {
-  settings = {
-    Lua = {
-      codeLens = { enable = true },
-      runtime = {
-        version = "LuaJIT",
-        path = {
-          "?.lua",
-          "?/init.lua",
+  on_init = function(client)
+    local root = client.root_dir and vim.uv.fs_realpath(client.root_dir)
+    -- Resolve both paths: ~/.config/nvim may be a symlink into the dotfiles repo.
+    if not root or root ~= vim.uv.fs_realpath(vim.fn.stdpath "config") then
+      return
+    end
+    if vim.uv.fs_stat(root .. "/.luarc.json") or vim.uv.fs_stat(root .. "/.luarc.jsonc") then
+      return
+    end
+
+    local settings = vim.tbl_deep_extend("force", vim.deepcopy(client.settings), {
+      Lua = {
+        runtime = {
+          version = "LuaJIT",
+          path = { "lua/?.lua", "lua/?/init.lua" },
+        },
+        workspace = {
+          checkThirdParty = false,
+          library = { vim.env.VIMRUNTIME },
         },
       },
-      signatureHelp = { enabled = true },
-      hint = {
-        enable = true,
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      diagnostics = {
-        globals = {
-          "vim",
-          "require",
-        },
-      },
-    },
-  },
+    })
+    client.settings = settings
+    client.config.settings = settings
+    -- Initial settings are sent before on_init; publish the scoped override.
+    client:notify("workspace/didChangeConfiguration", { settings = settings })
+  end,
 })
 
 -- @see https://github.com/paolotiu/tailwind-intellisense-regex-list

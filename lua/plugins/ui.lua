@@ -1,26 +1,9 @@
--- Catppuccin {{{1
--- Colorscheme configuration.
-vim.pack.add {
-  {
-    src = "https://github.com/catppuccin/nvim",
-    name = "catppuccin",
-  },
-}
-
 require("catppuccin").setup {
   flavour = "mocha",
   transparent_background = true,
 }
 
 vim.cmd.colorscheme "catppuccin"
--- }}}
-
--- Lualine {{{1
--- Configure the statusline.
-vim.pack.add {
-  "https://github.com/nvim-tree/nvim-web-devicons",
-  "https://github.com/nvim-lualine/lualine.nvim",
-}
 
 require("lualine").setup {
   sections = {
@@ -29,50 +12,57 @@ require("lualine").setup {
     lualine_c = {
       "filename",
       "filetype",
+      "lsp_status",
     },
     lualine_x = {
-      {
-        "rest",
-        icon = "",
-        fg = "#428890",
-      },
       "encoding",
       "fileformat",
     },
   },
 }
--- }}}
-
--- Indent Blankline {{{1
--- Add vertical indentation guides.
-vim.pack.add {
-  "https://github.com/lukas-reineke/indent-blankline.nvim",
-}
 
 require("ibl").setup()
--- }}}
 
--- Todo Comments {{{1
--- Highlight and search TODO, FIXME, and similar comments.
-vim.pack.add {
-  "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/folke/todo-comments.nvim",
-}
-
-require("todo-comments").setup()
--- }}}
-
--- Fidget {{{1
--- LSP progress notifications.
-vim.pack.add {
-  "https://github.com/j-hui/fidget.nvim",
-}
-
-require("fidget").setup {
-  notification = {
-    window = { winblend = 0 },
+-- Highlight words anywhere in text; no signs, comment-only filtering, or TODO commands.
+require("mini.hipatterns").setup {
+  highlighters = {
+    fixme = {
+      pattern = {
+        "%f[%w]()FIXME()%f[%W]",
+        "%f[%w]()FIX()%f[%W]",
+        "%f[%w]()BUG()%f[%W]",
+        "%f[%w]()FIXIT()%f[%W]",
+        "%f[%w]()ISSUE()%f[%W]",
+      },
+      group = "MiniHipatternsFixme",
+    },
+    todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+    hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+    warn = {
+      pattern = { "%f[%w]()WARN()%f[%W]", "%f[%w]()WARNING()%f[%W]", "%f[%w]()XXX()%f[%W]" },
+      group = "MiniHipatternsHack",
+    },
+    perf = {
+      pattern = {
+        "%f[%w]()PERF()%f[%W]",
+        "%f[%w]()OPTIM()%f[%W]",
+        "%f[%w]()PERFORMANCE()%f[%W]",
+        "%f[%w]()OPTIMIZE()%f[%W]",
+      },
+      group = "MiniHipatternsNote",
+    },
+    note = {
+      pattern = { "%f[%w]()NOTE()%f[%W]", "%f[%w]()INFO()%f[%W]" },
+      group = "MiniHipatternsNote",
+    },
+    test = {
+      pattern = {
+        "%f[%w]()TEST()%f[%W]",
+        "%f[%w]()TESTING()%f[%W]",
+        "%f[%w]()PASSED()%f[%W]",
+        "%f[%w]()FAILED()%f[%W]",
+      },
+      group = "MiniHipatternsTodo",
+    },
   },
 }
--- }}}
-
--- vim: set fdm=marker fdl=0 fen:
