@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "FixCursorHold.nvim": {
+      "rev": "1900f89dc17c603eec29960f57c00bd9ae696495",
+      "src": "git@github.com:antoinemadec/FixCursorHold.nvim"
+    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
@@ -12,6 +16,10 @@
     "conform.nvim": {
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "fidget.nvim": {
+      "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
+      "src": "git@github.com:j-hui/fidget.nvim"
     },
     "friendly-snippets": {
       "rev": "b4d01b0fdf3c9a549961c2f9ffe8dc09be166219",
@@ -75,6 +83,10 @@
       "rev": "3e1e178861e792eda7e86591114bca4060a64a0a",
       "src": "https://github.com/Crysthamus/nvim-file-operations"
     },
+    "nvim-lsp-file-operations": {
+      "rev": "b9c795d3973e8eec22706af14959bc60c579e771",
+      "src": "git@github.com:antosha417/nvim-lsp-file-operations"
+    },
     "nvim-lspconfig": {
       "rev": "ac9d2f7c4757db6320cab6697fe73e5e8adb2457",
       "src": "https://github.com/neovim/nvim-lspconfig"
@@ -104,6 +116,10 @@
       "src": "https://github.com/nvim-telescope/telescope.nvim",
       "version": "'v0.2.1'"
     },
+    "todo-comments.nvim": {
+      "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
+      "src": "git@github.com:folke/todo-comments.nvim"
+    },
     "treesitter-autoinstall.nvim": {
       "rev": "b60bd6b84ec9bd3ce6447e51bff6ffc6142f60b7",
       "src": "https://github.com/mks-h/treesitter-autoinstall.nvim"
@@ -123,6 +139,10 @@
     "vim-matchup": {
       "rev": "0106b1afd4a2f7e1098037b5ceb161bab7471088",
       "src": "https://github.com/andymass/vim-matchup"
+    },
+    "vim-repeat": {
+      "rev": "65846025c15494983dafe5e3b46c8f88ab2e9635",
+      "src": "git@github.com:tpope/vim-repeat"
     },
     "vim-sleuth": {
       "rev": "be69bff86754b1aa5adcbb527d7fcd1635a84080",
