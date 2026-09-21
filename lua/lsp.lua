@@ -6,6 +6,7 @@ local enabled_servers = {
   "eslint",
   -- Godot editor built-in LSP. Requires the Godot editor to be open.
   "gdscript",
+  "gopls",
   "html",
   "jsonls",
   "lua_ls",
