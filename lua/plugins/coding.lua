@@ -56,6 +56,7 @@ require("conform").setup {
     graphql = { "prettier" },
     vue = { "prettier" },
     gdscript = { "gdscript-formatter" },
+    go = { "goimports", "gofumpt" },
     lua = { "stylua" },
     sql = { "sql_formatter" },
   },

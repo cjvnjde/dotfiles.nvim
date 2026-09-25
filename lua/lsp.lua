@@ -30,6 +30,25 @@ vim.lsp.config("cssls", {
   },
 })
 
+vim.lsp.config("gopls", {
+  settings = {
+    gopls = {
+      -- Match the conform formatter so LSP edits and code actions use the same style.
+      gofumpt = true,
+      staticcheck = true,
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
+    },
+  },
+})
+
 vim.lsp.config("lua_ls", {
   on_init = function(client)
     local root = client.root_dir and vim.uv.fs_realpath(client.root_dir)

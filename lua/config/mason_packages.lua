@@ -19,6 +19,8 @@ local M = {
   "prettier",
   "markdownlint",
   "gdscript-formatter",
+  "goimports",
+  "gofumpt",
 
   -- others
   "sql-formatter",
