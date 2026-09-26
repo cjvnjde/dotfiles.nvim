@@ -38,6 +38,6 @@ vim.o.foldlevel = 99
 vim.diagnostic.config {
   virtual_text = true,
   update_in_insert = true,
-  float = { border = "rounded", source = true },
+  float = { border = "rounded", source = true, wrap = true },
   severity_sort = true,
 }

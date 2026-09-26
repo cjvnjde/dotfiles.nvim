@@ -25,12 +25,10 @@ function M.setup()
   map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
   map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
   map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
-  map("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
   map("x", ">", ">gv", { desc = "Indent selection" })
   map("x", "<", "<gv", { desc = "Unindent selection" })
   map({ "n", "x" }, ";", ":", { silent = false })
   map({ "n", "x" }, ":", ";", { silent = false })
-  map("n", "<leader>u", "<cmd>undolist<CR>", { desc = "Undo history" })
 
   -- Telescope, Leap, and Neo-tree
   map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Find text" })
@@ -47,7 +45,6 @@ function M.setup()
   map("n", "<leader>fm", function()
     require("conform").format { lsp_format = "fallback" }
   end, { desc = "[F]or[M]at document" })
-  map("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostic message" })
   map("n", "<leader>sd", function()
     local lines = not vim.diagnostic.config().virtual_lines
     vim.diagnostic.config { virtual_lines = lines, virtual_text = not lines }
@@ -69,7 +66,7 @@ function M.setup()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }, { bufnr = bufnr })
   end, { desc = "Toggle inlay hints" })
 
-  -- Native grn/gra provide rename and code actions without title-based auto-apply.
+  -- Native grn/gra provide rename/code actions; CTRL-] uses the LSP tagfunc.
   map({ "n", "x" }, "<leader>ci", function()
     vim.lsp.buf.code_action {
       context = { only = { "source.organizeImports" }, diagnostics = {} },
@@ -79,7 +76,6 @@ function M.setup()
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("LspMappings", { clear = true }),
     callback = function(event)
-      map("n", "gd", vim.lsp.buf.definition, { buffer = event.buf, desc = "Go to definition" })
       local client = vim.lsp.get_client_by_id(event.data.client_id)
       if client and client.name == "ts_ls" then
         map("n", "<leader>cu", function()
