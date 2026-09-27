@@ -14,11 +14,54 @@ M.kulala = {
   global_keymaps = false,
   kulala_keymaps_prefix = "",
 }
+-- Keep Mini's editing keys visible here. The plugins supply their descriptions.
+M.mini_ai = {
+  around = "a",
+  inside = "i",
+  -- Intentional Mini.ai overrides: next/previous text objects.
+  around_next = "an",
+  inside_next = "in",
+  around_last = "al",
+  inside_last = "il",
+  goto_left = "g[",
+  goto_right = "g]",
+}
+M.mini_surround = {
+  add = "sa",
+  delete = "sd",
+  find = "sf",
+  find_left = "sF",
+  highlight = "sh",
+  replace = "sr",
+  suffix_last = "l",
+  suffix_next = "n",
+}
+-- Completion uses Blink's default preset plus C-f above; MiniPairs maps paired
+-- punctuation, Enter, and Backspace. Plugin windows retain their own defaults.
 
 function M.setup()
+  require("which-key").add {
+    { "<leader>f", group = "Find / format" },
+    { "<leader>c", group = "Code", mode = { "n", "x" } },
+    { "<leader>co", group = "Coverage" },
+    { "<leader>h", group = "Git hunks", mode = { "n", "x" } },
+    { "<leader>t", group = "Tests / toggles" },
+    { "<leader>s", group = "Diagnostics" },
+    { "<leader>b", group = "Buffer" },
+    { "<leader>R", group = "HTTP", mode = { "n", "x" } },
+  }
+
   -- General editing
   map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
   map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+  for _, key in ipairs { "y", "Y" } do
+    map("x", key, function()
+      local view = vim.fn.winsaveview()
+      -- Use the native yank, including the selected register and selection type.
+      vim.cmd.normal { '"' .. vim.v.register .. key, bang = true }
+      vim.fn.winrestview(view)
+    end, { desc = "Yank selection and keep cursor position" })
+  end
 
   -- Telescope, Leap, and Neo-tree
   map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Find text" })
@@ -27,6 +70,7 @@ function M.setup()
   map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Find recent files" })
   map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
   map("n", "<leader>fg", "<cmd>Telescope git_status<CR>", { desc = "Find Git changes" })
+  map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "Find all active mappings" })
   map("n", "<leader><leader>", "<Plug>(leap)", { desc = "Jump with Leap" })
   map("n", "<leader>n", "<cmd>Neotree show toggle focus float reveal<CR>", { desc = "Toggle file tree" })
   map("n", "<leader>e", "<cmd>Neotree show focus float reveal<CR>", { desc = "Focus file tree" })
@@ -34,7 +78,10 @@ function M.setup()
   -- Formatting and LSP
   map("n", "<leader>fm", function()
     require("conform").format { lsp_format = "fallback" }
-  end, { desc = "[F]or[M]at document" })
+  end, { desc = "Format document" })
+  map("n", "<leader>fs", function()
+    require("config.sql").select_dialect()
+  end, { desc = "Select SQL formatter dialect" })
   map("n", "<leader>sd", function()
     local lines = not vim.diagnostic.config().virtual_lines
     vim.diagnostic.config { virtual_lines = lines, virtual_text = not lines }
@@ -85,6 +132,9 @@ function M.setup()
   map("n", "<leader>tf", function()
     require("plugins.testing").neotest().run.run(vim.api.nvim_buf_get_name(0))
   end, { desc = "Test file" })
+  map("n", "<leader>tp", function()
+    require("plugins.testing").neotest().run.run(vim.fn.expand "%:p:h")
+  end, { desc = "Test current package / directory" })
   map("n", "<leader>tl", function()
     require("plugins.testing").neotest().run.run_last()
   end, { desc = "Repeat last test" })

@@ -3,6 +3,7 @@ local M = {}
 local deferred = {
   ["nvim-nio"] = true,
   ["neotest-vitest"] = true,
+  ["neotest-golang"] = true,
   neotest = true,
   ["nvim-coverage"] = true,
   ["kulala.nvim"] = true,
@@ -39,6 +40,7 @@ local plugins = {
   { src = "https://github.com/mistweaverco/kulala.nvim", version = vim.version.range "6" },
   "https://github.com/nvim-neotest/nvim-nio",
   "https://github.com/marilari88/neotest-vitest",
+  { src = "https://github.com/fredrikaverpil/neotest-golang", version = vim.version.range "2" },
   "https://github.com/nvim-neotest/neotest",
   "https://github.com/andythigpen/nvim-coverage",
 }

@@ -26,8 +26,8 @@ require("telescope").setup {
 -- }}}
 -- Mini {{{1
 -- Collection of small editing helpers.
-require("mini.ai").setup()
-require("mini.surround").setup()
+require("mini.ai").setup { mappings = require("config.mappings").mini_ai }
+require("mini.surround").setup { mappings = require("config.mappings").mini_surround }
 require("mini.pairs").setup()
 -- }}}
 

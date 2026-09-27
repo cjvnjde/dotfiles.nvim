@@ -29,7 +29,9 @@ require("blink.cmp").setup {
 -- Treesitter {{{1
 -- Syntax highlighting and parser management.
 
--- Use the stable bash parser for zsh files.
+-- nvim-treesitter already registers sh -> bash, javascriptreact -> javascript,
+-- typescriptreact -> tsx, etc. Only add aliases for intentional overrides.
+-- Bash is a fallback for Zsh; Zsh-specific syntax may not parse correctly.
 vim.treesitter.language.register("bash", "zsh")
 -- }}}
 
@@ -62,12 +64,14 @@ require("conform").setup {
   },
   formatters = {
     sql_formatter = {
-      args = {
-        "--language",
-        "postgresql",
-        "--config",
-        '{"keywordCase":"upper","functionCase":"upper","dataTypeCase":"upper"}',
-      },
+      args = function(_, ctx)
+        return {
+          "--language",
+          require("config.sql").dialect(ctx.buf),
+          "--config",
+          '{"keywordCase":"upper","functionCase":"upper","dataTypeCase":"upper"}',
+        }
+      end,
     },
   },
   format_after_save = {

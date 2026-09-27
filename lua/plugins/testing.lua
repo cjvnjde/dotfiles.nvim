@@ -5,11 +5,19 @@ function M.neotest()
   if not tests then
     vim.cmd.packadd "nvim-nio"
     vim.cmd.packadd "neotest-vitest"
+    vim.cmd.packadd "neotest-golang"
     vim.cmd.packadd "neotest"
     local plugin = require "neotest"
     plugin.setup {
-      discovery = { enabled = false },
-      adapters = { require "neotest-vitest" },
+      -- Discover unopened test files too, after the first testing command.
+      discovery = { concurrent = 1 },
+      adapters = {
+        require "neotest-vitest",
+        require "neotest-golang" {
+          -- Use the Go toolchain directly; no extra test runner is required.
+          go_test_args = { "-v", "-count=1" },
+        },
+      },
     }
     tests = plugin
   end

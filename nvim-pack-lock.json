@@ -67,6 +67,11 @@
       "rev": "27bf921498043f7ecd821d6db68d05de244bbd02",
       "src": "https://github.com/nvim-neotest/neotest"
     },
+    "neotest-golang": {
+      "rev": "05cd7bf89a146cf1fa2848a9fe277a1e68a3a51d",
+      "src": "https://github.com/fredrikaverpil/neotest-golang",
+      "version": "2.0.0 - 3.0.0"
+    },
     "neotest-vitest": {
       "rev": "c3c69715da4b158069fd4262083e7219a5c14cfb",
       "src": "https://github.com/marilari88/neotest-vitest"
