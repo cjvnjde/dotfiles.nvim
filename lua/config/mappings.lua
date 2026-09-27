@@ -17,18 +17,8 @@ M.kulala = {
 
 function M.setup()
   -- General editing
-  map("n", "<C-h>", "<C-w>h", { desc = "Switch window left" })
-  map("n", "<C-l>", "<C-w>l", { desc = "Switch window right" })
-  map("n", "<C-j>", "<C-w>j", { desc = "Switch window down" })
-  map("n", "<C-k>", "<C-w>k", { desc = "Switch window up" })
   map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
   map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-  map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
-  map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
-  map("x", ">", ">gv", { desc = "Indent selection" })
-  map("x", "<", "<gv", { desc = "Unindent selection" })
-  map({ "n", "x" }, ";", ":", { silent = false })
-  map({ "n", "x" }, ":", ";", { silent = false })
 
   -- Telescope, Leap, and Neo-tree
   map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Find text" })
