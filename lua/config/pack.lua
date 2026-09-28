@@ -37,7 +37,7 @@ local plugins = {
   "https://github.com/tpope/vim-dadbod",
   "https://github.com/kristijanhusak/vim-dadbod-completion",
   "https://github.com/kristijanhusak/vim-dadbod-ui",
-  { src = "https://github.com/mistweaverco/kulala.nvim", version = vim.version.range "6" },
+  -- VM: Kulala upstream returns HTTP 404; omit this optional HTTP client.
   "https://github.com/nvim-neotest/nvim-nio",
   "https://github.com/marilari88/neotest-vitest",
   { src = "https://github.com/fredrikaverpil/neotest-golang", version = vim.version.range "2" },

@@ -166,13 +166,16 @@ function M.setup()
 
   -- HTTP
   map({ "n", "x" }, "<leader>Rs", function()
-    require("plugins.tools").kulala().run()
+    local client = require("plugins.tools").kulala()
+    if client then client.run() end
   end, { desc = "Send HTTP request" })
   map({ "n", "x" }, "<leader>Ra", function()
-    require("plugins.tools").kulala().run_all()
+    local client = require("plugins.tools").kulala()
+    if client then client.run_all() end
   end, { desc = "Send all HTTP requests" })
   map("n", "<leader>Rb", function()
-    require("plugins.tools").kulala().scratchpad()
+    local client = require("plugins.tools").kulala()
+    if client then client.scratchpad() end
   end, { desc = "Open HTTP scratchpad" })
 end
 

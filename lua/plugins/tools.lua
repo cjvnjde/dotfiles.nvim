@@ -12,6 +12,10 @@ vim.g.db_ui_use_nerd_fonts = 1
 
 local http
 function M.kulala()
+  if not vim.g.vm_kulala_available then
+    vim.notify("Kulala is unavailable: its upstream repository returns HTTP 404", vim.log.levels.WARN)
+    return nil
+  end
   if not http then
     vim.cmd.packadd "kulala.nvim"
     local plugin = require "kulala"
@@ -21,6 +25,7 @@ function M.kulala()
   return http
 end
 
+if vim.g.vm_kulala_available then
 local group = vim.api.nvim_create_augroup("HttpActivation", { clear = true })
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
   group = group,
@@ -40,5 +45,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end
   end,
 })
+
+end
 
 return M
