@@ -69,7 +69,16 @@ require("conform").setup {
           "--language",
           require("config.sql").dialect(ctx.buf),
           "--config",
-          '{"keywordCase":"upper","functionCase":"upper","dataTypeCase":"upper"}',
+          vim.json.encode {
+            keywordCase = "upper",
+            functionCase = "upper",
+            dataTypeCase = "upper",
+            paramTypes = {
+              custom = {
+                { regex = [[sqlc\.(?:embed|arg|narg|slice)\([^()]*\)]] },
+              },
+            },
+          },
         }
       end,
     },

@@ -10,10 +10,6 @@ M.blink = {
   preset = "default",
   ["<C-f>"] = { "accept", "fallback" },
 }
-M.kulala = {
-  global_keymaps = false,
-  kulala_keymaps_prefix = "",
-}
 -- Keep Mini's editing keys visible here. The plugins supply their descriptions.
 M.mini_ai = {
   around = "a",
@@ -164,19 +160,6 @@ function M.setup()
     require("plugins.testing").coverage().summary()
   end, { desc = "Show loaded coverage summary" })
 
-  -- HTTP
-  map({ "n", "x" }, "<leader>Rs", function()
-    local client = require("plugins.tools").kulala()
-    if client then client.run() end
-  end, { desc = "Send HTTP request" })
-  map({ "n", "x" }, "<leader>Ra", function()
-    local client = require("plugins.tools").kulala()
-    if client then client.run_all() end
-  end, { desc = "Send all HTTP requests" })
-  map("n", "<leader>Rb", function()
-    local client = require("plugins.tools").kulala()
-    if client then client.scratchpad() end
-  end, { desc = "Open HTTP scratchpad" })
 end
 
 -- Gitsigns installs these only after attaching to a tracked buffer.

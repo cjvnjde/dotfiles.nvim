@@ -1,3 +1,6 @@
+-- Load trusted project-local configuration, such as .nvim.lua.
+vim.opt.exrc = true
+
 -- Appearance
 vim.o.laststatus = 3
 vim.o.showmode = false
