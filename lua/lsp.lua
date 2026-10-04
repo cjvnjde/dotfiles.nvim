@@ -31,6 +31,14 @@ vim.lsp.config("cssls", {
 })
 
 vim.lsp.config("gopls", {
+  capabilities = {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
+        relativePatternSupport = true,
+      },
+    },
+  },
   settings = {
     gopls = {
       -- Match the conform formatter so LSP edits and code actions use the same style.
