@@ -44,7 +44,6 @@ function M.setup()
     { "<leader>t", group = "Tests / toggles" },
     { "<leader>s", group = "Diagnostics" },
     { "<leader>b", group = "Buffer" },
-    { "<leader>R", group = "HTTP", mode = { "n", "x" } },
   }
 
   -- General editing
@@ -83,20 +82,10 @@ function M.setup()
     vim.diagnostic.config { virtual_lines = lines, virtual_text = not lines }
   end, { desc = "Toggle diagnostic lines/text" })
   map("n", "<leader>sc", function()
-    for _, client in ipairs(vim.lsp.get_clients { name = "codebook" }) do
-      local ns = vim.lsp.diagnostic.get_namespace(client.id)
-      local enabled = not vim.diagnostic.is_enabled { ns_id = ns }
-      vim.diagnostic.enable(enabled, { ns_id = ns })
-      vim.notify("Codebook diagnostics " .. (enabled and "enabled" or "disabled"))
-    end
+    require("config.lsp_actions").toggle_codebook_diagnostics()
   end, { desc = "Toggle Codebook diagnostics" })
   map("n", "<leader>th", function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    if #vim.lsp.get_clients { bufnr = bufnr, method = "textDocument/inlayHint" } == 0 then
-      vim.notify("No LSP client supports inlay hints for this buffer", vim.log.levels.WARN)
-      return
-    end
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }, { bufnr = bufnr })
+    require("config.lsp_actions").toggle_inlay_hints()
   end, { desc = "Toggle inlay hints" })
 
   -- Native grn/gra provide rename/code actions; CTRL-] uses the LSP tagfunc.
