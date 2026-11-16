@@ -69,10 +69,6 @@
       "rev": "bb85e4bfc8d89b0e62c8fa53ccdd13d12e2f77b3",
       "src": "git@github.com:rebelot/kanagawa.nvim"
     },
-    "kulala.nvim": {
-      "rev": "232a9939919fe9bc88d573bce92de50f2f160c60",
-      "src": "git@github.com:mistweaverco/kulala.nvim"
-    },
     "leap.nvim": {
       "rev": "277e04fad21e3af05a55cc414757b09a704f2a92",
       "src": "https://codeberg.org/andyg/leap.nvim"
